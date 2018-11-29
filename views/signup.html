@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>注册</title>
+        <link type="text/css" rel="stylesheet" href="css/signup.css"/>
+    </head>
+    <body>
+        <form action="/signup" method="POST">
+            <fieldset>
+                <legend>注册</legend>
+                <p>
+                    <label class="name">昵名</label>
+                    <input name="nickName" type="text" class="text" id="nameText">
+                    <div id="information" class="information">必填，长度为4~16个字符</div>
+                </p>
+                <p>
+                    <label class="name" >真实姓名</label>
+                    <input name="name" type="text" class="text" style="margin-left:9px;">
+                </p>
+                <p>
+                    <label class="name">学号</label>
+                    <input name="number" type="text" class="text">
+                </p>
+                <p>
+                    <label class="name">学校</label>
+                    <select name="school" style="margin-left:40px;">
+                        <option value="nwu">西北大学</option>
+                        <option value="xisu">西安外国语大学</option>
+                        <option value="snu">陕西师范大学</option>
+                    </select>
+                </p>
+                <p>
+                    <label class="name">账号</label>
+                    <input name="account" type="text" class="text" id="accountText">
+                    <div id="information4" class="information">必填，长度为6~14个数字或字母</div>
+                </p>
+                <p>
+                    <label class="name">密码</label>
+                    <input name="password" type="password" class="text" id="passwordText">
+                    <div id="information2" class="information">必填，长度为6~14个数字或字母</div>
+                </p>
+                <p>
+                    <label class="name">密码确认</label>
+                    <input type="password" class="text" style="margin-left:9px;" id="passwordText2">
+                    <div id="information3" class="information">再次输入相同密码</div>
+                </p>
+                <div class="warn">
+                    <p>注意事项</p>
+                    <p>1.注册后不能修改密码</p>
+                    <p>2.真实姓名与学号用于查询期末成绩</p>
+                </div>
+                <button id="confirmButton" disabled="true">提交</button>
+                <a class='button'href="/">返回首页</a>
+            </fieldset>
+        </form>
+        <script type="text/javascript" src="js/signup.js"></script>
+    </body>
+</html>

@@ -1,0 +1,290 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  /* font-family: sans-serif; */
+}
+/* 当屏幕最小为669px时（一直大于669px），执行下面 */
+@media(min-width:669px) {
+  /* 头部 */
+  div#newVistor {
+      height: 50px;
+      background-color: #373277;
+  }
+  div#newVistor img#icon {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      margin: 0px 0px 0px 50px;
+  }
+  div#newVistor p{
+      position: absolute;
+      margin-left: 7.5%;
+      color: #fff;
+  }
+  div#newVistor ul{
+      position: absolute;
+      right: 50px;
+  }
+
+  div#newVistor ul li{
+      float: right;
+      list-style-type: none;
+      margin-left: 10px;
+  }
+  div#newVistor ul li a{
+      text-decoration: none;
+      color: rgba(255, 255, 255, .6);
+  }
+  div#newVistor ul li a:hover {
+      color: #fff;
+  }
+  div#newVistor button {
+      display: none;
+  }
+  ul#pagesList{
+      padding: 0px;
+      margin-left: 120px;
+   }   
+}
+/* 当屏幕最大为669px时（一直小于669px），执行下面 */
+@media(max-width:669px) {
+  /* 头部 */
+  div#newVistor {
+      height: 50px;
+      background-color: #373277;
+  }
+  div#newVistor p{
+      position: absolute;
+      margin-left: 10px;
+      color: #fff;
+  }
+  div#newVistor ul.hidingMenu {
+      display: none;
+  }
+  div#newVistor ul.showingMenu {
+      position: relative;
+      top: 50px;
+      display: block;
+      padding: 0;
+      margin: 0;
+      background-color: #373277;
+  }
+  div#newVistor ul li{
+      list-style-type: none;
+      padding-left: 10px;
+      padding-top: 5px;
+  }
+  div#newVistor ul li a{
+      text-decoration: none;
+      font-size: 0.8em;
+      color: #fff;
+  }
+  div#newVistor button {
+      display: block;
+      float: right;
+      margin-top: 0.5em;
+      margin-right: 0.5em;
+      width: 2.5em;
+      height: 2.5em;
+      background-color: #373277;
+      border: none;
+      border-radius: 0.7em;
+      padding: 0;
+  }
+  div#newVistor button:active {
+      background-color: rgba(94,87,184,0.6);
+  }
+  div#newVistor button span.icon-bar {
+    display: block;
+    width: 80%;
+    height: 0.15em;
+    background-color: #fff;
+    margin: 0.5em auto;
+  }
+  ul#pagesList{
+      margin-left: 0%;
+  }   
+}
+/* 博客 */
+ul#blogsList{
+  width: 85%;
+  margin: 0 auto;
+  padding: 0;
+}
+ul#blogsList li{
+  list-style-type: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .3);
+}
+ul#blogsList li::after{
+  display: block;
+  content:'';
+  clear: both;
+}
+ul#blogsList li h3{
+  margin-top: 40px;
+  font-size: 1.3em;
+}
+ul#blogsList li p{
+  line-height: 2em;
+}
+ul#blogsList li p:nth-child(3),p:nth-child(4),p:nth-child(5),p:nth-child(6){
+  float: left;
+  margin-right: 20px;
+  color: rgb(133, 144, 166);
+}
+
+/*页码*/
+ul#pagesList li{
+  float: left;
+  list-style-type: none;
+}
+ul#pagesList::after{
+  display:block;
+  content: '';
+  clear: both;
+}
+ul#pagesList li a{
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    text-decoration: none;
+}
+ul#pagesList li a:hover {
+    background-color: #dee2e6;
+}
+ul#pagesList li.active a{
+    color: #fff;
+    background-color: #007bff;
+}
+/* 展开全文*/ 
+button#spread {
+  border: none;
+  background-color: #fff;
+  color: #175199;
+}
+/* 底部 */
+div#footer {
+  position: relative;
+  background-color: #333;
+  bottom: 0;
+  padding: 15px 0;
+}
+div#footer p {
+  color: #fff;
+  width: 30%;
+  margin: 0 auto;
+}
+
+button.thumbsUp {
+    width: 80px;
+    height: 30px;
+    background-color: rgba(0,132,255,.1);
+    border-radius: 10px;
+    border-color: transparent;
+    color: #0084ff;
+    font-size: 1.2em;
+}
+button.thumbsUp img {
+    width: 50%;
+    height: 80%;
+    margin-top: 3px;
+}
+button.thumbsUp span {
+    position: relative;
+    bottom: 1px;
+}
+button.thumbsUping {
+    width: 80px;
+    height: 30px;
+    background-color: #0084ff;
+    border-radius: 10px;
+    border-color: transparent;
+    color: #fff;
+    font-size: 1.2em;
+}
+button.thumbsUping img {
+    width: 50%;
+    height: 80%;
+    margin-top: 6%;
+}
+button.thumbsUping span {
+    position: relative;
+    bottom: 1px;
+}
+button.comments {
+    width: 5em;
+    height: 30px;
+    padding: 0px;
+    background-color: transparent;
+    border-color: transparent;
+    color: rgb(133, 144, 166);
+    font-size: 1em;
+}
+button.comments img {
+    width: 50%;
+    height: 80%;
+    margin-top: 3px;
+}
+button.hideComments {
+    width: 9em;
+    height: 30px;
+    padding: 0px;
+    background-color: transparent;
+    border-color: transparent;
+    color: rgb(133, 144, 166);
+    font-size: 1em;
+}
+button.hideComments img {
+    width: 50%;
+    height: 80%;
+    margin-top: 3px;
+}
+
+div.commentBox {
+    display: none;
+    width: 94%;
+    margin: 0 auto;
+    clear: both;
+}
+div.commentBox ul {
+    padding: 0;
+} 
+div.commentBox ul li {
+    border-top: 0.5px solid rgba(0, 0, 0, .3);
+    border-bottom: none !important;
+    padding: 10px 0 0 20px;
+}
+div.commentBox ul li p {
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+}
+div.commentBox ul li span {
+    color: #8590a6;
+    float: right;
+}
+div.commentBox form {
+    margin: 10px 0px;
+}
+div.commentBox input {
+    padding: 5px 10px;
+    border-radius: 1em;
+    margin-top: 0.1em;
+}
+div.commentBox button {
+    display: block;
+    float: right;
+    margin-bottom: 2em;
+    width: 4.5em;
+    height: 2em;
+    background-color: blue;
+    color: white;
+    font-size: 0.8em;
+    text-align: center;
+    border-radius: 0.1em;
+}

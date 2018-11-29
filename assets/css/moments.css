@@ -1,0 +1,166 @@
+ul#pagesList li{
+  float: left;
+  list-style-type: none;
+}
+ul#pagesList::after{
+  display:block;
+  content: '';
+  clear: both;
+}
+ul#pagesList li a{
+  margin-left: 10px;
+  text-decoration: none;
+}
+button {
+  background-color: blue;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 10%;
+  margin: 30px auto;
+}
+a.button {
+  display: block;
+  background-color: blue;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 10%;
+  margin: 30px auto;
+}
+/* 底部 */
+div#footer {
+  position: relative;
+  background-color: #333;
+  bottom: 0;
+  padding: 15px 0;
+}
+div#footer p {
+  color: #fff;
+  width: 30%;
+  margin: 0 auto;
+}
+
+/* 摄像功能 */
+#video {
+  margin: 0 auto;
+  background-color: #fff;
+  object-fit: fill
+}
+#canvas {
+  display: block;
+  margin: 0 auto;
+}
+div#cameraButtonBox {
+  width: 50%;
+  margin: 0 auto;
+}
+div#submitButtonBox {
+  width: 50%;
+  margin: 0 auto;
+}
+.box {
+  margin: 0 auto;
+  width: 160px;
+  height: 160px;
+}
+button#live {
+  width: 30%;
+  margin-left: 15%;
+}
+button#snap {
+  width: 30%;
+  margin-left: 10%;
+}
+button#update {
+  width: 30%;
+  margin-left: 15%;
+}
+a#downloadVideo {
+  width: 30%;
+  margin-right: 10%;
+  padding: 5px 10px;
+  float: right;
+}
+textarea#moment {
+  display: block;
+  width: 40%;
+  border: 2px solid #0084ff;
+  border-radius: 5px;
+  margin: 10px auto;
+}
+
+/* 想法 */
+ul#momentsList li {
+  margin: 110px 0 0 20%;
+  list-style: none;
+  clear: both;
+}
+ul#momentsList li::after {
+  content: '';
+  clear: both;
+  display: block;
+}
+ul#momentsList li img {
+  float: left;
+  margin-right: 30px;
+  clear: both;
+}
+ul#momentsList li p:nth-child(2) {
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: hidden;
+}
+ul#momentsList li span:nth-child(3) {
+  color: rgb(133, 144, 166);
+  float: right;
+  padding-right: 68.5%;
+}
+/*页码*/
+ul#pagesList {
+  margin-left: 20%;
+  margin-top: 100px;
+}
+ul#pagesList li{
+  float: left;
+  list-style-type: none;
+}
+ul#pagesList::after{
+  display:block;
+  content: '';
+  clear: both;
+}
+ul#pagesList li a {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    text-decoration: none;
+}
+ul#pagesList li a:hover {
+    background-color: #dee2e6;
+}
+ul#pagesList li.active a {
+    color: #fff;
+    background-color: #007bff;
+}
+
+/* 遮挡摄像头的画布 */
+canvas#videoCanvas {
+  position: absolute;
+  top: 8px;
+  left: 45%;
+}
+/* 图片显示的画布 */
+canvas#canvas {
+  border: 2px solid #007bff;
+  border-radius: 10px;
+}

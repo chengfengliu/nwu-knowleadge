@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>想法</title>
+        <link type="text/css" rel="stylesheet" href="/css/moments.css"/>
+    </head>
+    <body> 
+        <div class="box">
+            <video id="video" width="100%" height="100%"></video> 
+            <canvas id="videoCanvas" width="150" height="100"></canvas>       
+        </div>
+        <div id="cameraButtonBox">
+            <button id="live">打开摄像头</button>
+            <button id="snap">拍摄</button>
+        </div>
+        <canvas id="canvas" width="160" height="160"></canvas>
+        <textarea id="moment" name="moment" type="text" rows="5" placeholder="记录今天~"></textarea>
+        <div id="submitButtonBox">
+            <form>
+                <button id="update" type="submit">更新</button>
+                <a id="downloadVideo" class="button" download="video.flv" href="/api/downloadVideo">下载视频</a>
+            </form>
+        </div>
+        <img id="testImage">
+        <div>
+            <div id="pageCountFromServer" style="display:none"><%- momentsPagesCount %></div>
+            <div id="currentPageNoFromServer" style="display:none"><%- momentsPage %></div>
+            <ul id="momentsList">
+                <li>
+                    <img src="<%- image0 %>">
+                    <p><%- moment0 %></p>
+                    <span><%- date0 %></span>
+                </li>
+                <li>
+                    <img src="<%- image1 %>">
+                    <p><%- moment1 %></p>
+                    <span><%- date1 %></span>
+                </li>
+                <li>
+                    <img src="<%- image2 %>">
+                    <p><%- moment2 %></p>
+                    <span><%- date2 %></span>
+                </li>
+                <li>
+                    <img src="<%- image3 %>">
+                    <p><%- moment3 %></p>
+                    <span><%- date3 %></span>
+                </li>
+            </ul>
+            <ul id="pagesList"></ul>
+        </div>
+        <div><a class="button" href="/">返回首页</a></div>
+        <div id="footer">
+            <p>1902 - 2018 ©NWU<span style="float: right;">QQ:1480712353</span></p>
+        </div>
+        <script type="text/javascript" src="/js/moments.js"></script>
+    </body>
+</html>

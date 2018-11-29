@@ -1,0 +1,71 @@
+<!DOCTYPE.html>
+<html>
+    <head>
+        <title>查询挂科率</title>
+        <link type="text/css" rel="stylesheet" href="css/search.css"/>
+    </head>
+    <body>
+        <div class="container">
+            <h2>西北大学南校区专业课近三年挂科率查询系统</h2>
+            <h5>院系</h5>
+            <select id="institute" onchange = selectDistrict(institute,marjor,marjorList)>
+                <option value="information">信息科学与技术学院</option>
+                <option value="culture">文学院</option>
+                <option value="economic">经济管理学院</option>
+                <option>公共管理学院</option>
+                <option>外国语学院</option>
+                <option>法学院</option>
+                <option>马克思主义学院</option>
+                <option>新闻传播学院</option>
+                <option>数学学院</option>
+                <option>物理学院</option>
+                <option>化学与材料科学学院</option>
+                <option>城市与环境学院</option>
+            </select>
+            <h5>专业</h5>
+            <select id="marjor" onchange = selectDistrict(marjor,course,courseList)>
+                <option>计算机科学与技术</option>
+                <option>软件工程</option>
+                <option>信息与通信工程</option>
+                <option>物联网</option>
+                <option>电子科学与技术</option>
+            </select>
+            <h5>课程</h5>
+            <select id="course">
+                <option value="程序设计基础">程序设计基础</option>
+                <option value="离散数学">离散数学</optio>
+                <option value="数据结构">数据结构</option>
+                <option value="数字逻辑">数字逻辑</option>
+                <option value="电子技术基础">电子技术基础</option>
+                <option value="概率论">概率论</option>
+                <option value="操作系统">操作系统</option>
+                <option value="计算机组成原理">计算机组成原理</option>
+                <option value="数据库">数据库</option>
+                <option value="微机原理">微机原理</option>
+                <option value="单片机原理">单片机原理</option>
+                <option value="计算机网络">计算机网络</option>
+                <option value="软件工程">软件工程</option>
+                <option value="Linux程序设计">Linux程序设计</option>
+                <option value="JAVA">JAVA</option>
+                <option value="图形学">图形学</option>
+                <option value="体系结构">体系结构</option>
+                <option value="人机交互">人机交互</option>
+                <option value="编译技术">编译技术</option>
+                <option value="人工智能">人工智能</option>
+                <option value="数字图像处理">数字图像处理</option>
+                <option value="嵌入式系统">嵌入式系统</option>
+                <option value="多媒体技术">多媒体技术</option>
+                <option value="项目管理">项目管理</option>
+                <option value="互联网络程序设计">互联网络程序设计</option>
+                <option value="网络安全">网络安全</option>
+            </select>
+            <input type="button" value="查询" id="search" style="display:block;margin-top:50px;"/>
+            <p id="result"></p>
+        </div>
+        <div><a class="button"href="/">返回首页</a></div>
+        <div id="footer">
+            <p>1902 - 2018 ©NWU<span style="float: right;">QQ:1480712353</span></p>
+        </div>
+    </body>
+    <script type="text/javascript" src="/js/search.js"></script>
+</html>

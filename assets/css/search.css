@@ -1,0 +1,42 @@
+body{
+  margin:0;
+}
+div.container {
+  width: 500px;
+  margin: 0 auto;
+}
+select{
+  width:200px;
+}
+h5{
+  margin-left:5px;
+}
+#search{
+  width:90px;
+  height:30px;
+  margin-left:205px;
+  border-radius:3px;
+}
+a.button {
+  display: block;
+  background-color: blue;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 10%;
+  margin: 30px auto;
+}
+/* 底部 */
+div#footer {
+  position: relative;
+  background-color: #333;
+  bottom: 0;
+  padding: 15px 0;
+}
+div#footer p {
+  color: #fff;
+  width: 30%;
+  margin: 0 auto;
+}

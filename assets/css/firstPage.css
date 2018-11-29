@@ -1,0 +1,165 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+/* 当屏幕最小为669px时（一直大于669px），执行下面 */
+@media(min-width:669px) {
+  /* 头部 */
+  div#newVistor {
+      height: 50px;
+      background-color: #373277;
+  }
+  div#newVistor img#icon {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      margin: 0px 0px 0px 50px;
+  }
+  div#newVistor p{
+      position: absolute;
+      margin-left: 7.5%;
+      color: #fff;
+  }
+  div#newVistor ul{
+      position: absolute;
+      right: 50px;
+  }
+
+  div#newVistor ul li{
+      float: right;
+      list-style-type: none;
+      margin-left: 10px;
+  }
+  div#newVistor ul li a{
+      text-decoration: none;
+      color: rgba(255, 255, 255, .6);
+  }
+  div#newVistor ul li a:hover {
+      color: #fff;
+  }
+  div#newVistor button {
+      display: none;
+  }
+  /* 介绍部分 */
+  div#introduction div.part {
+      padding-top: 20px;
+      padding-bottom: 20px;
+  }
+  /* 清除浮动 */
+  div#introduction div.part::after {
+      display: block;
+      clear: both;
+      content: "";
+      visibility: hidden;
+      height: 0;
+  }
+  div#introduction div#blogPart {
+      background-color: #f5f5f5;
+  }
+  div#introduction div.part img {
+      float: left;
+      margin-top: 20px;
+      margin-left: 60px; 
+      width: 38.2%;
+  }
+  div#introduction div.part div.text {
+      float: left;
+      margin-left: 150px;
+      width: 30%;
+  }
+  ul#pagesList{
+      padding: 0px;
+      margin-left: 120px;
+   }   
+}
+/* 当屏幕最大为669px时（一直小于669px），执行下面 */
+@media(max-width:669px) {
+  /* 头部 */
+  div#newVistor {
+      height: 50px;
+      background-color: #373277;
+  }
+  div#newVistor img#icon {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      margin: 5px 0px 0px 0px;
+      display: none;
+  }
+  div#newVistor p{
+      position: absolute;
+      margin-left: 10px;
+      color: #fff;
+  }
+  div#newVistor ul{
+    position: absolute;
+    right: 10px;
+  }
+  div#newVistor ul li{
+    float: right;
+    list-style-type: none;
+    margin-left: 10px;
+  }
+  div#newVistor ul li a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, .6);
+  }
+  div#newVistor ul li a:hover {
+    color: #fff;
+  }
+  div#newVistor button {
+      display: block;
+      float: right;
+      margin-top: 0.5em;
+      margin-right: 0.5em;
+      width: 2.5em;
+      height: 2.5em;
+      background-color: #373277;
+      border: none;
+      border-radius: 0.7em;
+      padding: 0;
+  }
+  div#newVistor button:active {
+      background-color: rgba(94,87,184,0.6);
+  }
+  div#newVistor button span.icon-bar {
+    display: block;
+    width: 80%;
+    height: 0.15em;
+    background-color: #fff;
+    margin: 0.5em auto;
+  }
+  /* 介绍部分 */
+  div#introduction div.part {
+      padding-top: 20px;
+      padding-bottom: 20px;
+  }
+  div#introduction div#blogPart {
+      background-color: #f5f5f5;
+  }
+  div#introduction div.part img {
+      display: block;    
+      margin: 20px auto;
+      width: 60%; 
+  }
+  div#introduction div.part div.text {
+      margin: 20px auto;
+      width: 60%;
+  }
+  ul#pagesList{
+      margin-left: 0%;
+  }   
+}
+
+/* 底部 */
+div#footer {
+  position: relative;
+  background-color: #333;
+  bottom: 0;
+  padding: 15px 0;
+}
+div#footer p {
+  color: #fff;
+  width: 30%;
+  margin: 0 auto;
+}

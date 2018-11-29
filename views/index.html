@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+      <title>首页</title>
+      <link type="text/css" rel="stylesheet" href="/css/index.css"/>
+  </head>
+  <body>
+    <div id="newVistor">
+      <p>欢迎回来,<%- nickName %></p>
+      <button id="collapseButton">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <ul class="nav hidingMenu">
+        <li><a href='/logout'>退出</a></li>
+        <li><a href='/search'>查询挂科率</a></li>
+        <li><a href='/moments'>想法</a></li>
+        <li><a href='/blogs'>博客</a></li>
+        <li><a href='/download'>下载中心</a></li>
+        <li><a href='/searchgrade'>查询成绩</a></li>
+      </ul>
+    </div>
+    <div>
+        <ul id="blogsList">
+          <li>
+            <h3><%- blog0Title %></h3>
+            <p class="content"><%- blog0Content %></p>
+            <p><%- blog0Time %></p>
+            <p><%- blog0Auther %></p>
+            <p><button class="comments"><img src="/images/comments-solid.svg">评论</button></p>
+            <p><button class="<%- blog0ThumbsUpStatus %> thumbsUpButton"><img src="/images/thumbs-up-<%- blog0ThumbsUpStatus %>.svg"><span><%- blog0ThumbsUpCount %></span></button></p>
+            <div class="commentBox"></div>
+            <div class="commentsFromServer" style="display:none"><%- blog0Comments %></div>
+          </li>
+          <li>
+            <h3><%- blog1Title %></h3>
+            <p class="content"><%- blog1Content %></p>
+            <p><%- blog1Time %></p>
+            <p><%- blog1Auther %></p>
+            <p><button class="comments"><img src="/images/comments-solid.svg">评论</button></p>
+            <p><button class="<%- blog1ThumbsUpStatus %> thumbsUpButton"><img src="/images/thumbs-up-<%- blog1ThumbsUpStatus %>.svg"><span><%- blog1ThumbsUpCount %></span></button></p>
+            <div class="commentBox">
+                
+            </div>  
+            <div class="commentsFromServer" style="display:none"><%- blog1Comments %></div>
+          </li>
+          <li>
+            <h3><%- blog2Title %></h3>
+            <p class="content"><%- blog2Content %></p>
+            <p><%- blog2Time %></p>
+            <p><%- blog2Auther %></p>
+            <p><button class="comments"><img src="/images/comments-solid.svg">评论</button></p>
+            <p><button class="<%- blog2ThumbsUpStatus %> thumbsUpButton"><img src="/images/thumbs-up-<%- blog2ThumbsUpStatus %>.svg"><span><%- blog2ThumbsUpCount %></span></button></p>
+            <div class="commentBox">
+                
+            </div>  
+            <div class="commentsFromServer" style="display:none"><%- blog2Comments %></div>
+        </li>
+          <li>
+            <h3><%- blog3Title %></h3>
+            <p class="content"><%- blog3Content %></p>
+            <p><%- blog3Time %></p>
+            <p><%- blog3Auther %></p>
+            <p><button class="comments"><img src="/images/comments-solid.svg">评论</button></p>
+            <p><button class="<%- blog3ThumbsUpStatus %> thumbsUpButton"><img src="/images/thumbs-up-<%- blog3ThumbsUpStatus %>.svg"><span><%- blog3ThumbsUpCount %></span></button></p>        
+            <div class="commentBox"></div>
+            <div class="commentsFromServer" style="display:none"><%- blog3Comments %></div>
+          </li>
+        </ul>
+        <ul id="pagesList"></ul>
+        <div id="pageNo" style="display:none"><%- pageNo %></div>
+        <div id="blogsCount" style="display:none"><%- blogCount %></div>
+    </div>
+    <div id="footer">
+        <p>1902 - 2018 ©NWU<span style="float: right;">QQ:1480712353</span></p>
+    </div>
+    <script type="text/javascript" src="/js/index.js"></script>
+  </body>
+</html>
