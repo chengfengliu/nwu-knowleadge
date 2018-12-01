@@ -35,7 +35,7 @@ exports.allBlogs = async(ctx, next) => {
 }
 exports.otherBlogs = async(ctx, next) => {
     if (!ctx.session.loggedIn) {
-        ctx.response.body = '请先登录<a href="/">返回首页</a>'
+        ctx.response.body = '<p>请先登录<a href="/">返回首页</a></p>'
         return
     }
     const docs = await Blog.find()
@@ -65,7 +65,7 @@ exports.otherBlogs = async(ctx, next) => {
 }
 exports.userBlogs = async(ctx, next) => {
     if (!ctx.session.loggedIn) {
-        ctx.response.body = '请先登录<a href="/">返回首页</a>'
+        ctx.response.body = '<p>请先登录<a href="/">返回首页</a></p>'
         return
     }
     const user = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
