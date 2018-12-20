@@ -1,8 +1,7 @@
-/* eslint-disable */
-var webpack = require('webpack');
+const webpack = require('webpack');
 const webpackDevMiddleware = require('koa-webpack-dev-middleware')
 const webpackHotMiddleware = require('koa-webpack-hot-middleware')
-var config = require('./webpack.config');
+const config = require('./webpack.config');
 
 const Koa = require('koa')
 const static = require('koa-static')
@@ -13,7 +12,7 @@ const bodyParser = require('koa-bodyparser')
 const multer = require('koa-multer')
 const upload = multer({ dest: 'uploads/' })
 const path = require('path')
-var port = 3000;
+const port = parseInt(process.env.NODE_PORT)
 const app = new Koa()
 const router = new Router()
 
@@ -21,12 +20,16 @@ const mongoose = require('mongoose')
 const User = require('./models/User.js')
 const Blog = require('./models/Blog.js')
 const File = require('./models/File.js')
-
 const db = 'mongodb://localhost:27017/koa-react'
 
-var compiler = webpack(config)
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
-app.use(webpackHotMiddleware(compiler))
+const compiler = webpack(config(process.env.NODE_ENV))
+app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config(process.env.NODE_ENV).output.publicPath }))
+if(process.env.NODE_ENV === 'development') {
+  console.log('env development')
+  app.use(webpackHotMiddleware(compiler))
+} else if(process.env.NODE_ENV === 'production') {
+  console.log('env production')
+}
 app.use(bodyParser({enableTypes:['json', 'form', 'text'],formLimit: '1mb'}))
 app.use(static(path.join(__dirname, 'assets')))
 app.use(views(path.join(__dirname, 'views')))
@@ -54,10 +57,10 @@ router.get("/api/signUpStatus", User.getUserSignUpStatusAndNickName)
 //   await ctx.render('signup')
 //   await next()
 // })
-router.post('/signup', User.saveUser)
+router.post('/api/signup', User.saveUser)
 router.get('/api/getAllBlogs', Blog.allBlogs)
 router.get('/api/getOtherBlogs/:pageNo', Blog.otherBlogs)
-router.post('/login', User.findUser)
+router.post('/api/login', User.findUser)
 router.get('/api/logout', async(ctx, next) => {
   ctx.session.loggedIn = null
   ctx.response.body = {

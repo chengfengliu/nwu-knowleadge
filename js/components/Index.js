@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import $ from 'jquery'
-import '../../assets/css/firstPage.css'
 import Header from './Header'
 import Footer from './Footer'
 import Description from './Description'

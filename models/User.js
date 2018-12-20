@@ -9,7 +9,7 @@ const fs = require('fs')
 exports.saveUser = async(ctx, next) => {
   const {nickName, name, number, school, account, password} = ctx.request.body
   await User.create({nickName, name, number, school, account, password: md5(password), downloadTimes: 3})
-  ctx.body = nickName
+  ctx.response.body = account
   await next()
 }
 
@@ -21,7 +21,7 @@ exports.findUser = async(ctx, next) => {
     return
   } 
   ctx.session.loggedIn = doc._id.toString()
-  ctx.body = true
+  ctx.response.body = true
   // ctx.response.redirect('/')
   await next()
 }

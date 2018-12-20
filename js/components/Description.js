@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import '../../assets/css/description.css'
 export default class Description extends Component {
   render() {
     return(

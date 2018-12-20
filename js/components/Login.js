@@ -10,7 +10,7 @@ export default class Login extends Component {
   handlePost(data) {
     const _that = this
     $.ajax({
-      url: '/login',
+      url: '/api/login',
       type: 'post',
       dataType: 'json',
       data,

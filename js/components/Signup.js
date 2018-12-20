@@ -12,12 +12,13 @@ class Signup extends Component {
     // 一定要bind(this)和_that = this
     const _that = this
     $.ajax({
-      url: '/signup',
+      url: '/api/signup',
       type: 'post',
-      dataType: 'json',
+      // 不能乱加dataType
       data,
       success(responseData) {
-        _that.props.history.push( '/login',responseData)
+        alert('注册成功')
+        _that.props.history.push( '/login', responseData)
       }
     })
     
@@ -35,8 +36,8 @@ class Signup extends Component {
   }
 }
 
-Signup.propTypes = {
-  history: PropTypes.object.isRequired
-}
+// Signup.propTypes = {
+//   history: PropTypes.object.isRequired
+// }
 
 export default Signup

@@ -9,6 +9,12 @@ class LoginFrom extends Component {
       password: ''
     }
   }
+  componentWillMount() {
+    // console.log('componentwillMount')
+    this.setState({
+      account: this.props.returnData
+    })
+  }
   updateField(field, e) {
     const state = {}
     state[field] = e.target.value
@@ -29,7 +35,7 @@ class LoginFrom extends Component {
             <legend>登录</legend>
             <p>
                 <label className="name">账号</label>
-                <input id="account" name="account" type="text" className="text" onChange={this.updateField.bind(this, 'account')} value={this.props.returnData ? this.props.returnData : this.state.account}/>
+                <input id="account" name="account" type="text" className="text" onChange={this.updateField.bind(this, 'account')} value={this.state.account}/>
             </p>
             <p>
                 <label className="name">密码</label>

@@ -30,11 +30,7 @@ div#index {
       float: left;
       margin-left: 150px;
       width: 30%;
-  }
-  div#index ul#pagesList{
-      padding: 0px;
-      margin-left: 120px;
-   }   
+  }  
 }
 /* 当屏幕最大为669px时（一直小于669px），执行下面 */
 @media(max-width:669px) {
@@ -55,8 +51,4 @@ div#index {
       margin: 20px auto;
       width: 60%;
   }
-  div#index ul#pagesList{
-      margin-left: 0%;
-  }   
 }
-

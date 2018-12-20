@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import {Link} from 'react-router-dom'
+import '../../assets/css/grade.css'
 export default class Grade extends Component { 
   constructor(props) {
     super(props)
