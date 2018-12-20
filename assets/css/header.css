@@ -1,0 +1,105 @@
+/* 当屏幕最小为669px时（一直大于669px），执行下面 */
+@media(min-width:669px) {
+  /* 头部 */
+  header {
+      height: 50px;
+      background-color: #373277;
+  }
+  header img#icon {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      margin: 0px 0px 0px 50px;
+  }
+  header p{
+      position: absolute;
+      margin-left: 7.5%;
+      color: #fff;
+  }
+  header ul{
+      position: absolute;
+      right: 50px;
+  }
+
+  header ul li{
+      float: right;
+      list-style-type: none;
+      margin-left: 10px;
+  }
+  header ul li a{
+      text-decoration: none;
+      color: rgba(255, 255, 255, .6);
+  }
+  header ul li a:hover {
+      color: #fff;
+  }
+  header button {
+      display: none;
+  }
+}
+/* 当屏幕最大为669px时（一直小于669px），执行下面 */
+@media(max-width:669px) {
+  /* 头部 */
+  header {
+      height: 50px;
+      background-color: #373277;
+  }
+  header img#icon {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      margin: 5px 0px 0px 0px;
+      display: none;
+  }
+  header p{
+      position: absolute;
+      margin-left: 10px;
+      color: #fff;
+  }
+  header ul{
+    position: absolute;
+    right: 10px;
+  }
+  header ul li{
+    float: right;
+    list-style-type: none;
+    margin-left: 10px;
+  }
+  header ul li a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, .6);
+  }
+  header ul li a:hover {
+    color: #fff;
+  }
+  header button {
+      display: block;
+      float: right;
+      margin-top: 0.5em;
+      margin-right: 0.5em;
+      width: 2.5em;
+      height: 2.5em;
+      background-color: #373277;
+      border: none;
+      border-radius: 0.7em;
+      padding: 0;
+  }
+  header button:active {
+      background-color: rgba(94,87,184,0.6);
+  }
+  header button span.icon-bar {
+    display: block;
+    width: 80%;
+    height: 0.15em;
+    background-color: #fff;
+    margin: 0.5em auto;
+  }
+}
+
+img#head {
+    position: relative;
+    bottom: 3px;
+    float: left;
+    width: 30px;
+    height: 30px;
+}

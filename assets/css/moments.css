@@ -1,80 +1,41 @@
-ul#pagesList li{
-  float: left;
-  list-style-type: none;
+div#myMomentForm {
+  margin-top: 50px;
+  margin-left: 20%;
 }
-ul#pagesList::after{
-  display:block;
-  content: '';
-  clear: both;
-}
-ul#pagesList li a{
-  margin-left: 10px;
-  text-decoration: none;
-}
-button {
-  background-color: blue;
-  color: #fff;
-  text-decoration: none;
-  text-align: center;
-  padding: 5px 10px;
-  border-radius: 5px;
-  width: 10%;
-  margin: 30px auto;
-}
-a.button {
-  display: block;
-  background-color: blue;
-  color: #fff;
-  text-decoration: none;
-  text-align: center;
-  padding: 5px 10px;
-  border-radius: 5px;
-  width: 10%;
-  margin: 30px auto;
-}
-/* 底部 */
-div#footer {
-  position: relative;
-  background-color: #333;
-  bottom: 0;
-  padding: 15px 0;
-}
-div#footer p {
-  color: #fff;
-  width: 30%;
-  margin: 0 auto;
-}
-
 /* 摄像功能 */
-#video {
-  margin: 0 auto;
-  background-color: #fff;
-  object-fit: fill
-}
-#canvas {
-  display: block;
-  margin: 0 auto;
-}
-div#cameraButtonBox {
-  width: 50%;
-  margin: 0 auto;
-}
-div#submitButtonBox {
-  width: 50%;
-  margin: 0 auto;
-}
 .box {
+  position: relative;
+  float: left;
   margin: 0 auto;
   width: 160px;
   height: 160px;
 }
-button#live {
-  width: 30%;
-  margin-left: 15%;
+#video {
+  margin: 0 auto;
+  background-color: #fff;
+  object-fit: fill;
+  /* z-index: 9997; */
 }
-button#snap {
-  width: 30%;
-  margin-left: 10%;
+canvas#videoCanvas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  /* z-index: 9998; */
+}
+#canvas {
+  display: none;
+}
+
+div#submitButtonBox {
+  width: 50%;
+  margin: 0 auto;
+}
+
+button.cameraButton {
+  float: left;
+  width: 160px;
+  color: #fff;
+  background-color: blue;
 }
 button#update {
   width: 30%;
@@ -82,16 +43,15 @@ button#update {
 }
 a#downloadVideo {
   width: 30%;
-  margin-right: 10%;
-  padding: 5px 10px;
-  float: right;
 }
 textarea#moment {
+  /* float: right; */
   display: block;
   width: 40%;
+  height: 160px;
   border: 2px solid #0084ff;
   border-radius: 5px;
-  margin: 10px auto;
+  margin: 10px 0 0 20%;
 }
 
 /* 想法 */
@@ -151,16 +111,4 @@ ul#pagesList li a:hover {
 ul#pagesList li.active a {
     color: #fff;
     background-color: #007bff;
-}
-
-/* 遮挡摄像头的画布 */
-canvas#videoCanvas {
-  position: absolute;
-  top: 8px;
-  left: 45%;
-}
-/* 图片显示的画布 */
-canvas#canvas {
-  border: 2px solid #007bff;
-  border-radius: 10px;
 }

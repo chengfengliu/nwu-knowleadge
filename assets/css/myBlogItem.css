@@ -1,0 +1,41 @@
+div#myBlog ul#blogsList {
+  margin-top: 50px;
+}
+div#myBlog ul#blogsList li{
+  width: 60%;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  list-style-type: none;
+  border-bottom: 1px solid #555;
+}
+div#myBlog ul#blogsList li h3 {
+  text-align: center;
+  font-size: 1.5em;
+}
+div#myBlog ul#blogsList li p {
+  letter-spacing: 2px;
+  padding: 20px 50px;
+}
+div#myBlog ul#blogsList li p:nth-child(3) {
+  margin: 0px 20px;
+  padding: 0px;
+  text-align: right;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+}
+div#myBlog ul#blogsList li button.modifyButton {
+  display: block;
+  float: right;
+  margin-left: 20px;
+  width: 60px;
+  height: 20px;
+  background-color:blue;
+  color:white;
+  font-weight:bold;
+  font-size:10px;
+  text-align: center;
+  border-radius:5px;
+}
+div#myBlog ul#blogsList li button.modifyButton:nth-child(4) {
+  margin-right: 50px;
+}

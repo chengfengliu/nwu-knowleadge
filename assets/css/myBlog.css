@@ -1,0 +1,97 @@
+div#myBlog a{
+  text-decoration: none;
+}
+
+div#myBlog ul#blogsList {
+  margin-top: 50px;
+}
+div#myBlog ul#blogsList li{
+  width: 60%;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  list-style-type: none;
+  border-bottom: 1px solid #555;
+}
+div#myBlog ul#blogsList li h3 {
+  text-align: center;
+  font-size: 1.5em;
+}
+div#myBlog ul#blogsList li p {
+  letter-spacing: 2px;
+  padding: 20px 50px;
+}
+div#myBlog ul#blogsList li p:nth-child(3) {
+  text-align: right;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+}
+div#myBlog ul#blogsList li a.modifyButton {
+  display: block;
+  float: right;
+  margin-left: 20px;
+  width: 60px;
+  height: 20px;
+  background-color:blue;
+  color:white;
+  font-weight:bold;
+  font-size:10px;
+  text-align: center;
+  border-radius:5px;
+}
+div#myBlog ul#blogsList li a.modifyButton:nth-child(4) {
+  margin-right: 50px;
+}
+div#myBlog ul#pagesList {
+  margin-left: 70%;
+}
+div#myBlog ul#pagesList li{
+  float: left;
+  list-style-type: none;
+}
+div#myBlog ul#pagesList::after{
+  display:block;
+  content: '';
+  clear: both;
+}
+div#myBlog ul#pagesList li a{
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+div#myBlog div#editItem {
+  width: 50%;
+  height: 30px;
+  border-bottom: 1px solid #ebebeb;
+  border-top: 1px solid #ebebeb;
+  margin: 10px auto;
+}
+div#myBlog div.editButton {
+  float: left;
+  /* border: 1px solid blue; */
+  width: 20px;
+  height: 20px;
+  margin: 5px 10px;
+  color: #555;
+  text-align: center;
+}
+div#myBlog div.editButton:hover {
+  color: blue;
+}
+div#myBlog #bold {
+  font-weight: 600;
+}
+div#myBlog #italic {
+  font-style: italic;
+}
+
+a.button {
+  display: block;
+  background-color: blue;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 10%;
+  margin: 30px auto;
+}

@@ -11,7 +11,7 @@ exports.allBlogs = async(ctx, next) => {
         // 博客的页码数 
         const pageNo = 1
         const blogCountPerPage = pageNo * 4
-        await ctx.render('index', {nickName: doc['nickName'], pageNo, blogCount: blogs ? blogs.length : 0,
+        ctx.response.body = {nickName: doc['nickName'], pageNo, blogCount: blogs ? blogs.length : 0,
                     blog0Title: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].title : '', blog0Content: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].content : '', blog0Auther: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].auther : '', blog0Time: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].time : '', 
                     blog0ThumbsUpCount: (blogs && blogs[blogCountPerPage - 4]) ? (blogs[blogCountPerPage - 4].thumbsUpCount ? blogs[blogCountPerPage - 4].thumbsUpCount : '0') : '', blog0ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 4]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 4]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
                     blog0Comments: (blogs && blogs[blogCountPerPage - 4]) ? JSON.stringify(blogs[blogCountPerPage - 4].comments) : '',
@@ -27,13 +27,14 @@ exports.allBlogs = async(ctx, next) => {
                     blog3Title: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].title : '', blog3Content: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].content : '', blog3Auther: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].auther : '', blog3Time: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].time : '', 
                     blog3ThumbsUpCount: (blogs && blogs[blogCountPerPage - 1]) ? (blogs[blogCountPerPage - 1].thumbsUpCount ? blogs[blogCountPerPage - 1].thumbsUpCount : '0') : '', blog3ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 1]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 1]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
                     blog3Comments: (blogs && blogs[blogCountPerPage - 1]) ? JSON.stringify(blogs[blogCountPerPage - 1].comments) : '',
-                })
+                }
     } else {
-        await ctx.render('firstPage')
+        
     }
     await next()
 }
 exports.otherBlogs = async(ctx, next) => {
+    console.log('request otherBlogs',ctx.params.pageNo)
     if (!ctx.session.loggedIn) {
         ctx.response.body = '<p>请先登录<a href="/">返回首页</a></p>'
         return
@@ -44,7 +45,7 @@ exports.otherBlogs = async(ctx, next) => {
     // 博客的页码数 
     const pageNo = ctx.params.pageNo
     const blogCountPerPage = pageNo * 4
-    await ctx.render('index', {nickName: doc['nickName'], pageNo, blogCount: blogs ? blogs.length : 0,
+    ctx.response.body = {nickName: doc['nickName'], pageNo, blogCount: blogs ? blogs.length : 0,
                 blog0Title: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].title : '', blog0Content: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].content : '', blog0Auther: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].auther : '', blog0Time: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].time : '', 
                 blog0ThumbsUpCount: (blogs && blogs[blogCountPerPage - 4]) ? (blogs[blogCountPerPage - 4].thumbsUpCount ? blogs[blogCountPerPage - 4].thumbsUpCount : '0') : '', blog0ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 4]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 4]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
                 blog0Comments: (blogs && blogs[blogCountPerPage - 4]) ? JSON.stringify(blogs[blogCountPerPage - 4].comments) : '',
@@ -60,7 +61,7 @@ exports.otherBlogs = async(ctx, next) => {
                 blog3Title: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].title : '', blog3Content: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].content : '', blog3Auther: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].auther : '', blog3Time: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].time : '', 
                 blog3ThumbsUpCount: (blogs && blogs[blogCountPerPage - 1]) ? (blogs[blogCountPerPage - 1].thumbsUpCount ? blogs[blogCountPerPage - 1].thumbsUpCount : '0') : '', blog3ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 1]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 1]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
                 blog3Comments: (blogs && blogs[blogCountPerPage - 1]) ? JSON.stringify(blogs[blogCountPerPage - 1].comments) : '',
-            })
+            }
     await next()
 }
 exports.userBlogs = async(ctx, next) => {
@@ -74,21 +75,38 @@ exports.userBlogs = async(ctx, next) => {
         let blogsArray = blogs.filter(blog => {
             return user['blogs'].indexOf(blog['_id'].toString()) !== -1
         })
-        await ctx.render('blogs', {blogs: JSON.stringify(blogsArray)}) 
+        ctx.response.body = {blogs: JSON.stringify(blogsArray)} 
     } else {
         // 此用户还未发表过博客
-        await ctx.render('blogs',{blogs: ""})
+        ctx.response.body = {blogs: ""}
     }
     await next()
 }
 exports.add = async(ctx, next) => {
     const user = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
     ctx.request.body.auther = user['nickName']
+    const timeParText = ctx.request.body.time.split(' ').slice(1).reverse();
+    switch(timeParText[2]) {
+        case 'Jan': timeParText[2] = '1'; break;
+        case 'Feb': timeParText[2] = '2'; break;
+        case 'Mar': timeParText[2] = '3'; break;
+        case 'Apr': timeParText[2] = '4'; break;
+        case 'May': timeParText[2] = '5'; break;
+        case 'Jun': timeParText[2] = '6'; break;
+        case 'Jul': timeParText[2] = '7'; break;
+        case 'Aug': timeParText[2] = '8'; break;
+        case 'Sep': timeParText[2] = '9'; break;
+        case 'Oct': timeParText[2] = '10'; break;
+        case 'Nov': timeParText[2] = '11'; break;
+        case 'Dec': timeParText[2] = '12'; break;
+    }
+    ctx.request.body.time = `${timeParText[0]}-${timeParText[2]}-${timeParText[1]}`
     const blog = await Blog.create(ctx.request.body)
     await User.findOneAndUpdate(
         {_id: mongoose.Types.ObjectId(ctx.session.loggedIn)},
         { $push:{blogs: blog['_id'].toString()} },
     )
+    ctx.response.body = ctx.request.body
     await next()
 }
 exports.thumbsUp = async(ctx, next) => {
@@ -166,5 +184,36 @@ exports.comment = async(ctx, next) => {
         {$push: {'comments': {'user': user['nickName'], 'comment': ctx.request.body.comment, 'time': time}}},
     )
     ctx.response.body = {'user': user['nickName'], 'comment': ctx.request.body.comment, 'time': time}
+    await next()
+}
+
+exports.editBlog = async(ctx, next) => {
+    const timeParText = ctx.request.body.time.split(' ').slice(1).reverse();
+    switch(timeParText[2]) {
+        case 'Jan': timeParText[2] = '1'; break;
+        case 'Feb': timeParText[2] = '2'; break;
+        case 'Mar': timeParText[2] = '3'; break;
+        case 'Apr': timeParText[2] = '4'; break;
+        case 'May': timeParText[2] = '5'; break;
+        case 'Jun': timeParText[2] = '6'; break;
+        case 'Jul': timeParText[2] = '7'; break;
+        case 'Aug': timeParText[2] = '8'; break;
+        case 'Sep': timeParText[2] = '9'; break;
+        case 'Oct': timeParText[2] = '10'; break;
+        case 'Nov': timeParText[2] = '11'; break;
+        case 'Dec': timeParText[2] = '12'; break;
+    }
+    ctx.request.body.time = `${timeParText[0]}-${timeParText[2]}-${timeParText[1]}`
+    await Blog.findOneAndUpdate(
+        {_id: mongoose.Types.ObjectId(ctx.request.body._id)},
+        {$set: {title: ctx.request.body.title, content: ctx.request.body.content, time: ctx.request.body.time}}
+    )
+    ctx.response.body = ctx.request.body
+    await next()
+}
+exports.removeBlog = async(ctx, next) => {
+    await Blog.remove({_id: mongoose.Types.ObjectId(ctx.request.body._id)})
+    console.log('remove _id',ctx.request.body._id)
+    ctx.response.body = ctx.request.body._id
     await next()
 }

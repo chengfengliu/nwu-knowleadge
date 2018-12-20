@@ -12,7 +12,7 @@ exports.allFiles = async(ctx, next) => {
   }
   const files = await File.find()
   const user = await User.findOne({'_id': mongoose.Types.ObjectId(ctx.session.loggedIn)})
-  await ctx.render('download', {'files': JSON.stringify(files), 'downloadTimes': user['downloadTimes']})
+  ctx.response.body = {'files': JSON.stringify(files), 'downloadTimes': user['downloadTimes']}
   await next()
 }
 
@@ -21,7 +21,9 @@ exports.add = async(ctx, next) => {
   const rootPath = path.resolve(__dirname, '..')
   const file = ctx.req.file
   if(!file) {
-      ctx.response.body = '<p>请不要上传空文件<a href="/download">返回</a></p>'
+      ctx.response.body = {
+          name: ''
+      }
       return
   }
   //以下代码得到文件后缀
@@ -49,7 +51,14 @@ exports.add = async(ctx, next) => {
       {'_id': user['_id']},
       {$set: {'downloadTimes': user['downloadTimes'] + 5}}  // 可下载数加5
   )
-  ctx.response.body = '<p>完成上传<a href="/download">返回</a></p>'
+  ctx.response.body = {
+      _id: `${ insertedFile['_id'].toString() }`,
+      name: file.originalname,
+      fileBelong: ctx.req.body.fileBelong,
+      major: ctx.req.body.major,
+      provider: user.nickName,
+      downloadedTimes: 0
+  }
   await next()
 }
 

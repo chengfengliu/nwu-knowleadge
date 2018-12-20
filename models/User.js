@@ -9,7 +9,7 @@ const fs = require('fs')
 exports.saveUser = async(ctx, next) => {
   const {nickName, name, number, school, account, password} = ctx.request.body
   await User.create({nickName, name, number, school, account, password: md5(password), downloadTimes: 3})
-  await ctx.render('login', {signupAccount: ctx.request.body.account})
+  ctx.body = nickName
   await next()
 }
 
@@ -17,11 +17,12 @@ exports.findUser = async(ctx, next) => {
   const {account, password} = ctx.request.body
   const doc = await User.findOne({account, password: md5(password)})
   if(!doc) {
-    ctx.response.body = "<p>账号或密码错误。<a href='/login'>登录</a><span>或</span><a href='/'>首页</a></p>"
+    ctx.body = false
     return
   } 
   ctx.session.loggedIn = doc._id.toString()
-  ctx.response.redirect('/')
+  ctx.body = true
+  // ctx.response.redirect('/')
   await next()
 }
 
@@ -35,12 +36,12 @@ exports.allMoments = async(ctx, next) => {
   // 每4个想法一页
   const momentCountPerPage = momentsPage * 4
   const doc = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
-  await ctx.render('moments', {momentsPagesCount: doc['moments'] ? Math.ceil(doc['moments'].length / 4) : 0, momentsPage,
+  ctx.response.body =  {momentsPagesCount: doc['moments'] ? Math.ceil(doc['moments'].length / 4) : 0, momentsPage,
                         moment0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? doc['moments'][(momentCountPerPage) - 4]['moment'] : '', image0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? `userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 4]['timeId'] }.jpg` : '', date0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? doc['moments'][(momentCountPerPage) - 4]['date'] : '',
                         moment1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? doc['moments'][(momentCountPerPage) - 3]['moment'] : '', image1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? `userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 3]['timeId'] }.jpg` : '', date1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? doc['moments'][(momentCountPerPage) - 3]['date'] : '',
                         moment2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? doc['moments'][(momentCountPerPage) - 2]['moment'] : '', image2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? `userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 2]['timeId'] }.jpg` : '', date2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? doc['moments'][(momentCountPerPage) - 2]['date'] : '',
                         moment3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? doc['moments'][(momentCountPerPage) - 1]['moment'] : '', image3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? `userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 1]['timeId'] }.jpg` : '', date3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? doc['moments'][(momentCountPerPage) - 1]['date'] : '',
-  })
+  }
   await next()
 }
 exports.addMoment = async(ctx, next) => {
@@ -68,16 +69,15 @@ exports.addMoment = async(ctx, next) => {
         {_id: mongoose.Types.ObjectId(ctx.session.loggedIn)},
         //$push向数组增加数据，不能插入req.body，这是对象，而是插入req.body['moment']字符串
         { $push:{'moments': {'moment': ctx.request.body.moment, 'timeId': uploadTime, 'date': `${ uploadDate.getFullYear() }-${ uploadDate.getMonth() }-${ uploadDate.getDate() } ${ uploadDate.getHours() }:${ uploadDate.getMinutes() }`}}}
-      )
-      ctx.response.body = '<p>完成上传<a href="/moments">返回</a></p>'
+      )      
   } else { // 已有此用户文件夹
       fs.writeFileSync(path.join(userImagePath, `${ uploadTime }.jpg`), base64Data, {encoding: 'base64'})
       await User.findOneAndUpdate(
         {_id: mongoose.Types.ObjectId(ctx.session.loggedIn)},
         { $push:{'moments': {'moment': ctx.request.body.moment, 'timeId': uploadTime, 'date': `${ uploadDate.getFullYear() }-${ uploadDate.getMonth() }-${ uploadDate.getDate() } ${ uploadDate.getHours() }:${ uploadDate.getMinutes() }`}}}
       )
-      ctx.response.body = '<p>完成上传<a href="/moments">返回</a></p>'
   }
+  ctx.response.body = true
   await next()
 }
 
@@ -90,12 +90,12 @@ exports.otherMoments = async(ctx, next) => {
   const momentsPage = ctx.params.pageNo
   const momentCountPerPage = momentsPage * 4
   const doc = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
-  await ctx.render('moments', {momentsPagesCount: doc['moments'] ? Math.ceil(doc['moments'].length / 4) : 0, momentsPage,
+  ctx.response.body = {momentsPagesCount: doc['moments'] ? Math.ceil(doc['moments'].length / 4) : 0, momentsPage,
                         moment0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? doc['moments'][(momentCountPerPage) - 4]['moment'] : '', image0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? `/userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 4]['timeId'] }.jpg` : '', date0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? doc['moments'][(momentCountPerPage) - 4]['date'] : '',
                         moment1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? doc['moments'][(momentCountPerPage) - 3]['moment'] : '', image1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? `/userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 3]['timeId'] }.jpg` : '', date1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? doc['moments'][(momentCountPerPage) - 3]['date'] : '',
                         moment2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? doc['moments'][(momentCountPerPage) - 2]['moment'] : '', image2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? `/userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 2]['timeId'] }.jpg` : '', date2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? doc['moments'][(momentCountPerPage) - 2]['date'] : '',
                         moment3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? doc['moments'][(momentCountPerPage) - 1]['moment'] : '', image3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? `/userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 1]['timeId'] }.jpg` : '', date3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? doc['moments'][(momentCountPerPage) - 1]['date'] : '',
-  })
+  }
   await next()
 }
 exports.downloadVideo = async(ctx, next) => {
@@ -114,7 +114,6 @@ exports.downloadVideo = async(ctx, next) => {
   let reuslt = await send(ctx, 'f1.flv', {
       root: imagesPath
   })
-  console.log('xxxx',reuslt)
   await next()
 }
 exports.getDownloadTimes = async(ctx, next) => {
@@ -123,6 +122,20 @@ exports.getDownloadTimes = async(ctx, next) => {
       return
   }
   const user = await User.findOne({'_id': mongoose.Types.ObjectId(ctx.session.loggedIn)})
-  ctx.response.body = {'nowDownloadTimes': user['downloadTimes'] - 1}
+  ctx.response.body = {'nowDownloadTimes': user['downloadTimes']}
   await next()
+}
+
+exports.getUserSignUpStatusAndNickName = async(ctx, next) => {
+  if (ctx.session.loggedIn) {
+    const user = await User.findOne({'_id': mongoose.Types.ObjectId(ctx.session.loggedIn)})
+    ctx.response.body = {
+      hasLoggedIn: true,
+      userNickName: user.nickName
+    }
+  } else {
+    ctx.response.body = {
+      hasLoggedIn: false
+    }
+  }
 }

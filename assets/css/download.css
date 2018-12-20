@@ -1,45 +1,51 @@
-div#header {
+div#download img{
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin: -5px 0px 0px 65px;
+}
+div#download div#header {
   width: 50%;
   margin: 10px auto;
 }
-div#header div#times {       
+div#download div#header div#times {       
   margin-left: 80%;
 }
-ul {
+div#download ul {
   width: 50%;
   margin: 10px auto;
   padding: 0;
 }
-ul li{
+div#download ul li{
   list-style-type: none;
   padding: 5px 0;
 }
-ul li a {
+div#download ul li a {
   color: #000;
   padding-left: 20px;
 }
-ul li span {
+div#download ul li span {
   float: right;
   margin-right: 20px;
 }
-ul li span.provider {
+div#download ul li span.provider {
   margin-right: 80px;
 }
-ul li:nth-child(odd) {
+div#download ul li:nth-child(odd) {
   background-color: #e2eefc;
 }
-ul li:first-child{
+div#download ul li:first-child{
   font-size: 1em;
   font-weight: 600;
   color: #fff;
   background-color: #02679b;
 }
-ul::after{
+div#download ul::after{
   display:block;
   content: '';
   clear: both;
 }
-a.button {
+div#download a.button {
   display: block;
   background-color: blue;
   color: #fff;
@@ -50,18 +56,7 @@ a.button {
   width: 10%;
   margin: 30px auto;
 }
-div.warn {
+div#download div.warn {
   color: #555;
   font-size: 1rem;
-}
-/* 底部 */
-div#footer {
-  background-color: #333;
-  margin-top: 20px;
-  padding: 15px 0;
-}
-div#footer p {
-  color: #fff;
-  width: 30%;
-  margin: 0 auto;
 }

@@ -1,0 +1,42 @@
+div.commentBox {
+  width: 94%;
+  margin: 0 auto;
+  clear: both;
+}
+div.commentBox ul {
+  padding: 0;
+} 
+div.commentBox ul li {
+  border-top: 0.5px solid rgba(0, 0, 0, .3);
+  border-bottom: none !important;
+  padding: 10px 0 0 20px;
+}
+div.commentBox ul li p {
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: hidden;
+}
+div.commentBox ul li span {
+  color: #8590a6;
+  float: right;
+}
+div.commentBox form {
+  margin: 10px 0px;
+}
+div.commentBox input {
+  padding: 5px 10px;
+  border-radius: 1em;
+  margin-top: 0.1em;
+}
+div.commentBox button {
+  display: block;
+  float: right;
+  margin-bottom: 2em;
+  width: 4.5em;
+  height: 2em;
+  background-color: blue;
+  color: white;
+  font-size: 0.8em;
+  text-align: center;
+  border-radius: 0.1em;
+}

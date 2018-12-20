@@ -1,0 +1,112 @@
+/* 博客 */
+ul#blogsList{
+  width: 85%;
+  margin: 0 auto;
+  padding: 0;
+}
+ul#blogsList li{
+  list-style-type: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .3);
+}
+ul#blogsList li::after{
+  display: block;
+  content:'';
+  clear: both;
+}
+ul#blogsList li h3{
+  margin-top: 40px;
+  font-size: 1.3em;
+}
+ul#blogsList li p{
+  line-height: 2em;
+}
+ul#blogsList li p:nth-child(3),ul#blogsList li p:nth-child(4),ul#blogsList li p:nth-child(5),ul#blogsList li p:nth-child(6) {
+  float: left;
+  margin-right: 20px;
+  color: rgb(133, 144, 166);
+}
+
+/* 展开全文*/ 
+button#spread {
+  border: none;
+  background-color: #fff;
+  color: #175199;
+}
+
+button.thumbsUp {
+    width: 80px;
+    height: 30px;
+    background-color: rgba(0,132,255,.1);
+    border-radius: 10px;
+    border-color: transparent;
+    color: #0084ff;
+    font-size: 1.2em;
+}
+button.thumbsUp img {
+    width: 50%;
+    height: 80%;
+    margin-top: 3px;
+}
+button.thumbsUp span {
+    position: relative;
+    bottom: 1px;
+}
+button.thumbsUping {
+    width: 80px;
+    height: 30px;
+    background-color: #0084ff;
+    border-radius: 10px;
+    border-color: transparent;
+    color: #fff;
+    font-size: 1.2em;
+}
+button.thumbsUping img {
+    width: 50%;
+    height: 80%;
+    margin-top: 6%;
+}
+button.thumbsUping span {
+    position: relative;
+    bottom: 1px;
+}
+button.comments {
+    width: 5em;
+    height: 30px;
+    padding: 0px;
+    background-color: transparent;
+    border-color: transparent;
+    color: rgb(133, 144, 166);
+    font-size: 1em;
+  }
+button.comments img {
+  width: 50%;
+  height: 80%;
+  margin-top: 3px;
+}
+button.hideComments {
+  width: 9em;
+  height: 30px;
+  padding: 0px;
+  background-color: transparent;
+  border-color: transparent;
+  color: rgb(133, 144, 166);
+  font-size: 1em;
+}
+button.hideComments img {
+  width: 50%;
+  height: 80%;
+  margin-top: 3px;
+}
+
+/* 展开全文*/ 
+button#spread {
+  border: none;
+  background-color: #fff;
+  color: #175199;
+}
+
+img.spreadIcon {
+  margin-left: 5px;
+  width: 10px;
+  height: 10px;
+}

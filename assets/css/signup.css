@@ -1,32 +1,32 @@
-body {
-  background-image: url('../images/sky1.jpg');
+div#signupBackground {
+  background-image: url('/images/sky1.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
-p {
+div#signup p {
   padding-left: 25%;
 }
-fieldset {
+div#signup fieldset {
   width: 40%;
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 1);
   border:none;
 }
-.name {
+div#signup .name {
   font-size: 1em;
   font-weight: bold;
 }
-.text {
+div#signup .text {
   width: 50%;
   height: 30px;
   margin-left: 40px;
   text-indent: 10px;
   border-radius: 10px;
 }
-button.abled {
+div#signup button.abled {
   background-color: blue;              
 }
-button {
+div#signup button {
   display: block;
   margin: 40px auto;
   width: 80px;
@@ -37,32 +37,34 @@ button {
   font-size: 10px;
   border-radius: 5px;  
 }
-div.correct{
+div#signup span.hideSpan {
+  display: none;
+}
+div#signup span.correct{
   margin-top: 4px;
   margin-left: 40%;
   font-size: 0.5em;
   color: lightgreen;
 }
-div.error{
+div#signup span.error{
   margin-top: 4px;
   margin-left: 40%;
   font-size: 0.5em;
   color: red;
 }
-div.information {
-  display: none;
+div#signup span.information {
   margin-top: 4px;
   margin-left: 40%;
   font-size: 0.5em;
   color: gray;
 }
-div.warn {
+div#signup div.warn {
   color: #555;
   font-size: 0.5em;
   margin: 20px auto;
   width: 50%;
 }
-a.button {
+div#signup a.button {
   display: block;
   background-color: blue;
   color: #fff;
