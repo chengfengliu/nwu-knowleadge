@@ -1,17 +1,21 @@
 const path = require('path')
 const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const config = {
-  devtool: 'cheap-module-eval-source-map',
   entry: "./js/root.js",
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/static/',
-    chunkFilename: '[name]-[id].[chunkhash:8].bundle.js',
+    chunkFilename: '[name].bundle.js',
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
+    new HtmlWebpackPlugin({
+      template: './views/index.html',
+      title: 'test'
+    })
   ],
   module: {
     loaders: [
@@ -31,11 +35,13 @@ const config = {
 }
 
 module.exports = env => {
-  console.log('env1',env)
-  if(env === 'production') {
+  if(env === 'development') {
+    console.log('config development')
+    config.devtool = 'cheap-module-eval-source-map'
     config.plugins.push(new webpack.HotModuleReplacementPlugin())
   }
-  if(env === 'development') {
+  if(env === 'production') {
+    console.log('config production')
     config.plugins.push(new webpack.optimize.DedupePlugin())
     config.plugins.push(new webpack.optimize.UglifyJsPlugin({
       compress: {

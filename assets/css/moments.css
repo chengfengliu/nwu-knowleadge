@@ -112,3 +112,14 @@ ul#pagesList li.active a {
     color: #fff;
     background-color: #007bff;
 }
+div#myMoment a.button {
+  display: block;
+  background-color: blue;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 10%;
+  margin: 30px auto;
+}

@@ -1,4 +1,7 @@
 /*页码*/
+ul#pagesList {
+    margin-left: 5%;
+}
 ul#pagesList li{
   float: left;
   list-style-type: none;
