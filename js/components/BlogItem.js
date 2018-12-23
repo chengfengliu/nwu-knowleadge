@@ -64,18 +64,6 @@ export default class BlogItem extends Component {
     })
   }
   render() {
-    // const blogItem = this.props.blogData[`blog${this.props.index}Title`]
-    //  ? <li>
-    //       <h3>{this.props.blogData[`blog${this.props.index}Title`]}</h3>
-    //       <p className="content" dangerouslySetInnerHTML={{__html: this.props.blogData[`blog${this.props.index}Content`]}}></p>
-    //       <button id="spread" onClick={this.spread.bind(this)}>展开全文<canvas ref="canvas" id="myCanvas" width="10" height="10" style={{marginLeft:"5px"}}></canvas></button>
-    //       <p>{`编辑于 ${this.props.blogData[`blog${this.props.index}Time`]}`}</p>
-    //       <p>{this.props.blogData[`blog${this.props.index}Auther`]}</p>
-    //       <p>{!this.state.commentIsShowing ? <button className="comments" onClick={this.clickCommentButton.bind(this)}><img src="/images/comments-solid.svg"/>评论</button> : <button className="hideComments"onClick={this.clickHideCommentButton.bind(this)}><img src="/images/comments-solid.svg"/>收起评论</button>}</p>
-    //       <p><button className={`thumbsUpButton ${this.state.thumbsUpStatus}`} onClick={this.clickThumbsUpButton.bind(this)}><img src={`/images/thumbs-up-${this.state.thumbsUpStatus}.svg`}/><span>{this.state.thumbsUpCount}</span></button></p>
-    //       {this.state.commentIsShowing ? <Comment commentData={this.props.blogData[`blog${this.props.index}Comments`]} index={this.props.index} pageNo={this.props.pageNo}/> : ''}
-    //     </li>
-    //   : <li><h3>已经到尾了</h3></li>
     return (
       <li>
         <h3>{this.props.blogData[`blog${this.props.index}Title`]}</h3>

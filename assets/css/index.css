@@ -41,10 +41,6 @@ body {
   div#newVistor button {
       display: none;
   }
-  ul#pagesList{
-      padding: 0px;
-      margin-left: 120px;
-   }   
 }
 /* 当屏幕最大为669px时（一直小于669px），执行下面 */
 @media(max-width:669px) {
@@ -101,9 +97,6 @@ body {
     background-color: #fff;
     margin: 0.5em auto;
   }
-  ul#pagesList{
-      margin-left: 0%;
-  }   
 }
 /* 博客 */
 ul#blogsList{
@@ -133,34 +126,6 @@ ul#blogsList li p:nth-child(3),p:nth-child(4),p:nth-child(5),p:nth-child(6){
   color: rgb(133, 144, 166);
 }
 
-/*页码*/
-ul#pagesList li{
-  float: left;
-  list-style-type: none;
-}
-ul#pagesList::after{
-  display:block;
-  content: '';
-  clear: both;
-}
-ul#pagesList li a{
-    position: relative;
-    display: block;
-    padding: .5rem .75rem;
-    margin-left: -1px;
-    line-height: 1.25;
-    color: #007bff;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    text-decoration: none;
-}
-ul#pagesList li a:hover {
-    background-color: #dee2e6;
-}
-ul#pagesList li.active a{
-    color: #fff;
-    background-color: #007bff;
-}
 /* 展开全文*/ 
 button#spread {
   border: none;

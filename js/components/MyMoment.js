@@ -20,14 +20,14 @@ export default class MyMoment extends Component {
       momentsPagesCount: 1
     }
   }
-  componentWillMount() {
-    console.log('myMoment will Mount')
+  componentDidMount() {
+    // console.log('myMoment did Mount')
     const _that = this
     $.ajax({
       url: '/api/getAllmoments',
       type: 'get',
       success(responseData) {
-        console.log('/api/getAllmoments',responseData)
+        // console.log('/api/getAllmoments',responseData)
         const moment0 = {}
         const moment1 = {}
         const moment2 = {}

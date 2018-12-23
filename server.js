@@ -53,10 +53,6 @@ router.get("/", async(ctx, next) => {
   await next()
 })
 router.get("/api/signUpStatus", User.getUserSignUpStatusAndNickName)
-// router.get("/signup", async(ctx, next) => {
-//   await ctx.render('signup')
-//   await next()
-// })
 router.post('/api/signup', User.saveUser)
 router.get('/api/getAllBlogs', Blog.allBlogs)
 router.get('/api/getOtherBlogs/:pageNo', Blog.otherBlogs)
@@ -80,19 +76,11 @@ router.get('/api/getOtherMoments/:pageNo', User.otherMoments)
 router.get('/api/downloadVideo', User.downloadVideo)
 router.post('/api/updateMoments', User.addMoment)
 
-router.get('/download', File.allFiles)
+router.get('/api/download', File.allFiles)
 router.post('/api/upload', upload.single('myfile'), File.add)
 router.get('/api/download/:_id', File.download)
 router.get('/api/getDownloadTimes', User.getDownloadTimes)
 
-// router.get('/search',  async(ctx, next) => {
-//   await ctx.render('search')
-//   await next()
-// })
-router.get('/searchgrade', async(ctx, next) => {
-  ctx.response.body = '<p>目前暂停服务<a href="/">返回首页</a></p>'
-  await next()
-})
 app.use(router.routes()).use(router.allowedMethods())
 
 mongoose.connect(db)
@@ -104,5 +92,5 @@ mongoose.connection.on('connected', () => {
     } else {
       console.info("==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.", port, port)
     }
-  });
+  })
 })

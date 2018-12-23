@@ -12,7 +12,7 @@ export default class Index extends Component {
       userNickName: ''
     }
   }
-  componentWillMount() {
+  componentDidMount() {
     const _that = this
     $.ajax({
       url: '/api/signUpStatus',
@@ -28,7 +28,7 @@ export default class Index extends Component {
       url: '/api/logout',
       type: 'get',
       success(responceData) {
-        console.log('/api/logout',responceData)
+        // console.log('/api/logout',responceData)
         _that.setState({
           hasLoggedIn: responceData.hasLoggedIn
         })

@@ -14,13 +14,14 @@ export default class Blog extends Component {
       blogCount: 0
     }
   }
-  componentWillMount() {
+  componentDidMount() {
     // console.log('blog componentWillMount')
     const _that = this
     $.ajax({
       url: '/api/getAllBlogs',
       type: 'get',
       success(responseData) {
+        // console.log('api/getAllBlogs', responseData)
         const blog0 = {}
         const blog1 = {}
         const blog2 = {}

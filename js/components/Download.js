@@ -14,29 +14,28 @@ export default class Download extends Component {
       userDownloadTimes: 0
     }
   }
-  componentWillMount() {
+  componentDidMount() {
     const _that = this
-    // 两次ajax分别触发一次FileList的componentWillReceiveProps方法
+    // 如果是两次ajax会分别触发一次FileList的componentWillReceiveProps方法
     $.ajax({
       url: '/api/getDownloadTimes',
       type: 'get',
-      success(responseData) {
+      success(getDownloadTimesResponseData) {
         // console.log('/api/getDownloadTimes ', responseData.nowDownloadTimes)
-        _that.setState({
-          userDownloadTimes: responseData.nowDownloadTimes
-        })
+        $.ajax({
+          url: '/api/download',
+          type: 'get',
+          success(downloadResponseData) {
+            // console.log('/download ', responseData.files)
+            _that.setState({
+              userDownloadTimes: getDownloadTimesResponseData.nowDownloadTimes,
+              files: downloadResponseData.files.match(/\{(.+?)\}/g).map(item => JSON.parse(item))
+            })
+          }
+        }) 
       }
     })  
-    $.ajax({
-      url: '/download',
-      type: 'get',
-      success(responseData) {
-        // console.log('/download ', responseData.files)
-        _that.setState({
-          files: responseData.files.match(/\{(.+?)\}/g).map(item => JSON.parse(item))
-        })
-      }
-    }) 
+
   }
   updateFileList(updateFile) {
     // console.log(updateFile,typeof updateFile)

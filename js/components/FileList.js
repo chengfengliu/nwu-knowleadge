@@ -7,9 +7,7 @@ export default class FileList extends Component {
       files: []
     }
   }
-  // componentWillMount() {
-  //   console.log('componentWillMount')
-  // }
+
   componentWillReceiveProps(nextProps) {
     // console.log('filelist componentWillReceiveProps')
     this.refs.one.innerHTML = '<li>大一上<span>下载次数</span><span>提供者</span></li>'

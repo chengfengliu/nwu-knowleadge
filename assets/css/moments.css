@@ -80,38 +80,7 @@ ul#momentsList li span:nth-child(3) {
   float: right;
   padding-right: 68.5%;
 }
-/*页码*/
-ul#pagesList {
-  margin-left: 20%;
-  margin-top: 100px;
-}
-ul#pagesList li{
-  float: left;
-  list-style-type: none;
-}
-ul#pagesList::after{
-  display:block;
-  content: '';
-  clear: both;
-}
-ul#pagesList li a {
-    position: relative;
-    display: block;
-    padding: .5rem .75rem;
-    margin-left: -1px;
-    line-height: 1.25;
-    color: #007bff;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    text-decoration: none;
-}
-ul#pagesList li a:hover {
-    background-color: #dee2e6;
-}
-ul#pagesList li.active a {
-    color: #fff;
-    background-color: #007bff;
-}
+
 div#myMoment a.button {
   display: block;
   background-color: blue;

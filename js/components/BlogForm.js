@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../../assets/css/blogInput.css'
+import '../../assets/css/blogForm.css'
 import $ from 'jquery'
-export default class BlogInput extends Component {
+export default class BlogForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -50,8 +50,10 @@ export default class BlogInput extends Component {
         time: new Date().toString().slice(0,15)
       },
       success(responseData) {
-        _that.refs.title.value = ''
-        _that.refs.content.value = ''
+        _that.setState({
+          title: '',
+          content: ''
+        })
         alert('成功发布')
         _that.props.submitBlog(responseData)
       }
@@ -71,12 +73,24 @@ export default class BlogInput extends Component {
       },
       success(responseData) {
         console.log('/api/editBlog',responseData)
-        _that.refs.title.value = ''
-        _that.refs.content.value = ''
+        _that.setState({
+          title: '',
+          content: '',
+          isEditing: false,
+          editBlogId: '',
+        })
         alert('成功编辑')
         _that.props.editBlog(responseData)
       }
     }) 
+  }
+  clickCancelButton() {
+    this.setState({
+      isEditing: false,
+      title: '',
+      content: '',
+      editBlogId: ''
+    })
   }
   clickBoldButton() {
     if(this.refs.content.selectionEnd - this.refs.content.selectionStart > 0) {
@@ -100,15 +114,18 @@ export default class BlogInput extends Component {
         <div id='header'>
           <img src="images/write.png"/>
           <p>写博客</p>
-          {this.state.isEditing ? <button type="submit" id="submit" onClick={this.clickCompleteEditButton.bind(this)}>完成编辑</button> : <form><button type="submit" id="submit" onClick={this.handlePost.bind(this)}>发布</button></form>}
+          {this.state.isEditing 
+            ? <div><button className="submit" onClick={this.clickCancelButton.bind(this)}>取消</button><button className="submit" onClick={this.clickCompleteEditButton.bind(this)}>完成编辑</button></div> 
+            : <button className="submit" onClick={this.handlePost.bind(this)}>发布</button>
+          }
         </div>
         <form>
-          <div className="formItem"><input type="text" placeholder="请输入标题（不能为空）" id="title" ref="title" onChange={this.updateField.bind(this, 'title')}/></div>
+          <div className="formItem"><input type="text" placeholder="请输入标题（不能为空）" id="title" ref="title" onChange={this.updateField.bind(this, 'title')} value={this.state.title}/></div>
           <div id="editItem">
               <div id="bold" className="editButton" onClick={this.clickBoldButton.bind(this)}>B</div>
               <div id="italic" className="editButton" onClick={this.clickItalicButton.bind(this)}>I</div>
           </div>
-          <div className="formItem"><textarea placeholder="请输入正文（不能为空）"rows="10" id="content" ref="content" wrap="hard" onChange={this.updateField.bind(this, 'content')}></textarea></div>
+          <div className="formItem"><textarea placeholder="请输入正文（不能为空）"rows="10" id="content" ref="content" wrap="hard" onChange={this.updateField.bind(this, 'content')} value={this.state.content}></textarea></div>
         </form>
       </div>
     )

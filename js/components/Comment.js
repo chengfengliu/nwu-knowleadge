@@ -20,6 +20,10 @@ export default class Comment extends Component {
     this.setState(state)
   }
   clickSubmitButton() {
+    if(this.state.commentInput === '') {
+      alert("评论不能为空")
+      return
+    }
     const _that = this
     console.log(this.state)
     $.ajax({

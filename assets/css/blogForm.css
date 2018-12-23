@@ -31,9 +31,14 @@ div#blogInput button#completeEdit{
 }
 
 div#blogInput div#header {
-  margin: 0;
+  margin: 5px 0;
   padding: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+div#blogInput div#header::after {
+  display: block;
+  content: '';
+  clear: both;
 }
 div#blogInput div#header img {
   float: left;
@@ -42,18 +47,18 @@ div#blogInput div#header img {
   margin: 4px 0px 0px 60px;
 }
 div#blogInput div#header p {
-  width: 50%;
-  margin: 0 auto;
+  float: left;
+  margin: 0 20px;
   font-size: 1.2em;
   font-weight: 600;
   padding: 10px 0;
-  /* color: #fff; */
 }
-div#blogInput div#header button#submit {
+div#blogInput div#header button.submit {
+  display: block;
   float: right;
   width: 80px;
   height: 40px;
-  margin: -45px 80px 0 0;
+  margin: 0 40px 0 0;
   background-color:blue;
   color:white;
   font-weight:bold;

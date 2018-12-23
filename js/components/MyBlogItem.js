@@ -6,24 +6,21 @@ export default class MyBlogItem extends Component {
     super(props)
   }
   clickEditButton() {
-    const myBlogData = JSON.parse(this.props.myBlogData)
     this.props.receiveBlog({
-      title: myBlogData.title,
-      content: myBlogData.content,
-      _id: myBlogData._id
+      title: this.props.myBlogData.title,
+      content: this.props.myBlogData.content,
+      _id: this.props.myBlogData._id
     })
   }
   clickRemoveButton(e) {
     e.preventDefault()
-    console.log('click remove',JSON.parse(this.props.myBlogData))
-    const myBlogData = JSON.parse(this.props.myBlogData)
     const _that = this
     $.ajax({
       url: '/api/removeBlog',
       type: 'post',
       // dataType预期服务器返回的数据类型
       data: {
-        _id: myBlogData._id
+        _id: _that.props.myBlogData._id
       },
       success(responseData) {
         console.log('/api/removeBlog', responseData)
@@ -33,12 +30,11 @@ export default class MyBlogItem extends Component {
     }) 
   }
   render() {
-    const myBlogData = JSON.parse(this.props.myBlogData)
     return(
       <li>
-        <h3>{myBlogData.title}</h3>
-        <p dangerouslySetInnerHTML={{__html: myBlogData.content}}></p>
-        <p>{myBlogData.time}</p>
+        <h3>{this.props.myBlogData.title}</h3>
+        <p dangerouslySetInnerHTML={{__html: this.props.myBlogData.content}}></p>
+        <p>{this.props.myBlogData.time}</p>
         <button className="modifyButton" onClick={this.clickEditButton.bind(this)}>编辑</button>
         <button className="modifyButton" onClick={this.clickRemoveButton.bind(this)}>删除</button>
       </li>

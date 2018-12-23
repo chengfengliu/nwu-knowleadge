@@ -41,22 +41,6 @@ div#myBlog ul#blogsList li a.modifyButton {
 div#myBlog ul#blogsList li a.modifyButton:nth-child(4) {
   margin-right: 50px;
 }
-div#myBlog ul#pagesList {
-  margin-left: 70%;
-}
-div#myBlog ul#pagesList li{
-  float: left;
-  list-style-type: none;
-}
-div#myBlog ul#pagesList::after{
-  display:block;
-  content: '';
-  clear: both;
-}
-div#myBlog ul#pagesList li a{
-  margin-left: 10px;
-  text-decoration: none;
-}
 
 div#myBlog div#editItem {
   width: 50%;
