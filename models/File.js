@@ -1,5 +1,6 @@
 const {User} = require('./UserModel.js')
 const {File} = require('./FileModel.js')
+const {AuditFile} = require('./AuditFileModel.js')
 const send = require('koa-send')
 const mongoose = require('mongoose')
 const path = require('path')
@@ -42,15 +43,11 @@ exports.add = async(ctx, next) => {
   const Mime = nameMime.join('')
   const uploadFile = file.originalname.slice(0, -nameMime.length)
   const user = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
-  // 找到用户名后才插入
-  const insertedFile = await File.create({'name': `${ uploadFile }${ Mime }`, 'fileBelong': ctx.req.body.fileBelong, 'major': ctx.req.body.major, 'provider': user['nickName'], 'downloadedTimes': 0})
+  // 找到用户名后才插入AuditFile
+  const insertedFile = await AuditFile.create({'name': `${ uploadFile }${ Mime }`, 'fileBelong': ctx.req.body.fileBelong, 'major': ctx.req.body.major, 'provider': user['nickName'], 'provider_id': user['_id'], 'downloadedTimes': 0, Mime})
   //以ObjectId重命名文件 加上文件后缀
   fs.renameSync(path.join(rootPath, 'uploads', file.filename), path.join(rootPath, 'uploads', `${ insertedFile['_id'].toString() }${ Mime }`))
-  // 找到才能更新
-  await User.findOneAndUpdate(
-      {'_id': user['_id']},
-      {$set: {'downloadTimes': user['downloadTimes'] + 5}}  // 可下载数加5
-  )
+
   ctx.response.body = {
       _id: `${ insertedFile['_id'].toString() }`,
       name: file.originalname,

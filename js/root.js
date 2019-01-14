@@ -19,6 +19,7 @@ import MyMomentContainer from 'bundle-loader?lazy&name=[name]!./components/MyMom
 import DownloadContainer from 'bundle-loader?lazy&name=[name]!./components/Download'
 import GradeContainer from 'bundle-loader?lazy&name=[name]!./components/Grade'
 import SubjectContainer from 'bundle-loader?lazy&name=[name]!./components/Subject'
+import AdministratorContainer from 'bundle-loader?lazy&name=[name]!./components/Administrator'
 
 import Bundle from './bundle.js';
 import {BrowserRouter, Route} from 'react-router-dom'
@@ -65,6 +66,11 @@ export default class Root extends React.Component {
           {(Subject) => <Subject />}
       </Bundle>
     )
+    const Administrator = () => (
+      <Bundle load={AdministratorContainer}>
+          {(Administrator) => <Administrator />}
+      </Bundle>
+    )
   
     return(
       <BrowserRouter>
@@ -81,6 +87,7 @@ export default class Root extends React.Component {
           <Route path="/download" component={Download}></Route>
           <Route path="/searchgrade" component={Grade}></Route>
           <Route path="/searchsubject" component={Subject}></Route>
+          <Route path="/administrator" component={Administrator}></Route>
         </div>
       </BrowserRouter>
     )

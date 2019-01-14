@@ -20,7 +20,8 @@ const mongoose = require('mongoose')
 const User = require('./models/User.js')
 const Blog = require('./models/Blog.js')
 const File = require('./models/File.js')
-const db = 'mongodb://localhost:27017/koa-react'
+const AuditFile = require('./models/AuditFile.js')
+const db = `mongodb://localhost:27017/${process.env.NODE_DB}`
 
 const compiler = webpack(config(process.env.NODE_ENV))
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config(process.env.NODE_ENV).output.publicPath }))
@@ -81,6 +82,9 @@ router.post('/api/upload', upload.single('myfile'), File.add)
 router.get('/api/download/:_id', File.download)
 router.get('/api/getDownloadTimes', User.getDownloadTimes)
 
+router.get('/api/getAuditFiles', AuditFile.allAuditFiles)
+router.post('/api/approve', AuditFile.approve)
+router.post('/api/reject', AuditFile.reject)
 app.use(router.routes()).use(router.allowedMethods())
 
 mongoose.connect(db)

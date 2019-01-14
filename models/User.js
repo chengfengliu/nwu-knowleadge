@@ -8,20 +8,28 @@ const fs = require('fs')
 
 exports.saveUser = async(ctx, next) => {
   const {nickName, name, number, school, account, password} = ctx.request.body
-  await User.create({nickName, name, number, school, account, password: md5(password), downloadTimes: 3})
+  await User.create({nickName, name, number, school, account, password: md5(password), downloadTimes: 1})
   ctx.response.body = account
   await next()
 }
 
 exports.findUser = async(ctx, next) => {
   const {account, password} = ctx.request.body
+  if(account === 'admin' && password === 'nwulcfadmin') {
+    ctx.response.body = {
+      type: 'administrator'
+    }
+    return
+  }
   const doc = await User.findOne({account, password: md5(password)})
   if(!doc) {
-    ctx.body = false
+    ctx.response.body = false
     return
   } 
   ctx.session.loggedIn = doc._id.toString()
-  ctx.response.body = true
+  ctx.response.body = {
+    type: 'user'
+  }
   // ctx.response.redirect('/')
   await next()
 }

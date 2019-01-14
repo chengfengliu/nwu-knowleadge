@@ -45,3 +45,13 @@ div#login a.button {
   width: 20%;
   margin: 30px auto;
 }
+
+div#login div.warning {
+  font-size: 0.8em;
+  position: relative;
+  display: inline;
+  color: red;
+  top: 180px;
+  left: 50%;
+  margin: 0 -10%;
+}

@@ -44,7 +44,7 @@ export default class Download extends Component {
     // console.log(filesCopy.slice(0, -1),updateFile,typeof updateFile) 
     this.setState({
       files: filesCopy,
-      userDownloadTimes: this.state.userDownloadTimes + 5
+      // userDownloadTimes: this.state.userDownloadTimes + 5
     })
   }
   updateUserDownloadTimes(_id) {
@@ -72,7 +72,7 @@ export default class Download extends Component {
             <h3>文件列表</h3>
             <div id="times">可下载次数：<span id="downloadTimesFromServer">{this.state.userDownloadTimes}</span></div>
           </div>
-          <FileList files={this.state.files} updateUserDownloadTimes={this.updateUserDownloadTimes.bind(this)}/>
+          <FileList files={this.state.files} updateUserDownloadTimes={this.updateUserDownloadTimes.bind(this)} userDownloadTimes={this.state.userDownloadTimes}/>
           <h4>上传中心</h4>
           <div className="warn">
             <h5>注意事项</h5>

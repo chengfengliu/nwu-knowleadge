@@ -20,7 +20,7 @@ export default class UploadForm extends Component {
           if(responseData.name === '') {
             alert('请选择文件')
           } else {
-            alert('上传成功')
+            alert('上传成功，正在审核中')
             _that.refs.uploadInput.value = ''
             _that.refs.gradeInput.value = 'one'
             // console.log('/api/upload', responseData)

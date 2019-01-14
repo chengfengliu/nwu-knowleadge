@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import $ from 'jquery'
 
-export default class FileList extends Component {
+export default class AuditFileList extends Component {
   constructor(props) {
     super(props) 
     this.state = {
@@ -24,7 +25,25 @@ export default class FileList extends Component {
         // item = JSON.parse(item)
         // console.log(item.downloadedTimes, typeof item)
         const fileItem = document.createElement('li')
-        fileItem.innerHTML =  `<a class='downloadLink' href='/api/download/${item._id}.${item.name.split('.')[1]}' download='${item.name}'>${item.name}</a><span class='downloadedTimes'>${item.downloadedTimes}</span><span class='provider'>${item.provider}</span>`
+        fileItem.innerHTML =  `<a class='downloadLink' href='/api/download/${item._id}.${item.name.split('.')[1]}' download='${item.name}'>${item.name}</a><span class='downloadedTimes'>${item.downloadedTimes}</span><span class='provider'>${item.provider}</span><button id="approve">通过</button><button id="reject">拒绝</button>`
+        fileItem.querySelector('#approve').addEventListener('click', e => {
+          $.ajax({
+            url: '/api/approve',
+            method: 'post',
+            data: {
+              _id: item._id
+            }  
+          })
+        })
+        fileItem.querySelector('#reject').addEventListener('click', e => {
+          $.ajax({
+            url: '/api/reject',
+            method: 'post',
+            data: {
+              _id: item._id
+            }  
+          })
+        })
         this.refs[item.fileBelong].appendChild(fileItem)
       })
     }
@@ -36,13 +55,6 @@ export default class FileList extends Component {
         _that.props.updateUserDownloadTimes(splitArray[splitArray.length - 1].split('.')[0])
       })
     })
-    if(nextProps.userDownloadTimes === 0) {
-      _that.refs['filesList'].querySelectorAll('a').forEach(item => {
-        console.log(item)
-        item.style.pointerEvents = 'none';
-        item.style.color = 'grey';
-      })
-    }
   }
 
   render() {
