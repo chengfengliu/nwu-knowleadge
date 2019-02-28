@@ -19,7 +19,8 @@ export default class BlogItem extends Component {
       thumbsUpStatus: this.props.blogData[`blog${this.props.index}ThumbsUpStatus`],
       thumbsUpCount: this.props.blogData[`blog${this.props.index}ThumbsUpCount`],
       needSpread: this.props.blogData[`blog${this.props.index}Content`].length > 230,
-      allDontNeedSpread: !(this.props.blogData[`blog${this.props.index}Content`].length > 230)
+      allDontNeedSpread: !(this.props.blogData[`blog${this.props.index}Content`].length > 230),
+      commentAmount: JSON.parse(this.props.blogData[`blog${this.props.index}Comments`]).length
     })
   }
   // 换页时状态要重新初始化
@@ -29,7 +30,8 @@ export default class BlogItem extends Component {
       thumbsUpStatus: nextProps.blogData[`blog${this.props.index}ThumbsUpStatus`],
       thumbsUpCount: nextProps.blogData[`blog${this.props.index}ThumbsUpCount`],
       needSpread: nextProps.blogData[`blog${this.props.index}Content`].length > 230,
-      allDontNeedSpread: !(nextProps.blogData[`blog${this.props.index}Content`].length > 230)
+      allDontNeedSpread: !(nextProps.blogData[`blog${this.props.index}Content`].length > 230),
+      commentAmount: JSON.parse(nextProps.blogData[`blog${this.props.index}Comments`]).length
     })
   }
   clickCommentButton(e) {
@@ -73,7 +75,7 @@ export default class BlogItem extends Component {
         }
         <p>{`编辑于 ${this.props.blogData[`blog${this.props.index}Time`]}`}</p>
         <p>{this.props.blogData[`blog${this.props.index}Auther`]}</p>
-        <p>{!this.state.commentIsShowing ? <button className="comments" onClick={this.clickCommentButton.bind(this)}><img src="/images/comments-solid.svg"/>评论</button> : <button className="hideComments"onClick={this.clickHideCommentButton.bind(this)}><img src="/images/comments-solid.svg"/>收起评论</button>}</p>
+        <p>{!this.state.commentIsShowing ? <button className="comments" onClick={this.clickCommentButton.bind(this)}><img src="/images/comments-solid.svg"/><span>{this.state.commentAmount}条评论</span></button> : <button className="hideComments"onClick={this.clickHideCommentButton.bind(this)}><img src="/images/comments-solid.svg"/><span>收起评论</span></button>}</p>
         <p><button className={`thumbsUpButton ${this.state.thumbsUpStatus}`} onClick={this.clickThumbsUpButton.bind(this)}><img src={`/images/thumbs-up-${this.state.thumbsUpStatus}.svg`}/><span>{this.state.thumbsUpCount}</span></button></p>
         {this.state.commentIsShowing ? <Comment commentData={this.props.blogData[`blog${this.props.index}Comments`]} index={this.props.index} pageNo={this.props.pageNo}/> : ''}
       </li>

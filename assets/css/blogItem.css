@@ -69,8 +69,10 @@ button.thumbsUping span {
     position: relative;
     bottom: 1px;
 }
+/* 评论按钮 */
 button.comments {
-    width: 5em;
+    position: relative;
+    width: 8em;
     height: 30px;
     padding: 0px;
     background-color: transparent;
@@ -81,10 +83,15 @@ button.comments {
 button.comments img {
   width: 50%;
   height: 80%;
-  margin-top: 3px;
+  position: absolute;
+  left: -10%;
+}
+button.comments span {
+  margin-left: 10px;
 }
 button.hideComments {
-  width: 9em;
+  position: relative;
+  width: 8em;
   height: 30px;
   padding: 0px;
   background-color: transparent;
@@ -95,7 +102,11 @@ button.hideComments {
 button.hideComments img {
   width: 50%;
   height: 80%;
-  margin-top: 3px;
+  position: absolute;
+  left: -10%;
+}
+button.hideComments span {
+  margin-left: 10px;
 }
 
 /* 展开全文*/ 
