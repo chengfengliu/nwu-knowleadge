@@ -1,4 +1,4 @@
-/* 当屏幕最小为669px时（一直大于669px），执行下面 */
+/* 当屏幕最小为669px时（一直大于669px），执行下面 PC端*/
 @media(min-width:669px) {
   /* 头部 */
   header {
@@ -37,24 +37,25 @@
       display: none;
   }
 }
-/* 当屏幕最大为669px时（一直小于669px），执行下面 */
+/* 当屏幕最大为669px时（一直小于669px），执行下面 移动端*/
 @media(max-width:669px) {
   /* 头部 */
   header {
-      height: 50px;
-      background-color: #373277;
+    position: relative;
+    height: 50px;
+    background-color: #373277;
   }
   header img#icon {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      margin: 5px 0px 0px 0px;
-      display: none;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    margin: 5px 0px 0px 0px;
+    display: none;
   }
   header p{
-      position: absolute;
-      margin-left: 10px;
-      color: #fff;
+    position: absolute;
+    margin-left: 10px;
+    color: #fff;
   }
   header ul{
     position: absolute;
@@ -72,20 +73,35 @@
   header ul li a:hover {
     color: #fff;
   }
+  header ul#menu{
+    position: absolute;
+    right: 0;
+    display: block;
+    width: 100%;
+    background-color: #373277;
+    margin-top: 45px;
+    padding: 0
+  }
+  header ul#menu li{
+    float: left;
+    width: 100%;
+    text-align: left;
+    margin-top: 5px;
+  }
   header button {
-      display: block;
-      float: right;
-      margin-top: 0.5em;
-      margin-right: 0.5em;
-      width: 2.5em;
-      height: 2.5em;
-      background-color: #373277;
-      border: none;
-      border-radius: 0.7em;
-      padding: 0;
+    display: block;
+    float: right;
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+    width: 2.5em;
+    height: 2.5em;
+    background-color: #373277;
+    border: none;
+    border-radius: 0.7em;
+    padding: 0;
   }
   header button:active {
-      background-color: rgba(94,87,184,0.6);
+    background-color: rgba(94,87,184,0.6);
   }
   header button span.icon-bar {
     display: block;

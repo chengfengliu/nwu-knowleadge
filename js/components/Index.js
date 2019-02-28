@@ -36,7 +36,7 @@ export default class Index extends Component {
     })
   }
   render() {
-    console.log('index hasLoggedIn',this.state.hasLoggedIn)
+    // console.log('index hasLoggedIn',this.state.hasLoggedIn)
     return(
       <div id="index">
         <Header hasLoggedIn={this.state.hasLoggedIn} userNickName={this.state.userNickName} exit={this.exit.bind(this)}/>

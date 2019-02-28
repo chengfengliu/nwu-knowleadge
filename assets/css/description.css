@@ -49,6 +49,9 @@ div#index {
   }
   div#index div#introduction div.part div.text {
       margin: 20px auto;
-      width: 60%;
+      width: 70%;
+  }
+  div#index div#introduction div.part div.text h1 {
+      text-align: center;
   }
 }

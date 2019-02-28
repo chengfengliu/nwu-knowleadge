@@ -1,12 +1,50 @@
-footer {
-  position: relative;
-  background-color: #333;
-  bottom: 0;
-  padding: 15px 0;
-  text-align: center;
+/* PC */
+@media(min-width:669px) {
+  footer {
+    height: 50px;
+    position: relative;
+    background-color: #333;
+    bottom: 0;
+    padding: 15px 0;
+  }
+  footer p {
+    color: #fff;
+    width: 50%;
+    margin: 0 auto;
+  }
+  footer P::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  footer p span:nth-child(1) {
+    width: 30%;
+    float: left;
+    margin-left: 20%;
+  }
+  footer p span:nth-child(2) {
+    width: 30%;
+    float: right;
+    text-align: right;
+    margin-right: 20%;
+  }
 }
-footer p {
-  color: #fff;
-  width: 30%;
-  margin: 0 auto;
+/* mobile */
+@media(max-width:669px) {
+  footer {
+    position: relative;
+    background-color: #333;
+    bottom: 0;
+    padding: 15px 0;
+    text-align: center;
+  }
+  footer p {
+    font-size: 0.8rem;
+    color: #fff;
+    width: 80%;
+    margin: 0 auto;
+  }
+  footer p span:nth-child(2){
+    margin-left: 5%;
+  }
 }
