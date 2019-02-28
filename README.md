@@ -8,7 +8,7 @@
 ##### 改为`NODE_ENV=development NODE_PORT=3000 NODE_DB=koa-react node server.js`
 ##### windows:package.json中的scripts build
 ##### `NODE_ENV=production NODE_PORT=80 NODE_DB=koa node server.js`
-##### 改为`"build": "set NODE_ENV=production&&set NODE_PORT=80&&set NODE_DB=koa&&node server.js`
+##### 改为`set NODE_ENV=production&&set NODE_PORT=80&&set NODE_DB=koa&&node server.js`
 ###### 以上端口（NODE_PORT）以及数据库（NODE_DB）均可根据情况改变
 ### 开发模式`npm start`  
 ### 生产模式`npm run build`
