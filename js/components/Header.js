@@ -47,9 +47,9 @@ export default class Header extends Component {
     }
   }
   clickMenu() {
-    this.setState({
-      showMenu: !this.state.showMenu
-    })
+    this.setState(prevState => ({
+      showMenu: !prevState.showMenu
+    }))
   }
   render() {
     let menu;

@@ -49,7 +49,7 @@ const CONFIG = {
 }
 app.use(session(CONFIG, app))
 
-router.get("/", async(ctx, next) => {
+router.get(["/", "/signup", "/login", "/blog", "/moment", "/download", "/searchgrade", "/searchsubject", "/administrator"], async(ctx, next) => {
   await ctx.render('index')
   await next()
 })
@@ -86,7 +86,10 @@ router.get('/api/getAuditFiles', AuditFile.allAuditFiles)
 router.post('/api/approve', AuditFile.approve)
 router.post('/api/reject', AuditFile.reject)
 app.use(router.routes()).use(router.allowedMethods())
-
+app.use(async (ctx) => {
+  if(ctx.status === 404)
+    await ctx.render('404')
+})
 mongoose.connect(db)
 mongoose.connection.on('connected', () => {
   console.log(`Mongoose connection open to ${db}`)
