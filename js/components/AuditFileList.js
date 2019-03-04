@@ -22,7 +22,6 @@ export default class AuditFileList extends Component {
     this.refs.other.innerHTML = '<li>其他</li>'
     if(nextProps.files.length) {
       nextProps.files.forEach((item) => {
-        // item = JSON.parse(item)
         // console.log(item.downloadedTimes, typeof item)
         const fileItem = document.createElement('li')
         fileItem.innerHTML =  `<a class='downloadLink' href='/api/download/${item._id}.${item.name.split('.')[1]}' download='${item.name}'>${item.name}</a><span class='downloadedTimes'>${item.downloadedTimes}</span><span class='provider'>${item.provider}</span><button id="approve">通过</button><button id="reject">拒绝</button>`

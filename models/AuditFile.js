@@ -8,7 +8,7 @@ const fs = require('fs')
 
 exports.allAuditFiles = async(ctx, next) => {
   const auditFiles = await AuditFile.find()
-  ctx.response.body = {'auditFiles': JSON.stringify(auditFiles)}
+  ctx.response.body = {auditFiles}
   await next()
 }
 

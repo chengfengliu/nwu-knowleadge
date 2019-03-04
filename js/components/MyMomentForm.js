@@ -114,7 +114,7 @@ export default class MyMomentForm extends Component {
           {
             this.state.isOpeningCamera
               ? <button className="cameraButton" onClick={this.clickSnapButton.bind(this)}>拍摄</button>
-              : <div><button className="cameraButton" onClick={this.clickLiveButton.bind(this)}>打开摄像头</button><button className="cameraButton" onClick={this.clickUpdateButton.bind(this)}>更新</button></div>
+              : <div><button className="cameraButton" onClick={this.clickLiveButton.bind(this)}>打开摄像头</button><button className="cameraButton" onClick={this.clickUpdateButton.bind(this)}>发布</button></div>
           }         
         </div>
         <textarea ref="moment"id="moment" name="moment" type="text" rows="5" placeholder="记录今天~" onChange={this.updateField.bind(this, 'moment')}></textarea>

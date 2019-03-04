@@ -25,30 +25,29 @@ export default class Comment extends Component {
       return
     }
     const _that = this
-    console.log(this.state)
+    // console.log(this.state)
     $.ajax({
       url: '/api/submitComment',
       type: 'post',
-      dataType: 'json',
       data: {
         pageNo: _that.props.pageNo,
         blogid: _that.props.index,
         comment: _that.state.commentInput
       },
       success(responseData) {
-        console.log('responseData',responseData,JSON.parse(_that.state.commentData))
-        const commentDataCopy = JSON.parse(_that.state.commentData)
+        // console.log('responseData',responseData)
+        const commentDataCopy = _that.state.commentData
         commentDataCopy.push(responseData)
-        console.log('commentDataCopy',commentDataCopy)
+        // console.log('commentDataCopy',commentDataCopy)
         _that.setState({
-          commentData: JSON.stringify(commentDataCopy),
+          commentData: commentDataCopy,
           commentInput: ''
         })
       }
     }) 
   }
   render() {
-    const commentData = JSON.parse(this.state.commentData)
+    const commentData = this.state.commentData
     const commentList = commentData.length 
                         ? commentData.map((item, index) => ( 
                             <li key={index}>{`${item.user}：`}

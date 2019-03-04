@@ -20,7 +20,7 @@ export default class Administrator extends Component {
       success(responseData) {
         console.log(responseData)
         _that.setState({
-          files: responseData.auditFiles.match(/\{(.+?)\}/g).map(item => JSON.parse(item))
+          files: responseData.auditFiles
         })
       }
     })

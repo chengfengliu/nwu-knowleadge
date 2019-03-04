@@ -1,7 +1,7 @@
-const webpack = require('webpack');
+const webpack = require('webpack')
 const webpackDevMiddleware = require('koa-webpack-dev-middleware')
 const webpackHotMiddleware = require('koa-webpack-hot-middleware')
-const config = require('./webpack.config');
+const config = require('./webpack.config')
 
 const Koa = require('koa')
 const static = require('koa-static')
@@ -23,15 +23,18 @@ const File = require('./models/File.js')
 const AuditFile = require('./models/AuditFile.js')
 const db = `mongodb://localhost:27017/${process.env.NODE_DB}`
 
-const compiler = webpack(config(process.env.NODE_ENV))
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config(process.env.NODE_ENV).output.publicPath }))
+const configResult = config(process.env.NODE_ENV)
+const compiler = webpack(configResult)
+
 if(process.env.NODE_ENV === 'development') {
   console.log('env development')
-  app.use(webpackHotMiddleware(compiler))
+  app.use(webpackDevMiddleware(compiler, { noInfo: false, publicPath: configResult.output.publicPath, stats: {colors: true} }))
+  app.use(webpackHotMiddleware(compiler), {log: false, heartbeat: 2000})
 } else if(process.env.NODE_ENV === 'production') {
   console.log('env production')
+  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: configResult.output.publicPath}))
 }
-app.use(bodyParser({enableTypes:['json', 'form', 'text'],formLimit: '1mb'}))
+app.use(bodyParser({enableTypes:['json', 'form', 'text'], formLimit: '1mb'}))
 app.use(static(path.join(__dirname, 'assets')))
 app.use(views(path.join(__dirname, 'views')))
 app.keys = ['some secret hurr']
@@ -48,9 +51,16 @@ const CONFIG = {
   renew: false, /** (boolean) renew session when session is nearly expired, so we can always keep user logged in. (default is false)*/
 }
 app.use(session(CONFIG, app))
-
-router.get(["/", "/signup", "/login", "/blog", "/moment", "/download", "/searchgrade", "/searchsubject", "/administrator"], async(ctx, next) => {
+router.get(["/", "/signup", "/login"], async(ctx, next) => {
   await ctx.render('index')
+  await next()
+})
+router.get(["/blog", "/moment", "/download", "/searchgrade", "/searchsubject", "/administrator"], async(ctx, next) => {
+  if (!ctx.session.loggedIn) {
+    await ctx.render('needLogIn')
+  } else {
+    await ctx.render('index')
+  }
   await next()
 })
 router.get("/api/signUpStatus", User.getUserSignUpStatusAndNickName)

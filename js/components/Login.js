@@ -15,7 +15,6 @@ export default class Login extends Component {
     $.ajax({
       url: '/api/login',
       type: 'post',
-      dataType: 'json',
       data,
       success(responseData) {
         console.log(responseData, typeof responseData)

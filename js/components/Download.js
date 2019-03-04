@@ -26,10 +26,10 @@ export default class Download extends Component {
           url: '/api/download',
           type: 'get',
           success(downloadResponseData) {
-            // console.log('/download ', responseData.files)
+            // console.log('/download ', downloadResponseData.files)
             _that.setState({
               userDownloadTimes: getDownloadTimesResponseData.nowDownloadTimes,
-              files: downloadResponseData.files.match(/\{(.+?)\}/g).map(item => JSON.parse(item))
+              files: downloadResponseData.files
             })
           }
         }) 

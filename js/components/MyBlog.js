@@ -21,10 +21,10 @@ export default class MyBlog extends Component {
       url: '/api/myBlog',
       type: 'get',
       success(responseData) {
-        console.log('/api/myBlog',responseData.blogs,responseData.blogs.slice(1, -1).match(/\{(.+?)\}/g).map(item => JSON.parse(item)),typeof responseData.blogs)
+        // console.log('/api/myBlog',responseData.blogs, typeof responseData.blogs)
         // +?重复1次或更多次，但尽可能少重复,只有+会有{},{}  ->  {...}
         if(responseData.blogs.length > 2) {
-          _that.setState({myBlogList: responseData.blogs.slice(1, -1).match(/\{(.+?)\}/g).map(item => JSON.parse(item))})
+          _that.setState({myBlogList: responseData.blogs})
         }
       }
     }) 

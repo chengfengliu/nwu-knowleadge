@@ -4,41 +4,49 @@ const mongoose = require('mongoose')
 
 
 exports.allBlogs = async(ctx, next) => {
-    if (ctx.session.loggedIn) {
-        const docs = await Blog.find()
-        const blogs = docs.reverse()
-        const doc = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
-        // 博客的页码数 
-        const pageNo = 1
-        const blogCountPerPage = pageNo * 4
-        ctx.response.body = {nickName: doc['nickName'], pageNo, blogCount: blogs ? blogs.length : 0,
-                    blog0Title: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].title : '', blog0Content: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].content : '', blog0Auther: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].auther : '', blog0Time: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].time : '', 
-                    blog0ThumbsUpCount: (blogs && blogs[blogCountPerPage - 4]) ? (blogs[blogCountPerPage - 4].thumbsUpCount ? blogs[blogCountPerPage - 4].thumbsUpCount : '0') : '', blog0ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 4]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 4]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
-                    blog0Comments: (blogs && blogs[blogCountPerPage - 4]) ? JSON.stringify(blogs[blogCountPerPage - 4].comments) : '',
-                    
-                    blog1Title: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].title : '', blog1Content: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].content : '', blog1Auther: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].auther : '', blog1Time: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].time : '', 
-                    blog1ThumbsUpCount: (blogs && blogs[blogCountPerPage - 3]) ? (blogs[blogCountPerPage - 3].thumbsUpCount ? blogs[blogCountPerPage - 3].thumbsUpCount : '0') : '', blog1ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 3]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 3]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
-                    blog1Comments: (blogs && blogs[blogCountPerPage - 3]) ? JSON.stringify(blogs[blogCountPerPage - 3].comments) : '',
-                    
-                    blog2Title: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].title : '', blog2Content: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].content : '', blog2Auther: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].auther : '', blog2Time: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].time : '', 
-                    blog2ThumbsUpCount: (blogs && blogs[blogCountPerPage - 2]) ? (blogs[blogCountPerPage - 2].thumbsUpCount ? blogs[blogCountPerPage - 2].thumbsUpCount : '0') : '', blog2ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 2]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 2]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
-                    blog2Comments: (blogs && blogs[blogCountPerPage - 2]) ? JSON.stringify(blogs[blogCountPerPage - 2].comments) : '',
-                    
-                    blog3Title: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].title : '', blog3Content: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].content : '', blog3Auther: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].auther : '', blog3Time: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].time : '', 
-                    blog3ThumbsUpCount: (blogs && blogs[blogCountPerPage - 1]) ? (blogs[blogCountPerPage - 1].thumbsUpCount ? blogs[blogCountPerPage - 1].thumbsUpCount : '0') : '', blog3ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 1]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 1]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
-                    blog3Comments: (blogs && blogs[blogCountPerPage - 1]) ? JSON.stringify(blogs[blogCountPerPage - 1].comments) : '',
-                }
-    } else {
-        
-    }
+    const docs = await Blog.find()
+    const blogs = docs.reverse()
+    const doc = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
+    // 博客的页码数 
+    const pageNo = 1
+    const blogCountPerPage = pageNo * 4
+    ctx.response.body = {nickName: doc['nickName'], pageNo, blogCount: blogs ? blogs.length : 0,
+                blog0Title: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].title : '',
+                blog0Content: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].content : '', 
+                blog0Auther: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].auther : '',
+                blog0Time: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].time : '', 
+                blog0ThumbsUpCount: (blogs && blogs[blogCountPerPage - 4]) ? (blogs[blogCountPerPage - 4].thumbsUpCount ? blogs[blogCountPerPage - 4].thumbsUpCount : '0') : '',
+                blog0ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 4]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 4]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
+                blog0Comments: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].comments : '',
+                
+                blog1Title: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].title : '',
+                blog1Content: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].content : '',
+                blog1Auther: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].auther : '',
+                blog1Time: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].time : '', 
+                blog1ThumbsUpCount: (blogs && blogs[blogCountPerPage - 3]) ? (blogs[blogCountPerPage - 3].thumbsUpCount ? blogs[blogCountPerPage - 3].thumbsUpCount : '0') : '',
+                blog1ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 3]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 3]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
+                blog1Comments: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].comments : '',
+                
+                blog2Title: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].title : '',
+                blog2Content: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].content : '',
+                blog2Auther: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].auther : '',
+                blog2Time: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].time : '', 
+                blog2ThumbsUpCount: (blogs && blogs[blogCountPerPage - 2]) ? (blogs[blogCountPerPage - 2].thumbsUpCount ? blogs[blogCountPerPage - 2].thumbsUpCount : '0') : '',
+                blog2ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 2]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 2]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
+                blog2Comments: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].comments : '',
+                
+                blog3Title: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].title : '',
+                blog3Content: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].content : '',
+                blog3Auther: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].auther : '',
+                blog3Time: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].time : '', 
+                blog3ThumbsUpCount: (blogs && blogs[blogCountPerPage - 1]) ? (blogs[blogCountPerPage - 1].thumbsUpCount ? blogs[blogCountPerPage - 1].thumbsUpCount : '0') : '',
+                blog3ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 1]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 1]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
+                blog3Comments: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].comments : '',
+            }
     await next()
 }
 exports.otherBlogs = async(ctx, next) => {
-    console.log('request otherBlogs',ctx.params.pageNo)
-    if (!ctx.session.loggedIn) {
-        ctx.response.body = '<p>请先登录<a href="/">返回首页</a></p>'
-        return
-    }
+    // console.log('request otherBlogs',ctx.params.pageNo)
     const docs = await Blog.find()
     const blogs = docs.reverse()
     const doc = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
@@ -46,36 +54,48 @@ exports.otherBlogs = async(ctx, next) => {
     const pageNo = ctx.params.pageNo
     const blogCountPerPage = pageNo * 4
     ctx.response.body = {nickName: doc['nickName'], pageNo, blogCount: blogs ? blogs.length : 0,
-                blog0Title: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].title : '', blog0Content: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].content : '', blog0Auther: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].auther : '', blog0Time: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].time : '', 
-                blog0ThumbsUpCount: (blogs && blogs[blogCountPerPage - 4]) ? (blogs[blogCountPerPage - 4].thumbsUpCount ? blogs[blogCountPerPage - 4].thumbsUpCount : '0') : '', blog0ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 4]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 4]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
-                blog0Comments: (blogs && blogs[blogCountPerPage - 4]) ? JSON.stringify(blogs[blogCountPerPage - 4].comments) : '',
+                blog0Title: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].title : '',
+                blog0Content: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].content : '',
+                blog0Auther: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].auther : '',
+                blog0Time: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].time : '', 
+                blog0ThumbsUpCount: (blogs && blogs[blogCountPerPage - 4]) ? (blogs[blogCountPerPage - 4].thumbsUpCount ? blogs[blogCountPerPage - 4].thumbsUpCount : '0') : '',
+                blog0ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 4]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 4]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
+                blog0Comments: (blogs && blogs[blogCountPerPage - 4]) ? blogs[blogCountPerPage - 4].comments : '',
                 
-                blog1Title: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].title : '', blog1Content: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].content : '', blog1Auther: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].auther : '', blog1Time: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].time : '', 
-                blog1ThumbsUpCount: (blogs && blogs[blogCountPerPage - 3]) ? (blogs[blogCountPerPage - 3].thumbsUpCount ? blogs[blogCountPerPage - 3].thumbsUpCount : '0') : '', blog1ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 3]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 3]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
-                blog1Comments: (blogs && blogs[blogCountPerPage - 3]) ? JSON.stringify(blogs[blogCountPerPage - 3].comments) : '',
+                blog1Title: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].title : '',
+                blog1Content: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].content : '',
+                blog1Auther: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].auther : '',
+                blog1Time: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].time : '', 
+                blog1ThumbsUpCount: (blogs && blogs[blogCountPerPage - 3]) ? (blogs[blogCountPerPage - 3].thumbsUpCount ? blogs[blogCountPerPage - 3].thumbsUpCount : '0') : '',
+                blog1ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 3]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 3]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
+                blog1Comments: (blogs && blogs[blogCountPerPage - 3]) ? blogs[blogCountPerPage - 3].comments : '',
                 
-                blog2Title: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].title : '', blog2Content: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].content : '', blog2Auther: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].auther : '', blog2Time: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].time : '', 
-                blog2ThumbsUpCount: (blogs && blogs[blogCountPerPage - 2]) ? (blogs[blogCountPerPage - 2].thumbsUpCount ? blogs[blogCountPerPage - 2].thumbsUpCount : '0') : '', blog2ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 2]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 2]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
-                blog2Comments: (blogs && blogs[blogCountPerPage - 2]) ? JSON.stringify(blogs[blogCountPerPage - 2].comments) : '',
+                blog2Title: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].title : '',
+                blog2Content: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].content : '',
+                blog2Auther: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].auther : '',
+                blog2Time: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].time : '', 
+                blog2ThumbsUpCount: (blogs && blogs[blogCountPerPage - 2]) ? (blogs[blogCountPerPage - 2].thumbsUpCount ? blogs[blogCountPerPage - 2].thumbsUpCount : '0') : '',
+                blog2ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 2]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 2]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
+                blog2Comments: (blogs && blogs[blogCountPerPage - 2]) ? blogs[blogCountPerPage - 2].comments : '',
                 
-                blog3Title: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].title : '', blog3Content: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].content : '', blog3Auther: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].auther : '', blog3Time: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].time : '', 
-                blog3ThumbsUpCount: (blogs && blogs[blogCountPerPage - 1]) ? (blogs[blogCountPerPage - 1].thumbsUpCount ? blogs[blogCountPerPage - 1].thumbsUpCount : '0') : '', blog3ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 1]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 1]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
-                blog3Comments: (blogs && blogs[blogCountPerPage - 1]) ? JSON.stringify(blogs[blogCountPerPage - 1].comments) : '',
+                blog3Title: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].title : '',
+                blog3Content: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].content : '',
+                blog3Auther: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].auther : '',
+                blog3Time: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].time : '', 
+                blog3ThumbsUpCount: (blogs && blogs[blogCountPerPage - 1]) ? (blogs[blogCountPerPage - 1].thumbsUpCount ? blogs[blogCountPerPage - 1].thumbsUpCount : '0') : '',
+                blog3ThumbsUpStatus: (blogs && blogs[blogCountPerPage - 1]) ? (((doc['thumbsUpBlogs'] ? doc['thumbsUpBlogs'].toString().split(',') : [""]).indexOf(blogs[blogCountPerPage - 1]._id.toString()) !== -1) ? 'thumbsUping' : 'thumbsUp') : '', 
+                blog3Comments: (blogs && blogs[blogCountPerPage - 1]) ? blogs[blogCountPerPage - 1].comments : '',
             }
     await next()
 }
 exports.userBlogs = async(ctx, next) => {
-    if (!ctx.session.loggedIn) {
-        ctx.response.body = '<p>请先登录<a href="/">返回首页</a></p>'
-        return
-    }
     const user = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
     if(user['blogs']) {
         const blogs = await Blog.find()
         let blogsArray = blogs.filter(blog => {
             return user['blogs'].indexOf(blog['_id'].toString()) !== -1
         })
-        ctx.response.body = {blogs: JSON.stringify(blogsArray)} 
+        ctx.response.body = {blogs: blogsArray} 
     } else {
         // 此用户还未发表过博客
         ctx.response.body = {blogs: ""}
@@ -104,7 +124,7 @@ exports.add = async(ctx, next) => {
     const blog = await Blog.create(ctx.request.body)
     await User.findOneAndUpdate(
         {_id: mongoose.Types.ObjectId(ctx.session.loggedIn)},
-        { $push:{blogs: blog['_id'].toString()} },
+        { $push: {blogs: blog['_id'].toString()} },
     )
     ctx.response.body = ctx.request.body
     await next()

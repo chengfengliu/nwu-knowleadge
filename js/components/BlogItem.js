@@ -20,7 +20,7 @@ export default class BlogItem extends Component {
       thumbsUpCount: this.props.blogData[`blog${this.props.index}ThumbsUpCount`],
       needSpread: this.props.blogData[`blog${this.props.index}Content`].length > 230,
       allDontNeedSpread: !(this.props.blogData[`blog${this.props.index}Content`].length > 230),
-      commentAmount: JSON.parse(this.props.blogData[`blog${this.props.index}Comments`]).length
+      commentAmount: this.props.blogData[`blog${this.props.index}Comments`].length
     })
   }
   // 换页时状态要重新初始化
@@ -31,7 +31,7 @@ export default class BlogItem extends Component {
       thumbsUpCount: nextProps.blogData[`blog${this.props.index}ThumbsUpCount`],
       needSpread: nextProps.blogData[`blog${this.props.index}Content`].length > 230,
       allDontNeedSpread: !(nextProps.blogData[`blog${this.props.index}Content`].length > 230),
-      commentAmount: JSON.parse(nextProps.blogData[`blog${this.props.index}Comments`]).length
+      commentAmount: nextProps.blogData[`blog${this.props.index}Comments`].length
     })
   }
   clickCommentButton(e) {

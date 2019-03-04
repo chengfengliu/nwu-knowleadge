@@ -7,13 +7,9 @@ const path = require('path')
 const fs = require('fs')
 
 exports.allFiles = async(ctx, next) => {
-  if (!ctx.session.loggedIn) {
-      ctx.response.body = "<p>请先登录<a href='/'>返回首页</a></p>"
-      return
-  }
   const files = await File.find()
   const user = await User.findOne({'_id': mongoose.Types.ObjectId(ctx.session.loggedIn)})
-  ctx.response.body = {'files': JSON.stringify(files), 'downloadTimes': user['downloadTimes']}
+  ctx.response.body = {files, 'downloadTimes': user['downloadTimes']}
   await next()
 }
 
@@ -60,10 +56,6 @@ exports.add = async(ctx, next) => {
 }
 
 exports.download = async(ctx, next) => {
-    if (!ctx.session.loggedIn) {
-        ctx.response.body = "<p>请先登录<a href='/'>返回首页</a></p>"
-        return
-    }
     const user = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
     const rootPath = path.resolve(__dirname, '..')
     // 用户可下载次数减1
