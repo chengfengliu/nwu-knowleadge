@@ -4,8 +4,10 @@
 #### 环境node，mongoDB，python（npm安装Java需要），Java（npm安装Java需要）
 ### 安装依赖`npm install`
 
-### 开发模式Windows`npm start`&nbsp;&nbsp;&nbsp;&nbsp;Linux`npm run linux-start`
+### 开发模式Windows`npm start`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linux`npm run linux-start`
+### http://127.0.0.1:3000/
 ### 生产模式Windows`npm run windows-build`&nbsp;Linux`npm run build`
+### http://127.0.0.1:3001/
 ###### 以上端口（NODE_PORT）以及数据库（NODE_DB）均可在package.json的script属性中更改
 
 ##### 若需要使用想法模块中的下载视频功能
