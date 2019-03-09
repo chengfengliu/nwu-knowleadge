@@ -212,8 +212,4 @@ class SignupFrom extends Component {
   }
 }
 
-SignupFrom.propTypes = {
-  onPost: PropTypes.func.isRequired,
-}
-
 export default SignupFrom

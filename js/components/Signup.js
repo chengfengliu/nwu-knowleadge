@@ -36,8 +36,4 @@ class Signup extends Component {
   }
 }
 
-// Signup.propTypes = {
-//   history: PropTypes.object.isRequired
-// }
-
 export default Signup

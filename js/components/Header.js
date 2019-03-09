@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import '../../assets/css/header.css'
-
+import myContext from '../context'
 export default class Header extends Component {
   constructor(porps) {
     super(porps)
@@ -66,7 +66,7 @@ export default class Header extends Component {
         <ul>
           {this.state.hasLoggedIn ? null : <li><Link to='/login'>登录</Link></li>}
           {this.state.hasLoggedIn ? null : <li><Link to='/signup'>注册</Link></li>}
-          {this.state.hasLoggedIn ? <li><a href="#"><span><img src='/images/head.png' id="head"/></span>{this.state.userNickName}</a></li> : null}
+          {this.state.hasLoggedIn ? <li><a href="#"><span><img src='/images/head.png' id="head"/></span><myContext.Consumer>{userNickName =>(<span>{userNickName}</span>)}</myContext.Consumer></a></li> : null}
           {this.state.hasLoggedIn && this.props.exit ? <li><Link to='#' onClick={this.props.exit}>退出</Link></li> : null}
           {this.state.hasLoggedIn ? <li><Link to='/blog'>我的博客</Link></li> : null}
           {this.state.hasLoggedIn ? <li><Link to='/moment'>我的想法</Link></li> : null}

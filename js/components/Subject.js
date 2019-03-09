@@ -8,16 +8,150 @@ export default class Subject extends Component {
     super(props)
     this.state = {
       marjorList: {
-        information:[["计算机科学与技术",100],["软件工程",50],["信息与通信工程",100],["物联网",100],["电子科学与技术",100]],
-        culture:[["汉语言文学",100],["中国语言文学",101],["广播电视编导",102],["戏剧影视文学",103],["对外汉语教育",104]]
+        // information:[["计算机科学与技术",100, ],["软件工程",50],["信息与通信工程",100],["物联网",100],["电子科学与技术",100]],
+        information: {
+          '计算机科学与技术': {
+            studentNumber2017: 80,
+            studentNumber2016: 100,
+            studentNumber2015: 98,
+            studentNumber2014: 95
+          },
+          '软件工程': {
+            studentNumber2017: 80,
+            studentNumber2016: 100,
+            studentNumber2015: 98,
+          }
+        },
+        // culture:[["汉语言文学",100],["中国语言文学",101],["广播电视编导",102],["戏剧影视文学",103],["对外汉语教育",104]]
       },
       courseList: {
-        "计算机科学与技术":[["程序设计基础",17],["离散数学",9],["数据结构",16],["数字逻辑",10],
-                          ["电子技术基础",22],["概率论",7],["操作系统",2],["计算机组成原理",2],["数据库",5],["微机原理",3],["单片机原理",3],
-                          ["计算机网络",16],["软件工程",1],["Linux程序设计",4],["JAVA",11],["图形学",7],["体系结构",10],["人机交互",4],
-                          ["编译技术",24],["人工智能",3],["数字图像处理",7],["嵌入式系统",1],["多媒体技术",2],["项目管理",5],
-                          ["互联网络程序设计",8],["网络安全",47]],
-        "软件工程":[["C语言",10],["C++语言",20],["JAVA语言",10]]
+        "计算机科学与技术": {
+          "程序设计基础": {
+            failNumber2017: 3
+          },
+          "离散数学": {
+            failNumber2017: 13,
+            failNumber2016: 9
+          },
+          "程序设计基础二": {
+            failNumber2017: 2,
+          },
+          "面向对象程序设计": {
+            failNumber2016: 26
+          },
+          "数据结构": {
+            failNumber2017: 1,
+            failNumber2016: 12
+          },
+          "数字逻辑": {
+            failNumber2017: 5,
+            failNumber2016: 10
+          },
+          "电子技术基础": {
+            failNumber2017: 7,
+            failNumber2016: 22
+          },
+          "概率论": {
+            failNumber2016: 1,
+            failNumber2015: 7
+          },
+          "操作系统": {
+            failNumber2016: 4,
+            failNumber2015: 2
+          },
+          "计算机组成原理": {
+            failNumber2016: 11,
+            failNumber2015: 2
+          },
+          "数据库": {
+            failNumber2016: 3,
+            failNumber2015: 5
+          },
+          "微机原理": {
+            failNumber2016: 7,
+            failNumber2015: 3
+          },
+          "单片机原理": {
+            failNumber2016: 5,
+            failNumber2015: 3
+          },
+          "计算机网络": {
+            failNumber2016: 3,
+            failNumber2015: 16
+          },
+          "软件工程": {
+            failNumber2016: 7,
+            failNumber2015: 1
+          },
+          "Linux程序设计": {
+            failNumber2016: 10,
+            failNumber2015: 4
+          },
+          "JAVA": {
+            failNumber2016: 9,
+            failNumber2015: 11
+          },
+          "图形学": {
+            failNumber2015: 7
+          },
+          "体系结构": {
+            failNumber2016: 10,
+            failNumber2015: 10
+          },
+          "人机交互": {
+            failNumber2015: 4,
+            failNumber2014: 4
+          },
+          "编译技术": {
+            failNumber2015: 21,
+            failNumber2014: 24
+          },
+          "人工智能": {
+            failNumber2015: 5,
+            failNumber2014: 3
+          },
+          "数字图像处理": {
+            failNumber2015: 11,
+            failNumber2014: 7
+          },
+          "嵌入式系统": {
+            failNumber2015: 3,
+            failNumber2014: 1
+          },
+          "多媒体技术": {
+            failNumber2015: 3,
+            failNumber2014: 2
+          },
+          "项目管理": {
+            failNumber2015: 11,
+            failNumber2014: 5
+          },
+          "互联网络程序设计": {
+            failNumber2015: 11,
+            failNumber2014: 8
+          },
+          "网络安全": {
+            failNumber2015: 35,
+            failNumber2014: 47
+          },
+        },
+
+        "软件工程": {
+          "多媒体技术": {
+            failNumber2015: 3,
+            failNumber2014: 2
+          },
+          "项目管理": {
+            failNumber2015: 11,
+            failNumber2014: 5
+          },
+        }
+        // [["程序设计基础",17],["离散数学",9],["数据结构",16],["数字逻辑",10],
+        //                   ["电子技术基础",22],["概率论",7],["操作系统",2],["计算机组成原理",2],["数据库",5],["微机原理",3],["单片机原理",3],
+        //                   ["计算机网络",16],["软件工程",1],["Linux程序设计",4],["JAVA",11],["图形学",7],["体系结构",10],["人机交互",4],
+        //                   ["编译技术",24],["人工智能",3],["数字图像处理",7],["嵌入式系统",1],["多媒体技术",2],["项目管理",5],
+        //                   ["互联网络程序设计",8],["网络安全",47]],
+        // "软件工程":[["C语言",10],["C++语言",20],["JAVA语言",10]]
       }
     }
   }
@@ -25,37 +159,23 @@ export default class Subject extends Component {
     const selected = e.target.value
     console.log(selected)
     this.refs.course.innerHTML = "";
-    for(var i = 0; i < this.state.courseList[selected].length; i++){
+    for(var item in this.state.courseList[selected]){
         const opt = document.createElement("option")
-        opt.value = this.state.courseList[selected][i][0]
-        opt.innerHTML = this.state.courseList[selected][i][0]
+        opt.value = item
+        opt.innerHTML = item
         this.refs.course.appendChild(opt);
     }
   }
   clickSearchButton() {
-    var number1,number2;
-    var courseSelected = this.refs.course.options[this.refs.course.selectedIndex].value;
-    var courseListSelected = this.state.courseList[this.refs.marjor.options[this.refs.marjor.selectedIndex].value];
-    var marjorSelected = this.refs.marjor.options[this.refs.marjor.selectedIndex].value;
-    var marjorListSelected = this.state.marjorList[this.refs.institute.options[this.refs.institute.selectedIndex].value];
-    for(var i = 0;i < courseListSelected.length; i++){
-        if(courseListSelected[i][0] == courseSelected)
-        {   
-            number1 = i;
-            break;
-        }
+    document.getElementById("result").innerHTML = ''
+    const courseSelected = this.refs.course.options[this.refs.course.selectedIndex].value
+    const marjorSelected = this.refs.marjor.options[this.refs.marjor.selectedIndex].value
+    const instituteSelected = this.refs.institute.options[this.refs.institute.selectedIndex].value
+    // console.log('courseSelected',courseSelected,this.state.courseList[marjorSelected][courseSelected],'marjorSelected',marjorSelected,this.state.marjorList['information'][marjorSelected])
+    for(let item in this.state.courseList[marjorSelected][courseSelected]) {
+      // console.log(item,this.state.courseList[marjorSelected][courseSelected][item])
+      document.getElementById("result").innerHTML += `${item.slice(-4)}级挂科率为${Math.floor((this.state.courseList[marjorSelected][courseSelected][item] / this.state.marjorList[instituteSelected][marjorSelected]['studentNumber' + item.slice(-4)]) * 100)}%&nbsp;&nbsp;&nbsp;`;
     }
-    for(var j = 0;j < marjorListSelected.length; j++){
-        if(marjorListSelected[j][0] == marjorSelected)
-        {
-            number2 = j;
-            break;
-        }
-    }
-    var rate = 
-    courseListSelected[number1][1]
-    /marjorListSelected[number2][1];
-    document.getElementById("result").innerHTML = "挂科率为" + (rate * 100) + "%";
   }
   render() {
     return (
@@ -81,8 +201,8 @@ export default class Subject extends Component {
             </select>
             <h5>专业</h5>
             <select id="marjor" onChange={this.selectDistrict.bind(this)} ref="marjor">
-              <option>计算机科学与技术</option>
-              <option>软件工程</option>
+              <option value="计算机科学与技术">计算机科学与技术</option>
+              <option value="软件工程">软件工程</option>
               <option>信息与通信工程</option>
               <option>物联网</option>
               <option>电子科学与技术</option>

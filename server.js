@@ -10,6 +10,7 @@ const Router = require('koa-router')
 const views = require('koa-views')
 const bodyParser = require('koa-bodyparser')
 const multer = require('koa-multer')
+const enforceHttps = require('koa-sslify').default
 const upload = multer({ dest: 'uploads/' })
 const path = require('path')
 const port = parseInt(process.env.NODE_PORT)
@@ -33,6 +34,7 @@ if(process.env.NODE_ENV === 'development') {
 } else if(process.env.NODE_ENV === 'production') {
   console.log('env production')
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: configResult.output.publicPath}))
+  app.use(enforceHttps())
 }
 app.use(bodyParser({enableTypes:['json', 'form', 'text'], formLimit: '1mb'}))
 app.use(static(path.join(__dirname, 'assets')))
@@ -51,6 +53,14 @@ const CONFIG = {
   renew: false, /** (boolean) renew session when session is nearly expired, so we can always keep user logged in. (default is false)*/
 }
 app.use(session(CONFIG, app))
+// https
+const https = require('https')
+const fs = require('fs')
+const sslOptions = {
+  key: fs.readFileSync(path.join(__dirname, 'ssl', '3_www.nwulcf.club.key')),
+  cert: fs.readFileSync(path.join(__dirname, 'ssl', '2_www.nwulcf.club.crt'))
+}
+
 router.get(["/", "/signup", "/login"], async(ctx, next) => {
   await ctx.render('index')
   await next()
@@ -100,6 +110,9 @@ app.use(async (ctx) => {
   if(ctx.status === 404)
     await ctx.render('404')
 })
+// app.use(cacheControl({
+//   maxAge: 60000
+// }))
 mongoose.connect(db)
 mongoose.connection.on('connected', () => {
   console.log(`Mongoose connection open to ${db}`)
@@ -110,4 +123,6 @@ mongoose.connection.on('connected', () => {
       console.info("==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.", port, port)
     }
   })
+  // https
+  https.createServer(sslOptions, app.callback()).listen(443)
 })

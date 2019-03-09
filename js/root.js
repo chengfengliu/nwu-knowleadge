@@ -28,47 +28,47 @@ export default class Root extends React.Component {
   render() {
     const Index = () => (
       <Bundle load={IndexContainer}>
-          {(Index) => <Index />}
+          {Index => <Index />}
       </Bundle>
     )
     const Signup = (props) => (
       <Bundle load={SignupContainer}>
-          {(Signup) => <Signup {...props}/>}
+          {Signup => <Signup {...props}/>}
       </Bundle>
     )
     const Login = (props) => (
       <Bundle load={LoginContainer}>
-          {(Login) => <Login {...props}/>}
+          {Login => <Login {...props}/>}
       </Bundle>
     )
     const MyBlog = () => (
       <Bundle load={MyBlogContainer}>
-          {(MyBlog) => <MyBlog />}
+          {MyBlog => <MyBlog />}
       </Bundle>
     )
     const MyMoment = () => (
       <Bundle load={MyMomentContainer}>
-          {(MyMoment) => <MyMoment />}
+          {MyMoment => <MyMoment />}
       </Bundle>
     )
     const Download = () => (
       <Bundle load={DownloadContainer}>
-          {(Download) => <Download />}
+          {Download => <Download />}
       </Bundle>
     )
     const Grade = () => (
       <Bundle load={GradeContainer}>
-          {(Grade) => <Grade />}
+          {Grade => <Grade />}
       </Bundle>
     )
     const Subject = () => (
       <Bundle load={SubjectContainer}>
-          {(Subject) => <Subject />}
+          {Subject => <Subject />}
       </Bundle>
     )
     const Administrator = () => (
       <Bundle load={AdministratorContainer}>
-          {(Administrator) => <Administrator />}
+          {Administrator => <Administrator />}
       </Bundle>
     )
   

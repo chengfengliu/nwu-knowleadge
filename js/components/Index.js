@@ -4,12 +4,13 @@ import Header from './Header'
 import Footer from './Footer'
 import Description from './Description'
 import Blog from './Blog'
+import myContext from '../context'
 export default class Index extends Component {
   constructor(props) {
     super(props)
     this.state = {
       hasLoggedIn: false,
-      userNickName: ''
+      userNickName: '',
     }
   }
   componentDidMount() {
@@ -30,7 +31,7 @@ export default class Index extends Component {
       success(responceData) {
         // console.log('/api/logout',responceData)
         _that.setState({
-          hasLoggedIn: responceData.hasLoggedIn
+          hasLoggedIn: responceData.hasLoggedIn,
         })
       }
     })
@@ -39,7 +40,9 @@ export default class Index extends Component {
     // console.log('index hasLoggedIn',this.state.hasLoggedIn)
     return(
       <div id="index">
-        <Header hasLoggedIn={this.state.hasLoggedIn} userNickName={this.state.userNickName} exit={this.exit.bind(this)}/>
+        <myContext.Provider value={this.state.userNickName}>
+          <Header hasLoggedIn={this.state.hasLoggedIn} exit={this.exit.bind(this)}/>
+        </myContext.Provider>
         {this.state.hasLoggedIn ? <Blog /> : <Description />}
         <Footer />
       </div>

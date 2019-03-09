@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import '../../assets/css/login.css'
 class LoginFrom extends Component {
@@ -52,10 +52,6 @@ class LoginFrom extends Component {
     </form>
     )
   }
-}
-LoginFrom.propTypes = {
-  onPost: PropTypes.func.isRequired,
-  returnData: PropTypes.string.isRequired
 }
 
 export default LoginFrom
