@@ -79,7 +79,7 @@ export default class MyMoment extends Component {
   render() {
     return (
       <div id="myMoment">
-        <Header hasLoggedIn={true}/>
+        <Header/>
           <MyMomentForm />
           <ul id="momentsList">
             {this.state.moment0.date0 ? <MomentItem momentData={this.state.moment0} index={0} pageNo={this.state.pageNo}/> : <li><h3>已经到尾了</h3></li>}

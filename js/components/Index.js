@@ -4,13 +4,13 @@ import Header from './Header'
 import Footer from './Footer'
 import Description from './Description'
 import Blog from './Blog'
-import myContext from '../context'
+import store from '../redux/store.js'
+import {logout, login} from '../redux/action.js'
 export default class Index extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      hasLoggedIn: false,
-      userNickName: '',
+      hasLoggedIn: false
     }
   }
   componentDidMount() {
@@ -19,12 +19,19 @@ export default class Index extends Component {
       url: '/api/signUpStatus',
       type: 'get',
       success(responceData) {
-        responceData.hasLoggedIn ? _that.setState({hasLoggedIn: true, userNickName: responceData.userNickName}) : _that.setState({hasLoggedIn: false})
+        if(responceData.hasLoggedIn) {
+          _that.setState({hasLoggedIn: true})
+          // console.log(responceData)
+          store.dispatch(login(responceData.userNickName))
+        } else {
+          _that.setState({hasLoggedIn: false})
+        }
       }
     })
   }
   exit() {
     const _that = this
+    store.dispatch(logout())
     $.ajax({
       url: '/api/logout',
       type: 'get',
@@ -32,7 +39,7 @@ export default class Index extends Component {
         // console.log('/api/logout',responceData)
         _that.setState({
           hasLoggedIn: responceData.hasLoggedIn,
-        })
+        }) 
       }
     })
   }
@@ -40,9 +47,7 @@ export default class Index extends Component {
     // console.log('index hasLoggedIn',this.state.hasLoggedIn)
     return(
       <div id="index">
-        <myContext.Provider value={this.state.userNickName}>
-          <Header hasLoggedIn={this.state.hasLoggedIn} exit={this.exit.bind(this)}/>
-        </myContext.Provider>
+        <Header exit={this.exit.bind(this)}/>
         {this.state.hasLoggedIn ? <Blog /> : <Description />}
         <Footer />
       </div>

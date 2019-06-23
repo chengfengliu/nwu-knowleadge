@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import store from '../redux/store.js'
+import {login} from '../redux/action.js'
 import $ from 'jquery'
 import LoginForm from './LoginForm'
 import Header from './Header'
 import Footer from './Footer'
-export default class Login extends Component { 
+class Login extends Component { 
   constructor(props) {
     super(props)
     this.state = {
@@ -17,15 +19,23 @@ export default class Login extends Component {
       type: 'post',
       data,
       success(responseData) {
-        console.log(responseData, typeof responseData)
+        // console.log(responseData, typeof responseData)
         if(responseData.type === 'user') {
           // 用户登录成功
-          _that.props.history.push('/',responseData)
+          $.ajax({
+            url: '/api/signUpStatus',
+            type: 'get',
+            success(responceAnotherData) {
+              store.dispatch(login(responceAnotherData.userNickName))
+              _that.props.history.push('/')
+            }
+          })
         } else if(responseData.type === 'administrator') {
           // 管理员登录成功
           console.log('admin succ')
-          _that.props.history.push('/administrator',responseData)
+          _that.props.history.push('/administrator')
         } else {
+          // 密码错误
           _that.setState({
             warning: true
           })
@@ -48,3 +58,5 @@ export default class Login extends Component {
     )
   }
 }
+
+export default Login

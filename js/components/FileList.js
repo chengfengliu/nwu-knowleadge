@@ -35,7 +35,7 @@ export default class FileList extends Component {
         _that.props.updateUserDownloadTimes(splitArray[splitArray.length - 1].split('.')[0])
       })
     })
-    if(nextProps.userDownloadTimes === 0) {
+    if(nextProps.userDownloadTimes === 0 || nextProps.userDownloadTimes < 0) {
       _that.refs['filesList'].querySelectorAll('a').forEach(item => {
         console.log(item)
         item.style.pointerEvents = 'none';

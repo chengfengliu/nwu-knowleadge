@@ -36,6 +36,8 @@
     "mongoose": "^5.4.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.6",
     "webpack-dev-middleware": "^3.6.0",

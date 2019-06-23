@@ -180,7 +180,7 @@ export default class Subject extends Component {
   render() {
     return (
       <div id="subject">
-        <Header hasLoggedIn={true}/>
+        <Header/>
           <img src="/images/search.png" id="searchIcon"></img>
           <div className="container">
             <h2>南校区部分专业课近三年挂科率查询系统</h2>

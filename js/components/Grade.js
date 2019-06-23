@@ -10,7 +10,7 @@ export default class Grade extends Component {
   render() {
     return (
       <div id="grade">
-        <Header hasLoggedIn={true}/>
+        <Header/>
         <div style={{width:"50%",margin: "400px auto", textAlign:"center",color:'red'}}>此功能受到老师批评而暂时停止</div>
         <Link to="/" className='button'>返回首页</Link>
         <Footer />

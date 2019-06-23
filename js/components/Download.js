@@ -65,7 +65,7 @@ export default class Download extends Component {
   render() {
     return (
       <div>
-        <Header hasLoggedIn={true}/>
+        <Header/>
         <div id="download">
           <img src="/images/download.png"></img>
           <div id="header">

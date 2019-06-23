@@ -23,7 +23,7 @@ export default class MyBlog extends Component {
       success(responseData) {
         // console.log('/api/myBlog',responseData.blogs, typeof responseData.blogs)
         // +?重复1次或更多次，但尽可能少重复,只有+会有{},{}  ->  {...}
-        if(responseData.blogs.length > 2) {
+        if(responseData.blogs.length > 0) {
           _that.setState({myBlogList: responseData.blogs})
         }
       }
@@ -73,7 +73,7 @@ export default class MyBlog extends Component {
     : '您暂时还未发布博客'
     return (
       <div id="myBlog">
-        <Header hasLoggedIn={true}/>
+        <Header/>
           <BlogForm myBlogInput={this.state.myBlogInput} submitBlog={this.submitBlog.bind(this)} editBlog={this.editBlog.bind(this)}/>
           <ul id="blogsList">
             {myBlogList}

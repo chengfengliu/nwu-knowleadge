@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {Provider} from 'react-redux'
+import store from './redux/store'
 // 同步引入
 // import Index from './components/Index'
 // import Signup from './components/Signup'
@@ -73,23 +75,25 @@ export default class Root extends React.Component {
     )
   
     return(
-      <BrowserRouter>
-        <div>
-          <Route path="/" exact component={Index}></Route>
-          <Route path="/signup" render={props => {
-            return Signup(props)
-          }}></Route>
-          <Route path="/login" render={props => {
-            return Login(props)
-          }}></Route>
-          <Route path="/blog" component={MyBlog}></Route>
-          <Route path="/moment" component={MyMoment}></Route>
-          <Route path="/download" component={Download}></Route>
-          <Route path="/searchgrade" component={Grade}></Route>
-          <Route path="/searchsubject" component={Subject}></Route>
-          <Route path="/administrator" component={Administrator}></Route>
-        </div>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <div>
+            <Route path="/" exact component={Index}></Route>
+            <Route path="/signup" render={props => {
+              return Signup(props)
+            }}></Route>
+            <Route path="/login" render={props => {
+              return Login(props)
+            }}></Route>
+            <Route path="/blog" component={MyBlog}></Route>
+            <Route path="/moment" component={MyMoment}></Route>
+            <Route path="/download" component={Download}></Route>
+            <Route path="/searchgrade" component={Grade}></Route>
+            <Route path="/searchsubject" component={Subject}></Route>
+            <Route path="/administrator" component={Administrator}></Route>
+          </div>
+        </BrowserRouter>
+      </Provider>
     )
   }
 }
