@@ -151,4 +151,13 @@ exports.getUserSignUpStatusAndNickName = async(ctx, next) => {
       hasLoggedIn: false
     }
   }
+  await next()
+}
+
+module.exports.getUsers = async(ctx, next) => {
+  const users = await User.find({})
+  ctx.response.body = {
+    users
+  }
+  await next()
 }

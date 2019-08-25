@@ -10,7 +10,6 @@ export default class AuditFileList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('filelist componentWillReceiveProps')
     this.refs.one.innerHTML = '<li>大一上<span>下载次数</span><span>提供者</span></li>'
     this.refs.two.innerHTML = '<li>大一下</li>'
     this.refs.three.innerHTML = '<li>大二上</li>'
