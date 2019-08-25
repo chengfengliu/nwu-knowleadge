@@ -21,7 +21,6 @@ export default class Index extends Component {
       success(responceData) {
         if(responceData.hasLoggedIn) {
           _that.setState({hasLoggedIn: true})
-          // console.log(responceData)
           store.dispatch(login(responceData.userNickName))
         } else {
           _that.setState({hasLoggedIn: false})
@@ -36,7 +35,6 @@ export default class Index extends Component {
       url: '/api/logout',
       type: 'get',
       success(responceData) {
-        // console.log('/api/logout',responceData)
         _that.setState({
           hasLoggedIn: responceData.hasLoggedIn,
         }) 
@@ -44,7 +42,6 @@ export default class Index extends Component {
     })
   }
   render() {
-    // console.log('index hasLoggedIn',this.state.hasLoggedIn)
     return(
       <div id="index">
         <Header exit={this.exit.bind(this)}/>

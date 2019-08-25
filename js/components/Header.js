@@ -11,7 +11,6 @@ class VHeader extends Component {
     }
   }
   componentDidUpdate() {
-    // console.log('did update', this.refs)
     if(this.refs.canvas) {
       const ctx = this.refs.canvas.getContext('2d')
       ctx.strokeStyle = '#FFF'
@@ -33,7 +32,6 @@ class VHeader extends Component {
     }))
   }
   render() {
-    // console.log('header render',store.getState().hasLoggedIn)
     let hasLoggedIn = this.props.hasLoggedIn
     let menu;
     if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
