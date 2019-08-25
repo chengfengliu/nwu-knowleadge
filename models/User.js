@@ -8,6 +8,11 @@ const fs = require('fs')
 
 exports.saveUser = async(ctx, next) => {
   const {nickName, name, number, school, account, password} = ctx.request.body
+  const doc = await User.find({account})
+  if(doc.length !== 0) {
+    ctx.response.body = false
+    return
+  }
   await User.create({nickName, name, number, school, account, password: md5(password), downloadTimes: 1})
   ctx.response.body = account
   await next()
