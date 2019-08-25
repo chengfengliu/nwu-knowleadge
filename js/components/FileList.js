@@ -32,6 +32,10 @@ export default class FileList extends Component {
       item.addEventListener('click', e =>{
         const splitArray = e.target.href.split('/')
         // console.log(splitArray[splitArray.length - 1].split('.')[0])
+        // 无次数点击无效
+        if(nextProps.userDownloadTimes === 0 || nextProps.userDownloadTimes < 0) {
+          return
+        }
         _that.props.updateUserDownloadTimes(splitArray[splitArray.length - 1].split('.')[0])
       })
     })
