@@ -32,7 +32,7 @@ class LoginFrom extends Component {
       <form onSubmit={this.handleSubmit.bind(this)}>
         <fieldset>
             <div style={{display:this.props.returnData?'block':'none'}}>注册成功！请登录</div>
-            <legend>登录</legend>
+            <legend>登录（账号系统已重做，请重新注册）</legend>
             <p>
                 <label className="name">邮箱</label>
                 <input id="account" name="account" type="text" className="text" onChange={this.updateField.bind(this, 'account')} value={this.state.account}/>
