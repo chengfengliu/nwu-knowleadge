@@ -7,6 +7,7 @@ export default class UploadForm extends Component {
   uploadFile() {
     const isConfirm = confirm(`你确定要上传此文件吗？`);
     if(isConfirm) {
+      alert('正在上传中，请稍等')
       const data = new FormData(this.refs.upload)
       const _that = this
       $.ajax({

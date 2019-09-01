@@ -23,7 +23,8 @@
     height: 30px;
     margin-left: 40px;
     text-indent: 10px;
-    border-radius: 10px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
   }
   div#signup button.abled {
     background-color: blue;              
@@ -43,20 +44,23 @@
     display: none;
   }
   div#signup span.correct{
+    display: block;
     margin-top: 4px;
-    margin-left: 40%;
+    margin-left: 15%;
     font-size: 0.5em;
     color: lightgreen;
   }
   div#signup span.error{
+    display: block;
     margin-top: 4px;
-    margin-left: 40%;
+    margin-left: 15%;
     font-size: 0.5em;
     color: red;
   }
   div#signup span.information {
+    display: block;
     margin-top: 4px;
-    margin-left: 40%;
+    margin-left: 15%;
     font-size: 0.5em;
     color: gray;
   }
@@ -126,25 +130,29 @@
   }
   div#signup span.correct{
     margin-top: 4px;
-    margin-left: 40%;
+    display: block;
+    margin-left: 27%;
     font-size: 0.5em;
     color: lightgreen;
   }
   div#signup span.error{
     margin-top: 4px;
-    margin-left: 40%;
+    display: block;
+    margin-left: 27%;
     font-size: 0.5em;
     color: red;
   }
   div#signup span.information {
     margin-top: 4px;
-    margin-left: 40%;
+    display: block;
+    margin-left: 27%;
     font-size: 0.5em;
     color: gray;
   }
   div#signup div.warn {
     color: #555;
-    font-size: 0.5em;
+    display: block;
+    margin-left: 27%;
     margin: 20px auto;
     width: 50%;
   }

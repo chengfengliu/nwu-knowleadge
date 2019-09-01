@@ -7,7 +7,7 @@ const send = require('koa-send')
 const path = require('path')
 const fs = require('fs')
 const nodemailer = require('nodemailer')
-
+const mail = require('../config.js').mail
 exports.saveUser = async(ctx, next) => {
   const {nickName, name, number, school, account, password, verificationCode} = ctx.request.body
   const doc = await User.find({nickName})
@@ -182,8 +182,8 @@ module.exports.getUsers = async(ctx, next) => {
 const transporter = nodemailer.createTransport({
   service: 'qq',
   auth: {
-    user: '772309659@qq.com',
-    pass: 'fknyzocsvwnpbebg'
+    user: mail.user,
+    pass: mail.pass
   }
 })
 module.exports.getCode = async(ctx, next) => {
@@ -198,13 +198,13 @@ module.exports.getCode = async(ctx, next) => {
   }
   const verificationCode = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`
   const mailOptions = {
-    from: '772309659@qq.com',
+    from: mail.user,
     to: mailAddress,
     subject: '【西北大学资料共享中心】验证码',
-    text: `验证码为${verificationCode}`
+    text: `验证码为${verificationCode}，仅用于账号注册，请勿告知他人`
   }
   await new Promise((resolve, reject) => {
-    transporter.sendMail(mailOptions, (err, indexOf) => {
+    transporter.sendMail(mailOptions, err => {
       if(err) {
         console.log(err)
         reject(err)

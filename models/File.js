@@ -5,6 +5,8 @@ const send = require('koa-send')
 const mongoose = require('mongoose')
 const path = require('path')
 const fs = require('fs')
+const nodemailer = require('nodemailer')
+const mail = require('../config.js').mail
 
 exports.allFiles = async(ctx, next) => {
   const files = await File.find()
@@ -12,7 +14,13 @@ exports.allFiles = async(ctx, next) => {
   ctx.response.body = {files, 'downloadTimes': user['downloadTimes']}
   await next()
 }
-
+const transporter = nodemailer.createTransport({
+    service: 'qq',
+    auth: {
+      user: mail.user,
+      pass: mail.pass
+    }
+})
 exports.add = async(ctx, next) => {
   // req.body 将具有文本域数据，如果存在的话
   const rootPath = path.resolve(__dirname, '..')
@@ -52,6 +60,21 @@ exports.add = async(ctx, next) => {
       provider: user.nickName,
       downloadedTimes: 0
   }
+  const mailOptions = {
+    from: mail.user,
+    to: mail.admin,
+    subject: '【西北大学资料共享中心】文件审核',
+    text: `${user.nickName}上传${file.originalname}到${ctx.req.body.fileBelong}，请尽快审核`
+  }
+  await new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions, err => {
+      if(err) {
+        console.log(err)
+        reject(err)
+      }
+      resolve()
+    })
+  })
   await next()
 }
 

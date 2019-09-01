@@ -22,7 +22,9 @@ class SignupFrom extends Component {
         account: false,
         password: false,
         passwordConfirm: false,
-        verificationCode: false
+        verificationCode: false,
+        name: false,
+        number: false,
       }
     }
   }
@@ -34,12 +36,12 @@ class SignupFrom extends Component {
       case 'nickName':
         if(e.target.value === '') {
           e.target.parentNode.querySelector('span').className = 'information'
-          e.target.parentNode.querySelector('span').innerHTML = "必填，长度为4~16个字符"
+          e.target.parentNode.querySelector('span').innerHTML = "必填，长度为3~16个字符"
           const Modifieddata = Object.assign({}, this.state.inputMap, {nickName: false})
           this.setState({
             inputMap: Modifieddata
           }, setButton)
-        } else if(e.target.value.length <= 16 &&e.target.value.length >= 4) {
+        } else if(e.target.value.length <= 16 &&e.target.value.length >= 3) {
           e.target.parentNode.querySelector('span').className = 'correct'
           e.target.parentNode.querySelector('span').innerHTML = "名称格式正确"
           const Modifieddata = Object.assign({}, this.state.inputMap, {nickName: true})
@@ -48,7 +50,7 @@ class SignupFrom extends Component {
           }, setButton)
         } else {
           e.target.parentNode.querySelector('span').className = 'error'
-          e.target.parentNode.querySelector('span').innerHTML = "请输入长度为4~16个字符的名称"
+          e.target.parentNode.querySelector('span').innerHTML = "请输入长度为3~16个字符的名称"
           const Modifieddata = Object.assign({}, this.state.inputMap, {nickName: false})
           this.setState({
             inputMap: Modifieddata
@@ -130,7 +132,7 @@ class SignupFrom extends Component {
       case 'verificationCode': 
         if(e.target.value === '') {
           e.target.parentNode.querySelector('span').className = 'information'
-          e.target.parentNode.querySelector('span').innerHTML = "必填"
+          e.target.parentNode.querySelector('span').innerHTML = "必填，长度为4个字符"
           const Modifieddata = Object.assign({}, this.state.inputMap, {verificationCode: false})
           this.setState({
             inputMap: Modifieddata
@@ -146,6 +148,54 @@ class SignupFrom extends Component {
           e.target.parentNode.querySelector('span').className = 'error'
           e.target.parentNode.querySelector('span').innerHTML = "请输入4位验证码"
           const Modifieddata = Object.assign({}, this.state.inputMap, {verificationCode: false})
+          this.setState({
+            inputMap: Modifieddata
+          }, setButton)
+        }
+        break
+      case 'name': 
+        if(e.target.value === '') {
+          e.target.parentNode.querySelector('span').className = 'information'
+          e.target.parentNode.querySelector('span').innerHTML = "必填，长度为3~5个字符"
+          const Modifieddata = Object.assign({}, this.state.inputMap, {name: false})
+          this.setState({
+            inputMap: Modifieddata
+          }, setButton)
+        } else if(3 <= e.target.value.length && e.target.value.length <= 5) {
+          e.target.parentNode.querySelector('span').className = 'correct'
+          e.target.parentNode.querySelector('span').innerHTML = "真实姓名格式正确"
+          const Modifieddata = Object.assign({}, this.state.inputMap, {name: true})
+          this.setState({
+            inputMap: Modifieddata
+          }, setButton)
+        } else {
+          e.target.parentNode.querySelector('span').className = 'error'
+          e.target.parentNode.querySelector('span').innerHTML = "请输入3~5位真实姓名"
+          const Modifieddata = Object.assign({}, this.state.inputMap, {name: false})
+          this.setState({
+            inputMap: Modifieddata
+          }, setButton)
+        }
+        break
+      case 'number': 
+        if(e.target.value === '') {
+          e.target.parentNode.querySelector('span').className = 'information'
+          e.target.parentNode.querySelector('span').innerHTML = "必填，长度为10个字符"
+          const Modifieddata = Object.assign({}, this.state.inputMap, {number: false})
+          this.setState({
+            inputMap: Modifieddata
+          }, setButton)
+        } else if(e.target.value.length === 10) {
+          e.target.parentNode.querySelector('span').className = 'correct'
+          e.target.parentNode.querySelector('span').innerHTML = "学号格式正确"
+          const Modifieddata = Object.assign({}, this.state.inputMap, {number: true})
+          this.setState({
+            inputMap: Modifieddata
+          }, setButton)
+        } else {
+          e.target.parentNode.querySelector('span').className = 'error'
+          e.target.parentNode.querySelector('span').innerHTML = "请输入10位学号"
+          const Modifieddata = Object.assign({}, this.state.inputMap, {number: false})
           this.setState({
             inputMap: Modifieddata
           }, setButton)
@@ -230,15 +280,17 @@ class SignupFrom extends Component {
         <p>
           <label className="name">昵名</label>
           <input name="nickName" type="text" className="text" id="nameText" value={this.state.nickName} onChange={this.updateField.bind(this, 'nickName')} onFocus={this.updateField.bind(this, 'nickName')}/>
-          <span id="information" className="hideSpan">必填，长度为4~16个字符</span>
+          <span id="information" className="hideSpan">必填，长度为3~16个字符</span>
         </p>
         <p>
           <label className="name" >真实姓名</label>
-          <input name="name" type="text" className="text" style={{marginLeft:'9px'}} value={this.state.name} onChange={this.updateField.bind(this, 'name')}/>
+          <input name="name" type="text" className="text" style={{marginLeft:'9px'}} value={this.state.name} onChange={this.updateField.bind(this, 'name')} onFocus={this.updateField.bind(this, 'name')}/>
+          <span id="information" className="hideSpan">必填，长度为3~5个字符</span>
         </p>
         <p>
           <label className="name">学号</label>
-          <input name="number" type="text" className="text" value={this.state.number} onChange={this.updateField.bind(this, 'number')}/>
+          <input name="number" type="text" className="text" value={this.state.number} onChange={this.updateField.bind(this, 'number')} onFocus={this.updateField.bind(this, 'number')}/>
+          <span id="information" className="hideSpan">必填，长度为10个字符</span>
         </p>
         <p>
           <label className="name">学校</label>
@@ -256,7 +308,7 @@ class SignupFrom extends Component {
         <p>
           <label className="name">验证码</label>
           <input name="verificationCode" style={{marginLeft:'24px', width: '100px'}} type="text" className="text" value={this.state.verificationCode} onChange={this.updateField.bind(this, 'verificationCode')} onFocus={this.updateField.bind(this, 'verificationCode')}/>
-          <button disabled={!this.state.canGetCode} className={this.state.canGetCode ? 'abled' : 'notAbled'} onClick={this.getCode.bind(this)} style={{display: 'inline', marginLeft: '10px'}}>{this.state.canGetCode ? '获取验证码' : `${this.state.time}后再获取`}</button>
+          <button disabled={!this.state.canGetCode} className={this.state.canGetCode ? 'abled' : 'notAbled'} onClick={this.getCode.bind(this)} style={{display: 'inline', marginLeft: '10px', margin: '0px 10px'}}>{this.state.canGetCode ? '获取验证码' : `${this.state.time}后再获取`}</button>
           <span id="information5" className="hideSpan" style={{display: 'block'}}></span>
         </p>
         <p>
