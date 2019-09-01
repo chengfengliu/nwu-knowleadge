@@ -17,11 +17,11 @@ class Signup extends Component {
       // 不能乱加dataType
       data,
       success(responseData) {
-        if(responseData) {
+        if(responseData.success) {
           alert('注册成功')
-          _that.props.history.push( '/login', responseData)
+          _that.props.history.push( '/login', responseData.account)
         } else {
-          alert('此账号已被注册')
+          alert(responseData.type)
         }
       }
     })

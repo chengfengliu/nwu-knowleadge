@@ -45,7 +45,7 @@ class Login extends Component {
     
   }
   render() {
-    const warning = this.state.warning ? <div className="warning">你输入的帐号或密码不正确，请重新输入</div> : null
+    const warning = this.state.warning ? <div className="warning">你输入的邮箱或密码不正确，请重新输入</div> : null
     return (
       <div id="loginBackground">
         <Header />

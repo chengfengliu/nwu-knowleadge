@@ -1,20 +1,37 @@
 const {User} = require('./UserModel.js')
+const {Code} = require('./CodeModel.js')
 const mongoose = require('mongoose')
 const md5 = require('md5')
 const java = require('java')
 const send = require('koa-send')
 const path = require('path')
 const fs = require('fs')
+const nodemailer = require('nodemailer')
 
 exports.saveUser = async(ctx, next) => {
-  const {nickName, name, number, school, account, password} = ctx.request.body
-  const doc = await User.find({account})
+  const {nickName, name, number, school, account, password, verificationCode} = ctx.request.body
+  const doc = await User.find({nickName})
   if(doc.length !== 0) {
-    ctx.response.body = false
+    ctx.response.body = {
+      success: false,
+      type: '用户名已被注册'
+    }
+    return
+  }
+  const result = await Code.find({account, verificationCode})
+  console.log(result,account, verificationCode)
+  if(result.length === 0) {
+    ctx.response.body = {
+      success: false,
+      type: '验证码错误'
+    }
     return
   }
   await User.create({nickName, name, number, school, account, password: md5(password), downloadTimes: 1})
-  ctx.response.body = account
+  ctx.response.body = {
+    success: true,
+    account
+  }
   await next()
 }
 
@@ -158,6 +175,54 @@ module.exports.getUsers = async(ctx, next) => {
   const users = await User.find({})
   ctx.response.body = {
     users
+  }
+  await next()
+}
+
+const transporter = nodemailer.createTransport({
+  service: 'qq',
+  auth: {
+    user: '772309659@qq.com',
+    pass: 'fknyzocsvwnpbebg'
+  }
+})
+module.exports.getCode = async(ctx, next) => {
+  const {mailAddress} = ctx.request.body
+  const doc = await User.find({account: mailAddress})
+  if(doc.length !== 0) {
+    ctx.response.body = {
+      success: false,
+      type: '邮箱已被注册'
+    }
+    return
+  }
+  const verificationCode = `${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`
+  const mailOptions = {
+    from: '772309659@qq.com',
+    to: mailAddress,
+    subject: '【西北大学资料共享中心】验证码',
+    text: `验证码为${verificationCode}`
+  }
+  await new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions, (err, indexOf) => {
+      if(err) {
+        console.log(err)
+        reject(err)
+      }
+      resolve()
+    })
+  })
+  const result = await Code.find({account: mailAddress})
+  if(result.length !== 0) {
+    await Code.update({account: mailAddress}, {$set: {verificationCode}})
+  } else {
+    await Code.create({
+      account: mailAddress,
+      verificationCode
+    })
+  }
+  ctx.response.body = {
+    success: true
   }
   await next()
 }

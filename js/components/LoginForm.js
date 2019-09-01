@@ -34,7 +34,7 @@ class LoginFrom extends Component {
             <div style={{display:this.props.returnData?'block':'none'}}>注册成功！请登录</div>
             <legend>登录</legend>
             <p>
-                <label className="name">账号</label>
+                <label className="name">邮箱</label>
                 <input id="account" name="account" type="text" className="text" onChange={this.updateField.bind(this, 'account')} value={this.state.account}/>
             </p>
             <p>

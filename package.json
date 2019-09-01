@@ -34,6 +34,7 @@
     "koa-webpack-hot-middleware": "^1.0.3",
     "mini-css-extract-plugin": "^0.5.0",
     "mongoose": "^5.4.0",
+    "nodemailer": "^6.3.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-redux": "^6.0.1",

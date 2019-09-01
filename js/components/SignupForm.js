@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-
+import $ from 'jquery'
+const regemail = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
 class SignupFrom extends Component { 
   constructor(props) {
     super(props)
@@ -12,12 +13,16 @@ class SignupFrom extends Component {
       account: '',
       password: '',
       passwordConfirm: '',
+      verificationCode: '',
       allCorrect: false,
+      canGetCode: true,
+      time: 60,
       inputMap: {
         nickName: false,
         account: false,
         password: false,
-        passwordConfirm: false
+        passwordConfirm: false,
+        verificationCode: false
       }
     }
   }
@@ -53,21 +58,21 @@ class SignupFrom extends Component {
       case 'account': 
         if(e.target.value === '') {
           e.target.parentNode.querySelector('span').className = 'information'
-          e.target.parentNode.querySelector('span').innerHTML = "必填，长度为6~14个数字或字母"
+          e.target.parentNode.querySelector('span').innerHTML = "必填"
           const Modifieddata = Object.assign({}, this.state.inputMap, {account: false})
           this.setState({
             inputMap: Modifieddata
           }, setButton)
-        } else if(e.target.value.length <= 16 &&e.target.value.length >= 6) {
+        } else if(regemail.test(e.target.value)) {
           e.target.parentNode.querySelector('span').className = 'correct'
-          e.target.parentNode.querySelector('span').innerHTML = "账号格式正确"
+          e.target.parentNode.querySelector('span').innerHTML = "邮箱格式正确"
           const Modifieddata = Object.assign({}, this.state.inputMap, {account: true})
           this.setState({
             inputMap: Modifieddata
           }, setButton)
         } else {
           e.target.parentNode.querySelector('span').className = 'error'
-          e.target.parentNode.querySelector('span').innerHTML = "请输入长度为6~16个字符的账号"
+          e.target.parentNode.querySelector('span').innerHTML = "请输入正确邮箱"
           const Modifieddata = Object.assign({}, this.state.inputMap, {account: false})
           this.setState({
             inputMap: Modifieddata
@@ -122,9 +127,32 @@ class SignupFrom extends Component {
           }, setButton)
         }
         break
+      case 'verificationCode': 
+        if(e.target.value === '') {
+          e.target.parentNode.querySelector('span').className = 'information'
+          e.target.parentNode.querySelector('span').innerHTML = "必填"
+          const Modifieddata = Object.assign({}, this.state.inputMap, {verificationCode: false})
+          this.setState({
+            inputMap: Modifieddata
+          }, setButton)
+        } else if(e.target.value.length === 4) {
+          e.target.parentNode.querySelector('span').className = 'correct'
+          e.target.parentNode.querySelector('span').innerHTML = "验证码格式正确"
+          const Modifieddata = Object.assign({}, this.state.inputMap, {verificationCode: true})
+          this.setState({
+            inputMap: Modifieddata
+          }, setButton)
+        } else {
+          e.target.parentNode.querySelector('span').className = 'error'
+          e.target.parentNode.querySelector('span').innerHTML = "请输入4位验证码"
+          const Modifieddata = Object.assign({}, this.state.inputMap, {verificationCode: false})
+          this.setState({
+            inputMap: Modifieddata
+          }, setButton)
+        }
+        break
     }
     function setButton() {
-      // console.log('Object.values(this.state.inputMap)',Object.values(this.state.inputMap),Object.values(this.state.inputMap).every(item => item))
       if(Object.values(this.state.inputMap).every(item => item)) {
         this.setState({
           allCorrect: true
@@ -146,17 +174,53 @@ class SignupFrom extends Component {
       school: this.state.school,
       account: this.state.account,
       password: this.state.password,
-      passwordConfirm: this.state.passwordConfirm
+      passwordConfirm: this.state.passwordConfirm,
+      verificationCode: this.state.verificationCode
     })
-    // this.setState({
-    //   nickName: '',
-    //   name: '',
-    //   number: '',
-    //   school: '',
-    //   account: '',
-    //   password: '',
-    //   passwordConfirm: ''
-    // })
+  }
+  getCode(e) {
+    if(!regemail.test(this.state.account)) {
+      alert('请输入正确邮箱')
+    }
+    const that = this
+    that.setState({
+      canGetCode: false
+    })
+    e.preventDefault()
+    $.ajax({
+      url: '/api/getCode',
+      type: 'post',
+      data: {
+        mailAddress: this.state.account
+      },
+      success(responseData) {
+        if(responseData.success) {
+          const intervalId = that.timeStart.call(that)
+          setTimeout(() => {
+            that.setState({
+              canGetCode: true,
+              time: 60
+            })
+            clearInterval(intervalId)
+          }, 60000)
+        } else {
+          that.setState({
+            canGetCode: true,
+            time: 60
+          })
+          alert(responseData.type)
+        }
+      }
+    })
+  }
+  timeStart() {
+    const that = this
+    const intervalId = setInterval(() => {
+      that.setState(preState => ({
+        time: preState.time - 1
+      }))
+    }, 1000)
+    return intervalId
   }
   render() {
     return (
@@ -185,9 +249,15 @@ class SignupFrom extends Component {
           </select>
         </p>
         <p>
-          <label className="name">账号</label>
+          <label className="name">邮箱</label>
           <input name="account" type="text" className="text" id="accountText" value={this.state.account} onChange={this.updateField.bind(this, 'account')} onFocus={this.updateField.bind(this, 'account')}/>
           <span id="information4" className="hideSpan">必填，长度为6~14个数字或字母</span>
+        </p>
+        <p>
+          <label className="name">验证码</label>
+          <input name="verificationCode" style={{marginLeft:'24px', width: '100px'}} type="text" className="text" value={this.state.verificationCode} onChange={this.updateField.bind(this, 'verificationCode')} onFocus={this.updateField.bind(this, 'verificationCode')}/>
+          <button disabled={!this.state.canGetCode} className={this.state.canGetCode ? 'abled' : 'notAbled'} onClick={this.getCode.bind(this)} style={{display: 'inline', marginLeft: '10px'}}>{this.state.canGetCode ? '获取验证码' : `${this.state.time}后再获取`}</button>
+          <span id="information5" className="hideSpan" style={{display: 'block'}}></span>
         </p>
         <p>
           <label className="name">密码</label>
