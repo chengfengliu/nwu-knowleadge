@@ -37,6 +37,7 @@ export default class Subject extends Component {
             failNumber2017: 2,
           },
           "面向对象程序设计": {
+            failNumber2017: 12,
             failNumber2016: 26
           },
           "数据结构": {
@@ -51,6 +52,9 @@ export default class Subject extends Component {
             failNumber2017: 7,
             failNumber2016: 22
           },
+          "工程数学": {
+            failNumber2017: 13
+          },
           "概率论": {
             failNumber2016: 1,
             failNumber2015: 7
@@ -60,14 +64,17 @@ export default class Subject extends Component {
             failNumber2015: 2
           },
           "计算机组成原理": {
+            failNumber2017: 10,
             failNumber2016: 11,
             failNumber2015: 2
           },
           "数据库": {
+            failNumber2017: 4,
             failNumber2016: 3,
             failNumber2015: 5
           },
           "微机原理": {
+            failNumber2017: 10,
             failNumber2016: 7,
             failNumber2015: 3
           },
@@ -99,22 +106,27 @@ export default class Subject extends Component {
             failNumber2015: 10
           },
           "人机交互": {
+            failNumber2016: 3,
             failNumber2015: 4,
             failNumber2014: 4
           },
           "编译技术": {
+            failNumber2016: 12,
             failNumber2015: 21,
             failNumber2014: 24
           },
           "人工智能": {
+            failNumber2016: 4,
             failNumber2015: 5,
             failNumber2014: 3
           },
           "数字图像处理": {
+            failNumber2016: 8,
             failNumber2015: 11,
             failNumber2014: 7
           },
           "嵌入式系统": {
+            failNumber2016: 2,
             failNumber2015: 3,
             failNumber2014: 1
           },
@@ -123,8 +135,12 @@ export default class Subject extends Component {
             failNumber2014: 2
           },
           "项目管理": {
+            failNumber2016: 2,
             failNumber2015: 11,
             failNumber2014: 5
+          },
+          "人群与网络": {
+            failNumber2016: 12,
           },
           "互联网络程序设计": {
             failNumber2015: 11,
