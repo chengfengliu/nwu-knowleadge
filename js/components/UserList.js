@@ -17,6 +17,7 @@ export default class AuditFileList extends Component {
       <tr key={index}>
         <td>{item.account}</td>
         <td>{item.nickName}</td>
+        <td>{item.number}</td>
         <td>{item.name}</td>
         <td>{item.downloadTimes}</td>
       </tr>
@@ -28,6 +29,7 @@ export default class AuditFileList extends Component {
             <tr>
               <th>账号</th>
               <th>用户名</th>
+              <th>学号</th>
               <th>姓名</th>
               <th>下载数</th>
             </tr>
