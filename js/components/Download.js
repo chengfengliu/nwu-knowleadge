@@ -21,12 +21,10 @@ export default class Download extends Component {
       url: '/api/getDownloadTimes',
       type: 'get',
       success(getDownloadTimesResponseData) {
-        // console.log('/api/getDownloadTimes ', responseData.nowDownloadTimes)
         $.ajax({
           url: '/api/download',
           type: 'get',
           success(downloadResponseData) {
-            // console.log('/download ', downloadResponseData.files)
             _that.setState({
               userDownloadTimes: getDownloadTimesResponseData.nowDownloadTimes,
               files: downloadResponseData.files
@@ -38,13 +36,10 @@ export default class Download extends Component {
 
   }
   updateFileList(updateFile) {
-    // console.log(updateFile,typeof updateFile)
     const filesCopy = this.state.files
     filesCopy.push(updateFile)
-    // console.log(filesCopy.slice(0, -1),updateFile,typeof updateFile) 
     this.setState({
       files: filesCopy,
-      // userDownloadTimes: this.state.userDownloadTimes + 5
     })
   }
   updateUserDownloadTimes(_id) {
@@ -56,7 +51,6 @@ export default class Download extends Component {
     })
     const filesCopy = this.state.files
     filesCopy[clickedFileIndex].downloadedTimes++
-    // console.log(clickedFileIndex)
     this.setState({
       userDownloadTimes: this.state.userDownloadTimes - 1,
       files: filesCopy

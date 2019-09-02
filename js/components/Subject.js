@@ -173,7 +173,6 @@ export default class Subject extends Component {
   }
   selectDistrict(e) {
     const selected = e.target.value
-    console.log(selected)
     this.refs.course.innerHTML = "";
     for(var item in this.state.courseList[selected]){
         const opt = document.createElement("option")
@@ -187,9 +186,7 @@ export default class Subject extends Component {
     const courseSelected = this.refs.course.options[this.refs.course.selectedIndex].value
     const marjorSelected = this.refs.marjor.options[this.refs.marjor.selectedIndex].value
     const instituteSelected = this.refs.institute.options[this.refs.institute.selectedIndex].value
-    // console.log('courseSelected',courseSelected,this.state.courseList[marjorSelected][courseSelected],'marjorSelected',marjorSelected,this.state.marjorList['information'][marjorSelected])
     for(let item in this.state.courseList[marjorSelected][courseSelected]) {
-      // console.log(item,this.state.courseList[marjorSelected][courseSelected][item])
       document.getElementById("result").innerHTML += `${item.slice(-4)}级挂科率为${Math.floor((this.state.courseList[marjorSelected][courseSelected][item] / this.state.marjorList[instituteSelected][marjorSelected]['studentNumber' + item.slice(-4)]) * 100)}%&nbsp;&nbsp;&nbsp;`;
     }
   }
