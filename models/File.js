@@ -80,6 +80,9 @@ exports.add = async(ctx, next) => {
 
 exports.download = async(ctx, next) => {
     const user = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
+    if(user.downloadTimes <= 0) {
+      return 
+    }
     const rootPath = path.resolve(__dirname, '..')
     // 用户可下载次数减1
     await User.findOneAndUpdate(
