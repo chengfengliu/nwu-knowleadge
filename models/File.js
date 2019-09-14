@@ -7,6 +7,13 @@ const path = require('path')
 const fs = require('fs')
 const nodemailer = require('nodemailer')
 const mail = require('../config.js').mail
+const transporter = nodemailer.createTransport({
+  service: 'qq',
+  auth: {
+    user: mail.user,
+    pass: mail.pass
+  }
+})
 
 exports.allFiles = async(ctx, next) => {
   const files = await File.find()
@@ -14,16 +21,10 @@ exports.allFiles = async(ctx, next) => {
   ctx.response.body = {files, 'downloadTimes': user['downloadTimes']}
   await next()
 }
-const transporter = nodemailer.createTransport({
-    service: 'qq',
-    auth: {
-      user: mail.user,
-      pass: mail.pass
-    }
-})
+
 exports.add = async(ctx, next) => {
   // req.body 将具有文本域数据，如果存在的话
-  const rootPath = path.resolve(__dirname, '..')
+  const rootPath = path.resolve(__dirname, '..', '..')
   const file = ctx.req.file
   if(!file) {
       ctx.response.body = {
@@ -83,7 +84,7 @@ exports.download = async(ctx, next) => {
     if(user.downloadTimes <= 0) {
       return 
     }
-    const rootPath = path.resolve(__dirname, '..')
+    const rootPath = path.resolve(__dirname, '..', '..')
     // 用户可下载次数减1
     await User.findOneAndUpdate(
         {'_id': user['_id']},

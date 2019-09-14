@@ -11,7 +11,7 @@ const views = require('koa-views')
 const bodyParser = require('koa-bodyparser')
 const multer = require('koa-multer')
 const enforceHttps = require('koa-sslify').default
-const upload = multer({ dest: 'uploads/' })
+const upload = multer({ dest: '../uploads/' })
 const path = require('path')
 const port = parseInt(process.env.NODE_PORT)
 const app = new Koa()
@@ -26,6 +26,7 @@ const db = `mongodb://localhost:27017/${process.env.NODE_DB}`
 
 const configResult = config(process.env.NODE_ENV)
 const compiler = webpack(configResult)
+const parentDirPath = path.resolve(__dirname, '..')
 
 if(process.env.NODE_ENV === 'development') {
   console.log('env development')
@@ -38,8 +39,8 @@ if(process.env.NODE_ENV === 'development') {
 }
 app.use(bodyParser({enableTypes:['json', 'form', 'text'], formLimit: '1mb'}))
 app.use(static(path.join(__dirname, 'assets')))
-const parentDirPath = path.resolve(__dirname, '..')
 app.use(static(path.join(parentDirPath, 'userImages')))
+app.use(static(path.join(parentDirPath, 'uploads')))
 app.use(views(path.join(__dirname, 'views')))
 app.keys = ['some secret hurr']
 const CONFIG = {
