@@ -38,6 +38,8 @@ if(process.env.NODE_ENV === 'development') {
 }
 app.use(bodyParser({enableTypes:['json', 'form', 'text'], formLimit: '1mb'}))
 app.use(static(path.join(__dirname, 'assets')))
+const parentDirPath = path.resolve(__dirname, '..')
+app.use(static(path.join(parentDirPath, 'userImages')))
 app.use(views(path.join(__dirname, 'views')))
 app.keys = ['some secret hurr']
 const CONFIG = {

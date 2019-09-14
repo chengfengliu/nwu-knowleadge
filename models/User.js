@@ -67,13 +67,14 @@ exports.allMoments = async(ctx, next) => {
   const momentCountPerPage = momentsPage * 4
   const doc = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
   ctx.response.body =  {momentsPagesCount: doc['moments'] ? Math.ceil(doc['moments'].length / 4) : 0, momentsPage,
-                        moment0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? doc['moments'][(momentCountPerPage) - 4]['moment'] : '', image0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? `userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 4]['timeId'] }.jpg` : '', date0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? doc['moments'][(momentCountPerPage) - 4]['date'] : '',
-                        moment1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? doc['moments'][(momentCountPerPage) - 3]['moment'] : '', image1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? `userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 3]['timeId'] }.jpg` : '', date1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? doc['moments'][(momentCountPerPage) - 3]['date'] : '',
-                        moment2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? doc['moments'][(momentCountPerPage) - 2]['moment'] : '', image2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? `userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 2]['timeId'] }.jpg` : '', date2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? doc['moments'][(momentCountPerPage) - 2]['date'] : '',
-                        moment3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? doc['moments'][(momentCountPerPage) - 1]['moment'] : '', image3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? `userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 1]['timeId'] }.jpg` : '', date3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? doc['moments'][(momentCountPerPage) - 1]['date'] : '',
+                        moment0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? doc['moments'][(momentCountPerPage) - 4]['moment'] : '', image0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? `${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 4]['timeId'] }.jpg` : '', date0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? doc['moments'][(momentCountPerPage) - 4]['date'] : '',
+                        moment1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? doc['moments'][(momentCountPerPage) - 3]['moment'] : '', image1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? `${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 3]['timeId'] }.jpg` : '', date1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? doc['moments'][(momentCountPerPage) - 3]['date'] : '',
+                        moment2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? doc['moments'][(momentCountPerPage) - 2]['moment'] : '', image2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? `${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 2]['timeId'] }.jpg` : '', date2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? doc['moments'][(momentCountPerPage) - 2]['date'] : '',
+                        moment3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? doc['moments'][(momentCountPerPage) - 1]['moment'] : '', image3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? `${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 1]['timeId'] }.jpg` : '', date3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? doc['moments'][(momentCountPerPage) - 1]['date'] : '',
   }
   await next()
 }
+
 exports.addMoment = async(ctx, next) => {
   if (!ctx.session.loggedIn) {
       ctx.response.body = '<p>请先登录<a href="/">返回首页</a></p>'
@@ -83,13 +84,12 @@ exports.addMoment = async(ctx, next) => {
   const base64Data = ctx.request.body.image.replace(/^data:image\/\w+;base64,/, "").replace(/\s/g, "+")
   const userId = mongoose.Types.ObjectId(ctx.session.loggedIn).toString()
   // path.resolve() 方法会把一个路径或路径片段的序列解析为一个绝对路径。
-  const rootPath = path.resolve(__dirname, '..')
-  const userImagePath = path.join(rootPath, 'assets', 'userImages', userId)
+  const rootPath = path.resolve(__dirname, '..', '..')
+  const userImagePath = path.join(rootPath, 'userImages', userId)
   const uploadDate = new Date()
   const uploadTime = uploadDate.getTime()
   // 只能用fs.readdirSync
-  const dirs = fs.readdirSync(path.join(rootPath, 'assets', 'userImages'))
-  console.log(dirs,path.join(rootPath, 'assets', 'userImages'),rootPath,userImagePath)
+  const dirs = fs.readdirSync(path.join(rootPath, 'userImages'))
   // 没此用户的文件夹，则创建
   if (dirs.indexOf(userId) === -1 ){
       fs.mkdirSync(userImagePath)
@@ -121,13 +121,14 @@ exports.otherMoments = async(ctx, next) => {
   const momentCountPerPage = momentsPage * 4
   const doc = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
   ctx.response.body = {momentsPagesCount: doc['moments'] ? Math.ceil(doc['moments'].length / 4) : 0, momentsPage,
-                        moment0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? doc['moments'][(momentCountPerPage) - 4]['moment'] : '', image0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? `/userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 4]['timeId'] }.jpg` : '', date0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? doc['moments'][(momentCountPerPage) - 4]['date'] : '',
-                        moment1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? doc['moments'][(momentCountPerPage) - 3]['moment'] : '', image1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? `/userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 3]['timeId'] }.jpg` : '', date1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? doc['moments'][(momentCountPerPage) - 3]['date'] : '',
-                        moment2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? doc['moments'][(momentCountPerPage) - 2]['moment'] : '', image2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? `/userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 2]['timeId'] }.jpg` : '', date2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? doc['moments'][(momentCountPerPage) - 2]['date'] : '',
-                        moment3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? doc['moments'][(momentCountPerPage) - 1]['moment'] : '', image3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? `/userImages/${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 1]['timeId'] }.jpg` : '', date3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? doc['moments'][(momentCountPerPage) - 1]['date'] : '',
+                        moment0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? doc['moments'][(momentCountPerPage) - 4]['moment'] : '', image0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? `${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 4]['timeId'] }.jpg` : '', date0: (doc['moments'] && doc['moments'][(momentCountPerPage) - 4]) ? doc['moments'][(momentCountPerPage) - 4]['date'] : '',
+                        moment1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? doc['moments'][(momentCountPerPage) - 3]['moment'] : '', image1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? `${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 3]['timeId'] }.jpg` : '', date1: (doc['moments'] && doc['moments'][(momentCountPerPage) - 3]) ? doc['moments'][(momentCountPerPage) - 3]['date'] : '',
+                        moment2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? doc['moments'][(momentCountPerPage) - 2]['moment'] : '', image2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? `${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 2]['timeId'] }.jpg` : '', date2: (doc['moments'] && doc['moments'][(momentCountPerPage) - 2]) ? doc['moments'][(momentCountPerPage) - 2]['date'] : '',
+                        moment3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? doc['moments'][(momentCountPerPage) - 1]['moment'] : '', image3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? `${ doc['_id'].toString() }/${ doc['moments'][(momentCountPerPage) - 1]['timeId'] }.jpg` : '', date3: (doc['moments'] && doc['moments'][(momentCountPerPage) - 1]) ? doc['moments'][(momentCountPerPage) - 1]['date'] : '',
   }
   await next()
 }
+
 exports.downloadVideo = async(ctx, next) => {
   java.classpath.push(path.resolve('lib', 'opencv-windows-x86_64.jar'))
   java.classpath.push(path.resolve('lib', 'ffmpeg-windows-x86_64.jar'))
@@ -137,15 +138,15 @@ exports.downloadVideo = async(ctx, next) => {
     {_id: mongoose.Types.ObjectId(ctx.session.loggedIn)}
   )
   dirName = dirName['_id'].toString()
-  const saveMp4name = path.resolve('assets', 'userImages', dirName, 'f1.flv')
-  const imagesPath = path.resolve('assets', 'userImages', dirName)
+  const saveMp4name = path.resolve('..', 'userImages', dirName, 'f1.flv')
+  const imagesPath = path.resolve('..', 'userImages', dirName)
   java.callStaticMethodSync('javacvTest.TestRecorder2', 'test', saveMp4name, imagesPath)
-  console.log('tesssssst',imagesPath)
-  let reuslt = await send(ctx, 'f1.flv', {
+  await send(ctx, 'f1.flv', {
       root: imagesPath
   })
   await next()
 }
+
 exports.getDownloadTimes = async(ctx, next) => {
   if (!ctx.session.loggedIn) {
       ctx.response.body = '<p>请先登录<a href="/">返回首页</a></p>'
