@@ -3,4 +3,3 @@ ssl/
 config.js
 nohup.out
 package-lock.json
-restart.sh
