@@ -20,13 +20,24 @@
   footer p span:nth-child(1) {
     width: 30%;
     float: left;
-    margin-left: 20%;
+    text-align: center;
+    /* margin-left: 20%; */
   }
   footer p span:nth-child(2) {
+    width: 40%;
+    float: left;
+    text-align: center;
+    /* margin-right: 20%; */
+  }
+  footer p span:nth-child(3) {
     width: 30%;
-    float: right;
-    text-align: right;
-    margin-right: 20%;
+    float: left;
+    text-align: center;
+    /* text-align: right;
+    margin-right: 20%; */
+  }
+  footer p span a {
+    color: #fff;
   }
 }
 /* mobile */
