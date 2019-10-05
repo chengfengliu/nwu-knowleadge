@@ -12,7 +12,7 @@ npm install
 ```
 启动（开发模式）
 ```bash
-// Windows http://127.0.0.1:3000/
+// Windows 浏览器打开http://127.0.0.1:3000/
 npm start
 
 // Linux
@@ -20,7 +20,7 @@ npm run linux-start
 ```
 启动（生产模式）
 ```bash
-// Windows http://127.0.0.1:3001/
+// Windows 浏览器打开http://127.0.0.1:3001/
 npm run windows-build
 
 // Linux
@@ -34,18 +34,24 @@ sh restart.sh
 以上端口（NODE_PORT）以及数据库（NODE_DB）均可在package.json的script属性中更改
 
 ## 额外功能
-若需要使用想法模块中的下载视频功能
-1.windows ~/models/User.js downloadVideo函数中相关代码改为
-`java.classpath.push(path.resolve('lib', 'opencv-windows-x86_64.jar'))`
-`java.classpath.push(path.resolve('lib', 'ffmpeg-windows-x86_64.jar'))`
+### 想法模块下载视频功能
+* 项目目录上一级新建一个userImages文件夹存放用户照片
+* ~/models/User.js downloadVideo函数中相关代码改为
+```bash
+// Windows
+java.classpath.push(path.resolve('lib', 'opencv-windows-x86_64.jar'))
+java.classpath.push(path.resolve('lib', 'ffmpeg-windows-x86_64.jar'))
 
-linux ~/models/User.js   downloadVideo函数中相关代码改为
-`java.classpath.push(path.resolve('lib', 'opencv-linux-x86_64.jar'))`
-`java.classpath.push(path.resolve('lib', 'ffmpeg-linux-x86_64.jar'))`
-2.将~/lib/javacv-bin/相关操作系统jar文件移动到~/lib中
-3.重新在~/lib/javacvTest/中编译TestRecorder2.java文件
-`javac -cp ../javacv.jar; TestRecorder2.java`
+// Linux
+java.classpath.push(path.resolve('lib', 'opencv-linux-x86_64.jar'))
+java.classpath.push(path.resolve('lib', 'ffmpeg-linux-x86_64.jar'))
+```
 
-上传功能需要在项目目录上一级新建一个uploads文件夹
-想法功能需要在项目目录上一级新建一个userImages文件夹
+* 将~/lib/javacv-bin/相关操作系统jar文件移动到~/lib中
+* 重新在~/lib/javacvTest/中编译TestRecorder2.java文件
+```bash
+javac -cp ../javacv.jar; TestRecorder2.java
+```
+### 上传文件
+在项目目录上一级新建一个uploads文件夹
 
