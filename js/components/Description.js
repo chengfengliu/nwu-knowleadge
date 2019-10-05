@@ -8,7 +8,7 @@ export default class Description extends Component {
             <img src='images/sharePart.svg'/>
             <div className="text">
               <h1>学习资料共享</h1>
-              <p>下载中心可以下载大学四年的各种学习资料，也可上传学习资料。目前保存近五年的考试卷，上机作业，课后题答案等资料。和别人分享你的知识，那才是永恒之道。</p>
+              <p>下载中心可以下载大学四年的各种学习资料，也可上传学习资料。目前保存近五年的考试卷，上机作业，课后题答案等资料。和别人分享你的知识，那才是永恒之道。截止到2019/10/5前，本中心已有176份文件资料成功上传以及999次下载量。</p>
             </div>
           </div>
           <div id="blogPart" className="part">
