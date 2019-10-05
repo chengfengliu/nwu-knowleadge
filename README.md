@@ -10,14 +10,27 @@ node，mongoDB，python（npm安装Java需要），Java（npm安装Java需要）
 ```bash
 npm install
 ```
-开发模式
-Windows：`npm start`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linux：`npm run linux-start`
-http://127.0.0.1:3000/
-生产模式
-Windows`npm run windows-build`&nbsp;&nbsp;&nbsp;Linux`npm run build`
-http://127.0.0.1:3001/
-启动服务
-`sh restart.sh`
+启动（开发模式）
+```bash
+// Windows http://127.0.0.1:3000/
+npm start
+
+// Linux
+npm run linux-start
+```
+启动（生产模式）
+```bash
+// Windows http://127.0.0.1:3001/
+npm run windows-build
+
+// Linux
+npm run build
+```
+发布外网
+```bash
+// Linux
+sh restart.sh
+```
 以上端口（NODE_PORT）以及数据库（NODE_DB）均可在package.json的script属性中更改
 
 ## 额外功能
