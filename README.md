@@ -55,3 +55,17 @@ javac -cp ../javacv.jar; TestRecorder2.java
 ### 上传文件
 在项目目录上一级新建一个uploads文件夹
 
+### HTTPS
+项目文件夹中新建一个ssl文件夹，存放证书和密钥
+
+### 邮箱注册
+项目文件夹中新建一个config.js文件
+```bash
+// config.js
+module.exports.mail = {
+  user: '系统账号@qq.com',
+  pass: '系统账号QQ邮箱设置中获取token',
+  admin: '管理员账号@qq.com'
+}
+```
+
