@@ -11,10 +11,12 @@ export default class Administrator extends Component {
     super(props)
     this.state = {
       files: [],
-      users: []
+      users: [],
+      fileAmount: 0,
+      downloadAmount: 0,
     }
   }
-  componentDidMount() {
+  componentDidMount () {
     const _that = this
     $.ajax({
       url: '/api/getAuditFiles',
@@ -24,9 +26,17 @@ export default class Administrator extends Component {
           url: '/api/getUsers',
           type: 'get',
           success(responseUserData) {
-            _that.setState({
-              files: responseData.auditFiles,
-              users: responseUserData.users
+            $.ajax({
+              url: '/api/getFileAmountAndDownloadAmount',
+              type: 'get',
+              success(responseAmountData) {
+                _that.setState({
+                  files: responseData.auditFiles,
+                  users: responseUserData.users,
+                  fileAmount: responseAmountData.fileAmount,
+                  downloadAmount: responseAmountData.downloadAmount,
+                })
+              },
             })
           }
         })
@@ -39,6 +49,10 @@ export default class Administrator extends Component {
         <Header />
         <AuditFileList files={this.state.files} />
         <UserList users={this.state.users}/>
+        <div>
+          文件总数：{this.state.fileAmount}
+          下载总数: {this.state.downloadAmount}
+        </div>
         <Footer />
       </div>
     )

@@ -100,3 +100,16 @@ exports.download = async(ctx, next) => {
     })
     await next()
 }
+
+exports.fileAmountAndDownloadAmount = async(ctx, next) => {
+  const files = await File.find()
+  let downloadAmount = 0
+  files.forEach((file) => {
+    downloadAmount += Number(file.downloadedTimes)
+  })
+  ctx.body = {
+    fileAmount: files.length,
+    downloadAmount,
+  }
+  await next()
+}

@@ -110,6 +110,7 @@ router.post('/api/approve', AuditFile.approve)
 router.post('/api/reject', AuditFile.reject)
 router.get('/api/getUsers', User.getUsers)
 router.post('/api/getCode', User.getCode)
+router.get('/api/getFileAmountAndDownloadAmount', File.fileAmountAndDownloadAmount)
 app.use(router.routes()).use(router.allowedMethods())
 app.use(async (ctx) => {
   if(ctx.status === 404)
