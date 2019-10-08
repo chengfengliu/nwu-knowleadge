@@ -8,3 +8,11 @@ exports.add = async(operator, operation) => {
     time: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`
   })
 }
+
+exports.get = async(ctx, next) => {
+  const logs = await Log.find()
+  ctx.body = {
+    logs,
+  }
+  await next()
+}

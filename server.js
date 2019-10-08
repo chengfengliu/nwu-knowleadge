@@ -21,6 +21,7 @@ const mongoose = require('mongoose')
 const User = require('./models/User.js')
 const Blog = require('./models/Blog.js')
 const File = require('./models/File.js')
+const Log = require('./models/Log.js')
 const AuditFile = require('./models/AuditFile.js')
 const db = `mongodb://localhost:27017/${process.env.NODE_DB}`
 
@@ -111,6 +112,7 @@ router.post('/api/reject', AuditFile.reject)
 router.get('/api/getUsers', User.getUsers)
 router.post('/api/getCode', User.getCode)
 router.get('/api/getFileAmountAndDownloadAmount', File.fileAmountAndDownloadAmount)
+router.get('/api/getLog', Log.get)
 app.use(router.routes()).use(router.allowedMethods())
 app.use(async (ctx) => {
   if(ctx.status === 404)
