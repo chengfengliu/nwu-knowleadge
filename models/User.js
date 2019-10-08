@@ -1,5 +1,6 @@
 const {User} = require('./UserModel.js')
 const {Code} = require('./CodeModel.js')
+const Log = require('./Log.js')
 const mongoose = require('mongoose')
 const md5 = require('md5')
 const java = require('java')
@@ -19,7 +20,6 @@ exports.saveUser = async(ctx, next) => {
     return
   }
   const result = await Code.find({account, verificationCode})
-  console.log(result,account, verificationCode)
   if(result.length === 0) {
     ctx.response.body = {
       success: false,
@@ -28,6 +28,7 @@ exports.saveUser = async(ctx, next) => {
     return
   }
   await User.create({nickName, name, number, school, account, password: md5(password), downloadTimes: 1})
+  await Log.add(nickName, '注册')
   ctx.response.body = {
     success: true,
     account
@@ -52,7 +53,7 @@ exports.findUser = async(ctx, next) => {
   ctx.response.body = {
     type: 'user'
   }
-  // ctx.response.redirect('/')
+  await Log.add(doc.nickName, '登录')
   await next()
 }
 

@@ -1,5 +1,6 @@
 const {User} = require('./UserModel.js')
 const {File} = require('./FileModel.js')
+const Log = require('./Log.js')
 const {AuditFile} = require('./AuditFileModel.js')
 const send = require('koa-send')
 const mongoose = require('mongoose')
@@ -76,6 +77,7 @@ exports.add = async(ctx, next) => {
       resolve()
     })
   })
+  await Log.add(user.nickName, `上传${file.originalname}文件到${ctx.req.body.fileBelong}`)
   await next()
 }
 
@@ -91,13 +93,14 @@ exports.download = async(ctx, next) => {
         {$set: {'downloadTimes': user['downloadTimes'] - 1}}
     )
     // 文件被下载次数加1
-    await File.findOneAndUpdate(
+    const file = await File.findOneAndUpdate(
         {'_id': mongoose.Types.ObjectId(ctx.params._id.split('.')[0])},
         {$inc: {'downloadedTimes': 1}},
     )    
     await send(ctx, ctx.params._id, {
         root: path.join(rootPath, 'uploads')
     })
+    await Log.add(user.nickName, `下载${file.name}文件`)
     await next()
 }
 
