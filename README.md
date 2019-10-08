@@ -38,7 +38,7 @@ sh restart.sh
 * 项目目录上一级新建一个userImages文件夹存放用户照片
 * 重新在~/lib/javacvTest/中编译TestRecorder2.java文件
 ```bash
-javac -cp ../javacv.jar; TestRecorder2.java
+javac -cp ../javacv.jar TestRecorder2.java
 ```
 ### 上传文件
 在项目目录上一级新建一个uploads文件夹
