@@ -36,18 +36,6 @@ sh restart.sh
 ## 额外功能
 ### 想法模块下载视频功能
 * 项目目录上一级新建一个userImages文件夹存放用户照片
-* ~/models/User.js downloadVideo函数中相关代码改为
-```bash
-// Windows
-java.classpath.push(path.resolve('lib', 'opencv-windows-x86_64.jar'))
-java.classpath.push(path.resolve('lib', 'ffmpeg-windows-x86_64.jar'))
-
-// Linux
-java.classpath.push(path.resolve('lib', 'opencv-linux-x86_64.jar'))
-java.classpath.push(path.resolve('lib', 'ffmpeg-linux-x86_64.jar'))
-```
-
-* 将~/lib/javacv-bin/相关操作系统jar文件移动到~/lib中
 * 重新在~/lib/javacvTest/中编译TestRecorder2.java文件
 ```bash
 javac -cp ../javacv.jar; TestRecorder2.java

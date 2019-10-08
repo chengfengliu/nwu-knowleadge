@@ -131,8 +131,13 @@ exports.otherMoments = async(ctx, next) => {
 }
 
 exports.downloadVideo = async(ctx, next) => {
-  java.classpath.push(path.resolve('lib', 'opencv-windows-x86_64.jar'))
-  java.classpath.push(path.resolve('lib', 'ffmpeg-windows-x86_64.jar'))
+  if(process.env.NODE_ENV === 'development') {
+    java.classpath.push(path.resolve('lib', 'opencv-windows-x86_64.jar'))
+    java.classpath.push(path.resolve('lib', 'ffmpeg-windows-x86_64.jar'))
+  } else if(process.env.NODE_ENV === 'production') {
+    java.classpath.push(path.resolve('lib', 'opencv-linux-x86_64.jar'))
+    java.classpath.push(path.resolve('lib', 'ffmpeg-linux-x86_64.jar'))
+  }
   java.classpath.push(path.resolve('lib', 'javacpp.jar'))
   java.classpath.push(path.resolve('lib', 'javacv.jar'))
   let dirName = await User.findOne(
