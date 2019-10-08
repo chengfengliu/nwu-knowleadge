@@ -81,7 +81,7 @@ exports.add = async(ctx, next) => {
 
 exports.download = async(ctx, next) => {
     const user = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
-    if(user.downloadTimes <= 0) {
+    if(user.downloadTimes <= 0 && user.nickName !== '快毕业的老学姐') {
       return 
     }
     const rootPath = path.resolve(__dirname, '..', '..')
