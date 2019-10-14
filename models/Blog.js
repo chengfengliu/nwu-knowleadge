@@ -1,7 +1,7 @@
 const {Blog} = require('./BlogModel.js')
 const {User} = require('./UserModel.js')
 const mongoose = require('mongoose')
-
+const Log = require('./Log.js')
 
 exports.allBlogs = async(ctx, next) => {
     const docs = await Blog.find()
@@ -45,6 +45,7 @@ exports.allBlogs = async(ctx, next) => {
             }
     await next()
 }
+
 exports.otherBlogs = async(ctx, next) => {
     // console.log('request otherBlogs',ctx.params.pageNo)
     const docs = await Blog.find()
@@ -88,6 +89,7 @@ exports.otherBlogs = async(ctx, next) => {
             }
     await next()
 }
+
 exports.userBlogs = async(ctx, next) => {
     const user = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
     if(user['blogs']) {
@@ -102,6 +104,7 @@ exports.userBlogs = async(ctx, next) => {
     }
     await next()
 }
+
 exports.add = async(ctx, next) => {
     const user = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
     ctx.request.body.auther = user['nickName']
@@ -126,9 +129,11 @@ exports.add = async(ctx, next) => {
         {_id: mongoose.Types.ObjectId(ctx.session.loggedIn)},
         { $push: {blogs: blog['_id'].toString()} },
     )
+    await Log.add(user.nickName, `增加标题为${ctx.request.body.title}的博客`)
     ctx.response.body = ctx.request.body
     await next()
 }
+
 exports.thumbsUp = async(ctx, next) => {
     // 前端传来的blogid是此页的第几条博客，转化为_id
     const docs = await Blog.find()
@@ -150,6 +155,7 @@ exports.thumbsUp = async(ctx, next) => {
             {'_id': user['_id']},
             {$push: {'thumbsUpBlogs': blogid}}
         )
+        await Log.add(user.nickName, `点赞标题为${blog.title}的博客`)
         ctx.response.body = {'thumbsUpcount': 1, 'classStatus': 'thumbsUping', 'svgStatus': 'thumbsUping'}
     } else {
         // 此博客非第一次被赞
@@ -174,6 +180,7 @@ exports.thumbsUp = async(ctx, next) => {
                 {'_id': user['_id']},
                 {$push: {'thumbsUpBlogs': blogid}}
             )
+            await Log.add(user.nickName, `点赞标题为${blog.title}的博客`)
             ctx.response.body = {'thumbsUpcount': blog['thumbsUpCount'] + 1, 'classStatus': 'thumbsUping', 'svgStatus': 'thumbsUping'}
         } else {
             // 减1赞
@@ -188,6 +195,7 @@ exports.thumbsUp = async(ctx, next) => {
                 {'_id': user['_id']},
                 {$pull: {'thumbsUpBlogs': blogid}}
             )
+            await Log.add(user.nickName, `取消点赞标题为${blog.title}的博客`)
             ctx.response.body = {'thumbsUpcount': blog['thumbsUpCount'] - 1, 'classStatus': 'thumbsUp', 'svgStatus': 'thumbsUp'}
         }
     }
@@ -199,10 +207,11 @@ exports.comment = async(ctx, next) => {
     const blogs = docs.reverse()
     const user = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
     const time = new Date()
-    await Blog.findOneAndUpdate(
+    const blog = await Blog.findOneAndUpdate(
         {'_id': mongoose.Types.ObjectId(blogs[parseInt(ctx.request.body.pageNo) * 4 + parseInt(ctx.request.body.blogid) - 4]._id)},
         {$push: {'comments': {'user': user['nickName'], 'comment': ctx.request.body.comment, 'time': time}}},
     )
+    await Log.add(user.nickName, `评论标题为${blog.title}的博客`)
     ctx.response.body = {'user': user['nickName'], 'comment': ctx.request.body.comment, 'time': time}
     await next()
 }
@@ -224,16 +233,21 @@ exports.editBlog = async(ctx, next) => {
         case 'Dec': timeParText[2] = '12'; break;
     }
     ctx.request.body.time = `${timeParText[0]}-${timeParText[2]}-${timeParText[1]}`
-    await Blog.findOneAndUpdate(
+    const blog = await Blog.findOneAndUpdate(
         {_id: mongoose.Types.ObjectId(ctx.request.body._id)},
         {$set: {title: ctx.request.body.title, content: ctx.request.body.content, time: ctx.request.body.time}}
     )
+    const user = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
+    await Log.add(user.nickName, `编辑标题为${blog.title}的博客`)
     ctx.response.body = ctx.request.body
     await next()
 }
+
 exports.removeBlog = async(ctx, next) => {
+    const user = await User.findOne({_id: mongoose.Types.ObjectId(ctx.session.loggedIn)})
+    const blog = await Blog.findOne({_id: mongoose.Types.ObjectId(ctx.request.body._id)})
     await Blog.remove({_id: mongoose.Types.ObjectId(ctx.request.body._id)})
-    console.log('remove _id',ctx.request.body._id)
+    await Log.add(user.nickName, `删除标题为${blog.title}的博客`)
     ctx.response.body = ctx.request.body._id
     await next()
 }
