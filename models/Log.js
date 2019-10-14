@@ -14,7 +14,7 @@ exports.add = add = async(operator, operation) => {
 exports.get = async(ctx, next) => {
   const logs = await Log.find()
   ctx.body = {
-    logs,
+    logs: logs.reverse(),
   }
   await next()
 }
