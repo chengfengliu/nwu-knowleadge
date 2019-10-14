@@ -3,6 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import {Link} from 'react-router-dom'
 import '../../assets/css/search.css'
+import $ from 'jquery'
 export default class Subject extends Component { 
   constructor(props) {
     super(props)
@@ -170,6 +171,15 @@ export default class Subject extends Component {
         // "软件工程":[["C语言",10],["C++语言",20],["JAVA语言",10]]
       }
     }
+  }
+  componentDidMount() {
+    $.ajax({
+      url: '/api/addPageViewLog',
+      type: 'post',
+      data: {
+        pageName: '挂科率'
+      },
+    })
   }
   selectDistrict(e) {
     const selected = e.target.value

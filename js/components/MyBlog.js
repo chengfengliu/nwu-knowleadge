@@ -28,6 +28,13 @@ export default class MyBlog extends Component {
         }
       }
     }) 
+    $.ajax({
+      url: '/api/addPageViewLog',
+      type: 'post',
+      data: {
+        pageName: '我的博客'
+      },
+    })
   }
   receiveBlog(receiveData) {
     // console.log('title',receiveData.title,'content',receiveData.content)

@@ -33,7 +33,13 @@ export default class Download extends Component {
         }) 
       }
     })  
-
+    $.ajax({
+      url: '/api/addPageViewLog',
+      type: 'post',
+      data: {
+        pageName: '下载'
+      },
+    })
   }
   updateFileList(updateFile) {
     const filesCopy = this.state.files

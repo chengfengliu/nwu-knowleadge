@@ -3,9 +3,19 @@ import Header from './Header'
 import Footer from './Footer'
 import {Link} from 'react-router-dom'
 import '../../assets/css/grade.css'
+import $ from 'jquery'
 export default class Grade extends Component { 
   constructor(props) {
     super(props)
+  }
+  componentDidMount() {
+    $.ajax({
+      url: '/api/addPageViewLog',
+      type: 'post',
+      data: {
+        pageName: '查询成绩'
+      },
+    })
   }
   render() {
     return (

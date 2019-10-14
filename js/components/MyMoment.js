@@ -48,6 +48,13 @@ export default class MyMoment extends Component {
         })
       }
     }) 
+    $.ajax({
+      url: '/api/addPageViewLog',
+      type: 'post',
+      data: {
+        pageName: '我的想法'
+      },
+    })
   }
   changePageNo(pageNo) {
     const _that = this

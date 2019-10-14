@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import '../../assets/css/description.css'
+import $ from 'jquery'
 export default class Description extends Component {
+  componentDidMount() {
+    $.ajax({
+      url: '/api/addPageViewLog',
+      type: 'post',
+      data: {
+        pageName: '首页'
+      },
+    })
+  }
   render() {
     return(
         <div id="introduction">

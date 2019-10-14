@@ -16,6 +16,13 @@ export default class Index extends Component {
   componentDidMount() {
     const _that = this
     $.ajax({
+      url: '/api/addPageViewLog',
+      type: 'post',
+      data: {
+        pageName: '首页'
+      },
+    })
+    $.ajax({
       url: '/api/signUpStatus',
       type: 'get',
       success(responceData) {

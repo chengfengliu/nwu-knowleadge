@@ -113,6 +113,7 @@ router.get('/api/getUsers', User.getUsers)
 router.post('/api/getCode', User.getCode)
 router.get('/api/getFileAmountAndDownloadAmount', File.fileAmountAndDownloadAmount)
 router.get('/api/getLog', Log.get)
+router.post('/api/addPageViewLog', Log.addPageViewLog)
 app.use(router.routes()).use(router.allowedMethods())
 app.use(async (ctx) => {
   if(ctx.status === 404)

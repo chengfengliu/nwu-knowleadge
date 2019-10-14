@@ -8,6 +8,15 @@ class Signup extends Component {
   constructor(props) {
     super(props)
   }
+  componentDidMount() {
+    $.ajax({
+      url: '/api/addPageViewLog',
+      type: 'post',
+      data: {
+        pageName: '注册'
+      },
+    })
+  }
   handlePost(data) {
     // 一定要bind(this)和_that = this
     const _that = this

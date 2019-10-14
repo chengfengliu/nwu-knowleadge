@@ -12,6 +12,15 @@ class Login extends Component {
       warning: false
     }
   }
+  componentDidMount() {
+    $.ajax({
+      url: '/api/addPageViewLog',
+      type: 'post',
+      data: {
+        pageName: '登录'
+      },
+    })
+  }
   handlePost(data) {
     const _that = this
     $.ajax({
