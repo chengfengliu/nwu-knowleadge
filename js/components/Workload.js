@@ -38,6 +38,20 @@ export default class Workload extends Component{
     window.open(`/api/handleTable`)
   }
 
+  clear() {
+    const that = this
+    $.ajax({
+      url: '/api/clearTable',
+      method: 'get',
+      success() {
+        that.setState({
+          tableList: []
+        })
+        alert('清除成功')
+      }
+    })
+  }
+
   render() {
     console.log('this.state.tableList', this.state.tableList)
     const tableList = this.state.tableList.map((item, index) => {
@@ -55,6 +69,7 @@ export default class Workload extends Component{
           {tableList}
         </ul>
         <input type="button" value="处理" onClick={this.handle.bind(this)}/>
+        <input type="button" value="清除" onClick={this.clear.bind(this)} />
       </div>
     )
   }
