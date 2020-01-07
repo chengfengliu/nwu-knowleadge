@@ -12,6 +12,7 @@ const bodyParser = require('koa-bodyparser')
 const multer = require('koa-multer')
 const enforceHttps = require('koa-sslify').default
 const upload = multer({ dest: '../uploads/' })
+const tables = multer({ dest: '../tables/' })
 const path = require('path')
 const port = parseInt(process.env.NODE_PORT)
 const app = new Koa()
@@ -23,6 +24,7 @@ const Blog = require('./models/Blog.js')
 const File = require('./models/File.js')
 const Log = require('./models/Log.js')
 const AuditFile = require('./models/AuditFile.js')
+const Table = require('./models/Table.js')
 const db = `mongodb://localhost:27017/${process.env.NODE_DB}`
 
 const configResult = config(process.env.NODE_ENV)
@@ -65,7 +67,7 @@ const sslOptions = {
   cert: fs.readFileSync(path.join(__dirname, 'ssl', '2_www.nwulcf.club.crt'))
 }
 
-router.get(["/", "/signup", "/login"], async(ctx, next) => {
+router.get(["/", "/signup", "/login", "/workload"], async(ctx, next) => {
   await ctx.render('index')
   await next()
 })
@@ -114,6 +116,9 @@ router.post('/api/getCode', User.getCode)
 router.get('/api/getFileAmountAndDownloadAmount', File.fileAmountAndDownloadAmount)
 router.get('/api/getLog', Log.get)
 router.post('/api/addPageViewLog', Log.addPageViewLog)
+
+router.post('/api/uploadTable', tables.single('table'), Table.add)
+router.get('/api/handleTable', Table.handle)
 app.use(router.routes()).use(router.allowedMethods())
 app.use(async (ctx) => {
   if(ctx.status === 404)

@@ -11,6 +11,7 @@ import store from './redux/store'
 // import Download from './components/Download'
 // import Grade from './components/Grade'
 // import Subject from './components/Subject'
+import Workload from './components/Workload'
 
 // 异步引入
 import IndexContainer from 'bundle-loader?lazy&name=[name]!./components/Index'
@@ -91,6 +92,7 @@ export default class Root extends React.Component {
             <Route path="/searchgrade" component={Grade}></Route>
             <Route path="/searchsubject" component={Subject}></Route>
             <Route path="/administrator" component={Administrator}></Route>
+            <Route path="/workload" component={Workload}></Route>
           </div>
         </BrowserRouter>
       </Provider>
