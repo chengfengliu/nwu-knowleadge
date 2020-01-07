@@ -37,6 +37,8 @@ exports.handle = async(ctx, next) => {
   await send(ctx, 'sheet.xlsx', {
     root: path.resolve(__dirname, '..', '..', 'tables')
   })
-  fs.unlink(path.resolve(__dirname, '..', '..', 'tables', 'sheet.xlsx'))
+  fs.unlink(path.resolve(__dirname, '..', '..', 'tables', 'sheet.xlsx'), () => {
+    console.log('delete success')
+  })
   await next()
 }
