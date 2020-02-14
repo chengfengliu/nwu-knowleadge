@@ -5,14 +5,14 @@ export default class Workload extends Component{
   constructor(props) {
     super(props)
     this.state = {
-      tableList: []
+      tableList: [],
+      result: ""
     }
   }
   uploadFile() {
     const isConfirm = confirm(`你确定要上传此文件吗？`)
     const that = this
     if(isConfirm) {
-      alert('正在上传中，请稍等')
       const data = new FormData(this.refs.upload)
       $.ajax({
         url: '/api/uploadTable',
@@ -38,6 +38,18 @@ export default class Workload extends Component{
     window.open(`/api/handleTable`)
   }
 
+  excelToTxt() {
+    const that = this
+    $.ajax({
+      url: '/api/excelToTxt',
+      method: 'get',
+      success(responseData) {
+        that.setState({
+          result: responseData.result
+        })
+      }
+    })
+  }
   clear() {
     const that = this
     $.ajax({
@@ -45,7 +57,8 @@ export default class Workload extends Component{
       method: 'get',
       success() {
         that.setState({
-          tableList: []
+          tableList: [],
+          result: ""
         })
         alert('清除成功')
       }
@@ -70,6 +83,9 @@ export default class Workload extends Component{
         </ul>
         <input type="button" value="处理" onClick={this.handle.bind(this)}/>
         <input type="button" value="清除" onClick={this.clear.bind(this)} />
+        <input type="button" value="转文本" onClick={this.excelToTxt.bind(this)}/>
+        <div>结果</div>
+        <div>{this.state.result}</div>
       </div>
     )
   }

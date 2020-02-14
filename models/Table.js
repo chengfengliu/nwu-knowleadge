@@ -78,3 +78,19 @@ exports.clear = async(ctx, next) => {
   }
   await next()
 }
+
+exports.excelToTxt = async(ctx, next) => {
+  const data = []
+  const fileList = fs.readdirSync(path.resolve(__dirname, '..', '..','tables'))
+  fileList.forEach(file => {
+    const workSheets = xlsx.parse(path.resolve(__dirname, '..', '..','tables', file))
+    workSheets[0].data.shift() // 删除表头
+    workSheets[0].data.forEach(item => {
+      data.push(item[0])
+    })
+  })
+  ctx.body = {
+    'result': data.join(",")
+  }
+  await next()
+}

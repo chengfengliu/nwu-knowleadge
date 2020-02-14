@@ -120,6 +120,7 @@ router.post('/api/addPageViewLog', Log.addPageViewLog)
 router.post('/api/uploadTable', tables.single('table'), Table.add)
 router.get('/api/handleTable', Table.handle)
 router.get('/api/clearTable', Table.clear)
+router.get('/api/excelToTxt', Table.excelToTxt)
 app.use(router.routes()).use(router.allowedMethods())
 app.use(async (ctx) => {
   if(ctx.status === 404)
